@@ -1,0 +1,234 @@
+<div class="content">
+  <!--Side-bar-->
+  <div id="menuBar" class="menuActive">
+    <div id="menuBarItems" class="idiom-login center hidden">
+      <div *ngFor="let item of general.menu; index as i" class="menu-item">
+        <span
+          (click)="menuSelect(i)"
+          *ngIf="item.icon_only && item.show"
+          (click)="mostrar()"
+          class="ripple icon"
+        >
+          <img [src]="item.icon" />
+        </span>
+        <div [ngClass]="{ selected: item.selected }"></div>
+      </div>
+      <div>
+        <span id="idiomaHeader3asdwa" class="ripple icon">
+          <img src="../../assets/icons/lg.svg " />
+          <img src="../../assets/icons/chevron-down-outline.svg " />
+        </span>
+        <globo-select
+          [active]="'idiomaHeader3asdwa'"
+          [items]="general.idiomas"
+        ></globo-select>
+      </div>
+    </div>
+    <a (click)="general.menuresponsive.abrir()" class="menu-icon">
+      <img src="assets/icons/menu-outline.svg" alt="" />
+    </a>
+  </div>
+
+  <!--menu -->
+  <header class="cabecera center noselect">
+    <div class="center">
+      <a class="logo">
+        <img [src]="general.menu[0].icon" (click)="menuSelect(0)" alt="" />
+      </a>
+      <div class="menu">
+        <ul>
+          <li *ngFor="let item of general.menu; index as i" class="menu-item">
+            <span
+              class="ripple item"
+              *ngIf="!item.icon_only && item.show"
+              (click)="menuSelect(i)"
+              id="{{ item.nombre.en }}_{{ i }}"
+            >
+              {{ getText(item.nombre) }}
+            </span>
+            <div [ngClass]="{ selected: item.selected }"></div>
+            <globo-select
+              *ngIf="item.subItems"
+              [idioma]="general.idioma()"
+              [order]="i"
+              [active]="item.nombre.en + '_' + i"
+              [clicked]="menuSelectList"
+              [items]="item.subItems"
+            ></globo-select>
+          </li>
+        </ul>
+      </div>
+
+      <div class="center idiom-login">
+        <div *ngFor="let item of general.menu; index as i" class="menu-item">
+          <span
+            (click)="menuSelect(i)"
+            *ngIf="item.icon_only && item.show"
+            (click)="mostrar()"
+            class="ripple icon"
+          >
+            <img [src]="item.icon" />
+          </span>
+          <div [ngClass]="{ selected: item.selected }"></div>
+        </div>
+        <div class="menu-item">
+          <span id="idiomaHeader123154" class="ripple icon">
+            <img src="../../assets/icons/lg.svg " />
+            <img src="../../assets/icons/chevron-down-outline.svg " />
+          </span>
+          <globo-select
+            [active]="'idiomaHeader123154'"
+            [items]="general.idiomas"
+          ></globo-select>
+        </div>
+      </div>
+    </div>
+
+    <!--Titulo-->
+    <div class="title">
+      <p>{{ getTitle() }}</p>
+    </div>
+
+    <!--Fondo-->
+    <div class="fondo">
+      <div *ngIf="getFondo() !== ''">
+        <div class="overlay"></div>
+        <img
+          class="imgFondo"
+          sizes="(max-width: 480px) 480px, (max-width: 800px)  800px , 1200px"
+          [srcset]="getFondo()"
+          alt=""
+        />
+      </div>
+    </div>
+  </header>
+
+  <!--Canal de denuncias-->
+  <div class="centro canal-denuncias" [style.background]="pagebg()">
+    <router-outlet> </router-outlet>
+
+    <!--SVG-->
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 149.88">
+      <defs>
+        <style>
+          .cls-1 {
+            fill: #1d1d1d;
+          }
+        </style>
+      </defs>
+      <g id="Capa_2" data-name="Capa 2">
+        <g id="Capa_1-2" data-name="Capa 1">
+          <path
+            class="cls-1"
+            d="M0,0A4774.57,4774.57,0,0,0,576,90c102.66,9.68,246.45,22.85,428,21,473.64-4.81,901.51-108.73,916-111h0V149.88H0Z"
+          />
+        </g>
+      </g>
+    </svg>
+  </div>
+
+  <!--Footer-->
+  <div class="footer">
+    <div class="center">
+      <div class="footer-container">
+        <div class="col-1">
+          <img width="120px " src="../../assets/logo.png " alt=" " />
+        </div>
+        <div class="col-1">
+          <ul>
+            <div *ngFor="let item of general.menu; index as i">
+              <li
+                *ngIf="!item.subItems && !item.icon_only"
+                (click)="menuSelect(i)"
+              >
+                {{ getText(item.nombre) }}
+              </li>
+              <div *ngIf="item.subItems">
+                <li
+                  *ngFor="let subItem of item.subItems; index as subIndex"
+                  (click)="menuSelectList2(i, subIndex)"
+                >
+                  {{ getText(subItem.nombre) }}
+                </li>
+              </div>
+            </div>
+          </ul>
+        </div>
+        <div class="col-1">
+          <ul class="links">
+            <li>
+              <a
+                [href]="[
+                  general.idioma() === 'es'
+                    ? 'https://glovoapp.com/docs/en/legal/terms/?country=es'
+                    : 'https://glovoapp.com/docs/en/legal/terms/?country=en'
+                ]"
+              >
+                {{
+                  getText({
+                    en: "Terms & Conditions",
+                    es: "Terminos & Condiciones"
+                  })
+                }}
+              </a>
+            </li>
+            <li>
+              <a
+                [href]="[
+                  general.idioma() === 'es'
+                    ? 'https://glovoapp.com/docs/en/legal/privacy/?country=es'
+                    : 'https://glovoapp.com/docs/en/legal/privacy/?country=en'
+                ]"
+              >
+                {{
+                  getText({
+                    en: "Privacy Policy",
+                    es: "Política de Privacidad"
+                  })
+                }}
+              </a>
+            </li>
+            <li>
+              <a href="https://glovoapp.com/en/legal/cookies/">
+                {{
+                  getText({ en: "Cookies Policy", es: "Política de Cookies" })
+                }}
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <!--Button-canal-denuncias-->
+        <div class="container-btn">
+          <ul>
+            <li>
+              <a
+                [routerLink]="['/public/whistleblower-channel']"
+                (click)="window.scrollTo(0, 0)"
+              >
+                <div class="btn">
+                  {{
+                    getText({
+                      es: "Canal de denuncias",
+                      en: "Whistleblower Channel"
+                    })
+                  }}
+                </div>
+              </a>
+            </li>
+            <li class="idiom">
+              <span id="idiomaHeader2212" class="ripple icon">
+                <img src="../../assets/icons/lg.svg" />
+                <img src="../../assets/icons/chevron-down-outline.svg" />
+              </span>
+              <globo-select
+                [active]="'idiomaHeader2212'"
+                [items]="general.idiomas"
+              ></globo-select>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,39 @@
+<div class="center" style="width: 100% !important ; flex-direction: column; height: 100% !important; min-width: 120px; min-height: 200px; ">
+
+    <div style="width: 100%; display: flex; justify-content: center;">
+        <button pButton pRipple type="button" routerLink=".." class="p-button-rounded p-button-success " style="margin-top: 20px; margin-bottom: 40px; border: 3px solid #aaaaaa; margin-top: 10px;  height: 45px; padding-left: 20px; padding-right: 20px;
+            font-weight: 900; color: #aaaaaa; background: transparent; text-align: center; display: flex; justify-content: center; ">
+            {{general.getText({ es : "Cerrar ", en:"Close"})}}
+        </button>
+    </div>
+
+    <div class="tarjeta2" style="width: 100%; max-width: 1200px;">
+        <div style="width: 100%; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;  ">
+            <div style="display: flex; flex-direction: column;  justify-content: center;">
+                <div style="display: flex; flex-wrap: wrap; align-items: center; margin-right: 30px; ">
+                    <h4 style=" margin-bottom: 20px; font-size: 26px; font-weight: bold; ">
+                        {{general.getText(admin.complianceSelect.title)}}
+                    </h4>
+                </div>
+            </div>
+            <span class="custom" style="flex: 1;margin:5px; flex: 2; margin-top: 10px ;   border: 1px solid #ced4da; border-radius: 3px;">
+  
+ </span>
+        </div>
+        <div style="display: flex; width: 100%; flex-wrap: wrap; margin-bottom: 20px;">
+            <button routerLink="tag" pButton pRipple type="button " class="p-button-rounded p-button-success " style=" margin-left: 20px;  border: 3px solid #aaaaaa; margin-top: 10px;  height: 45px; padding-left: 20px; padding-right: 20px;
+                            font-weight: 900; color: #aaaaaa; background: transparent; text-align: center; display: flex; justify-content: center; ">
+            {{general.getText({ es : "Detalle de etiqueta", en:"Tag detail"})}}
+            </button>
+            <!-- <button routerLink="sections" pButton pRipple type="button " class="p-button-rounded p-button-success " style=" margin-left: 20px; border: 3px solid #aaaaaa; margin-top: 10px;  height: 45px; padding-left: 20px; padding-right: 20px;
+                                font-weight: 900; color: #aaaaaa; background: transparent; text-align: center; display: flex; justify-content: center; ">
+                {{general.getText({ es : "Secciones", en:"Sections"})}}
+            </button> -->
+
+        </div>
+        <div style="width: 100%;">
+            <router-outlet> </router-outlet>
+        </div>
+    </div>
+
+</div>

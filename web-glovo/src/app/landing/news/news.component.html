@@ -1,0 +1,44 @@
+<new-noticia #noticiaCompleta [data]="noticiaSelect" *ngIf="view"></new-noticia>
+<div *ngIf="individual.buscandoAnuncios" style="align-items: center; display: flex; width: 100%; justify-content: center; margin-top: 10%;" class="loader">
+    <p-progressSpinner></p-progressSpinner>
+</div>
+<div *ngIf=" !individual.buscandoAnuncios && !view" style="display: flex; flex-direction: column; align-items: center; padding-bottom: 200px;">
+    <div style="width: 85%; padding: 20px;  max-width: 1100px; display: flex; justify-content: space-around; align-items: center;  flex-direction: row-reverse; flex-wrap: wrap;">
+
+        <div *ngFor="let item of individual.anuncios.data; index as i " [style.flex]=" i  == 0 ||  i % 6 == 0 ? 'none' : '1'" [ngClass]="{ noticia1 :  (i % 6 > 3 && i % 6 < 7) , noticia :  !(i % 6 > 4 && i % 6 < 7 ) }" style="  flex: 1; display: flex; margin-top: 50px; width: 100%; padding: 10px; position: relative;">
+            <div style="flex: 1; max-width: 100%; ">
+                <div>
+                    <h1 class="title" [style.font-size]=" i  == 0 ||  i % 6 == 0 ? 'xx-large' : 'large'" style=" font-weight: bolder;   text-transform: capitalize; margin-bottom: 10px;">{{item.title}} </h1>
+                    <div class="barrita"></div>
+                </div>
+                <div class="inner" *ngIf="i % 6 == 0 || i == 0">
+                    <img [src]="general.getImage(item.mime_type , item.image )" style="width: 100%;" alt=" ">
+                </div>
+                <p style="color: gray;">{{general.getFecha(item.updated_at)}}</p>
+                <p>{{shortText(item.body)}}</p>
+                <br>
+                <button pButton pRipple type="button" [routerLink]=" '/private/news/' + item.id " class="p-button-rounded p-button-success" style=" padding-left: 0px; padding-right: 20px; font-weight: 600; color: #28ba9b; border: none ; background: none; text-align: center; display: flex; justify-content: center;">{{general.getText( { en : 'Read More', es : 'Leer Más' } )}}</button>
+                <br>
+            </div>
+            <div [ngClass]="{ imgContent : i % 6 == 0 || i == 0  }" class="prev">
+                <div [ngClass]="{imagen: i % 6 !== 0  && i !== 0, imagen1: i % 6 == 0 || i == 0  }">
+                    <img [src]="general.getImage(item.mime_type , item.image )" style="width: 110%;" alt=" ">
+                </div>
+            </div>
+        </div>
+        <div *ngIf="individual.buscandoMasAnuncios " style="height: 200px; display: flex; justify-content: center; width: 100%; ">
+            <p-progressSpinner></p-progressSpinner>
+        </div>
+
+    </div>
+    <div *ngIf="!individual.buscandoMasAnuncios && individual.anuncios.next" style="display: flex; justify-content: center;">
+        <button pButton pRipple type="button" (click)="buscarMas()" class="p-button-rounded p-button-success  btn" style=" padding-left: 0px; padding-right: 20px; font-weight: 600; color: #28ba9b; border: none ; background: none; text-align: center; display: flex; justify-content: center;"> <p class="form" > {{general.getText( { en : 'See more', es : 'Ver mas' } )}}</p>
+        </button>
+    </div>
+</div>
+<div *ngIf="!individual.buscandoAnuncios && !individual.anuncios.data[0]" class="loader">
+    <div style="display: flex; flex-direction: column; align-items: center; padding-bottom: 200px;">
+        <h1 class="title" style=" font-weight: bolder; text-transform: capitalize; margin-bottom: 10px;"> {{general.getText({ es: "No hay noticias Disponibles" , en : "No news available"})}}</h1>
+        <div class="barrita"></div>
+    </div>
+</div>

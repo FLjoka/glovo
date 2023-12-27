@@ -1,0 +1,217 @@
+<div class="tarjeta2" *ngIf=" buscandoNoticiaEs == false && buscandoNoticiaEn == false &&  buscandoDocumentos == false">
+    <div style="width:100%;">
+        <div style="width: 100%; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;  ">
+            <div style="display: flex; flex-direction: column;  justify-content: center;">
+                <div style="display: flex; flex-wrap: wrap; align-items: center; margin-right: 30px; ">
+                    <h4 style=" font-size:x-large; text-transform: capitalize; "> {{general.getText({ es : "Editar anuncio", en : "Edit announcement"})}}
+                    </h4>
+                </div>
+            </div>
+            <span class="custom" style="flex: 1;margin:5px; flex: 2; margin-top: 10px ;   border: 1px solid #ced4da; border-radius: 3px;">
+          
+         </span>
+        </div>
+
+        <div style="display: flex; width: 100%; flex-wrap: wrap; margin-bottom: 20px;">
+            <button pButton pRipple type="button " (click)="tab = 0;" class="p-button-rounded p-button-success " style=" margin-left: 20px;  border: 3px solid #aaaaaa; margin-top: 10px;  height: 45px; padding-left: 20px; padding-right: 20px;
+                            font-weight: 900; color: #aaaaaa; background: transparent; text-align: center; display: flex; justify-content: center; ">
+            {{general.getText({ es : "Datas del anuncio ", en:"Ad details"})}}
+            </button>
+            <button pButton pRipple type="button " (click)="tab = 1;" class="p-button-rounded p-button-success " style=" margin-left: 20px; border: 3px solid #aaaaaa; margin-top: 10px;  height: 45px; padding-left: 20px; padding-right: 20px;
+                                font-weight: 900; color: #aaaaaa; background: transparent; text-align: center; display: flex; justify-content: center; ">
+                {{general.getText({ es : "Documentos", en:"Documents"})}}
+            </button>
+            <button pButton pRipple type="button " (click)="tab = 2;" class="p-button-rounded p-button-success " style=" margin-left: 20px; border: 3px solid #aaaaaa; margin-top: 10px;  height: 45px; padding-left: 20px; padding-right: 20px;
+                        font-weight: 900; color: #aaaaaa; background: transparent; text-align: center; display: flex; justify-content: center; ">
+                {{general.getText({ es : "Información adicional", en:"Additional Information"} ) }}
+            </button>
+        </div>
+        <div *ngIf="tab == 0" style="width:100%;">
+
+            <div style="display: flex; width: 100%;">
+                <div class="inputbox " style="justify-content: space-between; ">
+                    <h5 style="flex: 1; ">{{general.getText({ es : "Título en español", en:"Title in Spanish"})}}
+                    </h5>
+                    <input class="inputcorreo" style="flex: 2;" type="text" [(ngModel)]="nuevo.title.es" [placeholder]="general.getText({ es : 'Título', en:'Title'})">
+                </div>
+            </div>
+            <div style="display: flex; width: 100%;">
+                <div class="inputbox " style="justify-content: space-between; ">
+                    <h5 style="flex: 1; "> {{general.getText({ es : "Título en inglés", en:"English title"})}}
+                    </h5>
+                    <input class="inputcorreo" style="flex: 2;" type="text" [(ngModel)]="nuevo.title.en" [placeholder]="general.getText({ es : 'Título', en:'Title'})">
+                </div>
+            </div>
+            <div style="display: flex; width: 100%;">
+
+
+
+                <div *ngIf="idiomaSet == 'es'" class="inputbox " style=" display: flex; flex-wrap: wrap; justify-content: space-between; ">
+                    <div style="flex: 1; display: flex; align-items: center; flex-direction: column; min-width: 200px; ">
+                        <h5>{{general.getText({ es : "Cuerpo del anuncio en español", en:"Announcement body in Spanish"})}}
+                        </h5>
+                        <button pButton pRipple type="button" (click)="idiomaSet = 'en'" class="p-button-rounded p-button-success  btn" style=" margin-right: 5px; height: 35px; padding-left: 20px; padding-right: 20px; font-weight: 900; color: white; border: none ;  background: #28ba9b; text-align: center; display: flex; align-items: center; justify-content: center;"> 
+                <i class="pi pi-sliders-h" style="fill: white; font-size: large; margin:5px;" ></i>
+                <p style="padding: 0; margin: 0; margin-right: 10px;"> {{general.getText( { en : 'Show in English', es : 'Mostrar en Inglés' } )}}</p>
+            </button>
+                        <br>
+                    </div>
+
+                    <div style="flex: 2;  min-width: 270px; position: relative;">
+                        <div style="width: 100% ;" *ngFor="let textBody of nuevo.body.es.parrafos; index as i">
+                            <div style=" width: 100%; display: flex; justify-content: flex-end; position: absolute;">
+                                <span (click)=" deleteParagrap( nuevo.body.es.parrafos, i )" style=" cursor: pointer; color: white; padding: 10px; font-weight: bold; font-size: 15px;  background: #28ba9b; border-radius:50%; width:25px ; height:25px; display: flex; justify-content: center; align-items: center; ">
+                    x
+                </span>
+                            </div>
+                            <textarea class="inputcorreo" style="width: calc( 100% -  20px); height: auto; border: 1px solid #c7c7c7; padding: 10px; margin: 10px;" [ngModel]="nuevo.body.es.parrafos[i]" (change)="ver($event,i,'es')" [placeholder]="general.getText({ es : 'Nuevo párrafo', en:'New paragraph'})"
+                                id="" cols="30" rows="10">
+    
+            </textarea>
+                        </div>
+                        <div style=" width: 100%; display: flex; justify-content: center; padding: 15px;">
+                            <span (click)="addEs()" style=" cursor: pointer; color: white; padding: 10px; font-weight: bold; font-size: 15px;  background: #28ba9b; border-radius:50%; width:25px ; height:25px; display: flex; justify-content: center; align-items: center; ">
+                    +
+                </span>
+                        </div>
+
+                    </div>
+                </div>
+
+
+
+
+                <div *ngIf="idiomaSet == 'en'" class="inputbox " style=" display: flex; flex-wrap: wrap; justify-content: space-between; ">
+                    <div style="flex: 1; display: flex; align-items: center; flex-direction: column; min-width: 200px; ">
+                        <h5>{{general.getText({ es : "Cuerpo del anuncio en inglés", en:"Announcement body in English"})}}
+                        </h5>
+                        <button pButton pRipple type="button" (click)="idiomaSet = 'es'" class="p-button-rounded p-button-success  btn" style=" margin-right: 5px; height: 35px; padding-left: 20px; padding-right: 20px; font-weight: 900; color: white; border: none ;  background: #28ba9b; text-align: center; display: flex; align-items: center; justify-content: center;"> 
+                <i class="pi pi-sliders-h" style="fill: white; font-size: large; margin:5px;" ></i>
+                <p style="padding: 0; margin: 0; margin-right: 10px;"> {{general.getText( { en : 'Show in Spanish', es : 'Mostrar en Español' } )}}</p>
+            </button>
+                        <br>
+                    </div>
+
+                    <div style="flex: 2;  min-width: 270px; position: relative;">
+                        <div style="width: 100% ;" *ngFor="let textBody of nuevo.body.en.parrafos; index as i">
+                            <div style=" width: 100%; display: flex; justify-content: flex-end; position: absolute;">
+                                <span (click)=" deleteParagrap( nuevo.body.en.parrafos, i )" style=" cursor: pointer; color: white; font-weight: bold; font-size: 10px!important;  background: #28ba9b; border-radius:50%; width:25px ; height:25px; display: flex; justify-content: center; align-items: center; ">
+                    x
+                </span>
+                            </div>
+                            <textarea class="inputcorreo" style="width: calc( 100% -  20px); height: auto; border: 1px solid #c7c7c7;  margin: 10px;" [ngModel]="nuevo.body.en.parrafos[i]" (change)="ver($event,i,'en')" [placeholder]="general.getText({ es : 'Nuevo párrafo', en:'New paragraph'})"
+                                id="" cols="30" rows="10">
+    
+            </textarea>
+                        </div>
+                        <div style=" width: 100%; display: flex; justify-content: center; padding: 15px;">
+                            <span (click)="addEn()" style=" cursor: pointer; color: white;  font-weight: bold; font-size: 15px;  background: #28ba9b; border-radius:50%; width:25px ; height:25px; display: flex; justify-content: center; align-items: center; ">
+                    +
+                </span>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div style="display: flex; width: 100%;">
+                <div class="inputbox " style="justify-content: space-between; width: 100%; ">
+                    <h5 style="flex: 1; "> {{general.getText({ es : "Imagen en español", en:"Picture in Spanish"})}}
+                    </h5>
+                    <div *ngIf="loadEs" style="flex: 5; display: flex; justify-content: center;">
+                        <p-progressSpinner [style]="{width: '30px', height: '30px'}" strokeWidth="1"></p-progressSpinner>
+                    </div>
+                    <div style="overflow: hidden;">
+                        <img *ngIf="prevEs && !loadEs" id="newsPrevEs" (load)="onImageLoad()" style="height: 70px; margin: 7px; cursor: pointer; " [src]="prevEs" alt="">
+                    </div>
+                    <input #newsImageEs id="newsImageEs" (change)="setImageEs($event)" type="file" hidden accept=".jpg, .jpeg, .png">
+                    <a (click)="elegir()" style="flex: 1;" class="toggleTrue">
+                        <span>   {{general.getText({ es : "Elegir", en:"Choose"})}}</span>
+                    </a>
+                </div>
+            </div>
+            <div style="display: flex; width: 100%;">
+                <div class="inputbox " style="justify-content: space-between; width: 100%; ">
+                    <h5 style="flex: 1; "> {{general.getText({ es : "Imagen en Inglés", en:"Picture in English"})}}
+                    </h5>
+                    <div *ngIf="loadEn" style="flex: 5; display: flex; justify-content: center;">
+                        <p-progressSpinner [style]="{width: '30px', height: '30px'}" strokeWidth="1"></p-progressSpinner>
+                    </div>
+                    <div style="overflow: hidden;">
+                        <img *ngIf="prevEn && !loadEn" id="newsPrevEn" (load)="onImageLoadEn()" style="height: 70px; margin: 7px; cursor: pointer; " [src]="prevEn" alt="">
+                    </div>
+                    <input #newsImageEn id="newsImageEn" (change)="setImageEn($event)" type="file" hidden accept=".jpg, .jpeg, .png">
+                    <a (click)="elegirEn()" style="flex: 1;" class="toggleTrue">
+                        <span>   {{general.getText({ es : "Elegir", en:"Choose"})}}</span>
+                    </a>
+                </div>
+            </div>
+            <div style="display: flex; width: 100%;">
+                <div class="inputbox " style="justify-content: space-between; ">
+                    <h5 style="flex: 1; ">{{general.getText({ es : "Fecha del evento", en:"Event date"})}}
+                    </h5>
+                    <input class="inputcorreo" style="flex: 2;" type="date" [(ngModel)]="event.date" [placeholder]="general.getText({ es : 'Título', en:'Title'})">
+                    <input class="inputcorreo" style="flex: 1;" type="time" [(ngModel)]="event.time" [placeholder]="general.getText({ es : 'Título', en:'Title'})">
+                    <span (click)="event.date = ''; event.time = '' " style="  margin-left: 10px; cursor: pointer; color: white; font-weight: bold; font-size: 15px;  background: #28ba9b; border-radius:50%; width:25px ; height:25px; display: flex; justify-content: center; align-items: center; ">
+                        x
+                    </span>
+                </div>
+            </div>
+            <div style="margin-top: 20px; margin-bottom: 20px; display: flex; justify-content: flex-end; width: 100%; ">
+
+                <button (click)="guardar()" pButton pRipple type="button " class="p-button-rounded p-button-success " style=" margin-top: 10px; margin-right: 25px; height: 45px; padding-left: 20px; padding-right: 20px; font-weight: 900; color: white; border:
+                    none ;  background: #28ba9b; text-align: center; display: flex; justify-content: center; ">
+            {{general.getText({ es : "Guardar Cambios ", en:"Save Changes"})}}
+        </button>
+
+            </div>
+        </div>
+        <div *ngIf="tab == 2">
+            <div style="display: flex; width: 100%;">
+                <div class="inputbox " style="justify-content: space-between; ">
+                    <h5 style="flex: 1; ">{{general.getText({ es : "subido por", en:"Uploaded by"})}}
+                    </h5>
+                    <div style="flex: 2;">
+                        <div style="display: flex; width: 100%; justify-content: space-between;">
+                            <p>{{general.getText({es:"Nombre",en:"Name"})}}:</p>
+                            <p>{{createData.uploaded_by.name}}</p>
+                        </div>
+                        <div style="display: flex; width: 100%; justify-content: space-between;">
+                            <p>{{general.getText({es:"Correo",en:"Email"})}}:</p>
+                            <p>{{createData.uploaded_by.email}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="inputbox " style="justify-content: space-between; ">
+                <h5 style="flex: 1; ">{{general.getText({ es : "Tocado por última vez por", en:"Last touched by"})}}
+                </h5>
+                <div style="flex: 2;">
+                    <div style="display: flex; width: 100%; justify-content: space-between;">
+                        <p>{{general.getText({es:"Nombre",en:"Name"})}}:</p>
+                        <p *ngIf="createData.last_touched_by">{{createData.last_touched_by.name}}</p>
+                        <p *ngIf="!createData.last_touched_by"> -- </p>
+                    </div>
+                    <div style="display: flex; width: 100%; justify-content: space-between;">
+                        <p>{{general.getText({es:"Correo",en:"Email"})}}:</p>
+                        <p *ngIf="createData.last_touched_by">{{createData.last_touched_by.email}}</p>
+                        <p *ngIf="!createData.last_touched_by"> -- </p>
+                    </div>
+                </div>
+            </div>
+            <div style="display: flex; width: 100%;">
+                <div class="inputbox " style="justify-content: space-between; ">
+                    <h5 style="flex: 1; ">{{general.getText({ es : "Creado el", en:"Created at"})}}
+                    </h5>
+                    <div style="flex: 2; justify-content: flex-end; display: flex;">
+                        <p>{{general.getFecha(createData.created_at)}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <edit-documents *ngIf="tab == 1" [id]="data.id" [data]="documents" style="width: 100%;"></edit-documents>
+    </div>
+</div>
+<div style="height: 350px; display: flex; justify-content: center; align-items: center;width: 100%;" *ngIf=" buscandoNoticiaEs == true || buscandoNoticiaEn == true ||  buscandoDocumentos == true">
+    <p-progressSpinner></p-progressSpinner>
+</div>

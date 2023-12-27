@@ -1,0 +1,84 @@
+<div class="tarjeta2">
+    <div style="width: 100%; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;  ">
+        <div style="display: flex; flex-direction: column;  justify-content: center;">
+            <div style="display: flex; flex-wrap: wrap; align-items: center; margin-right: 30px; ">
+                <h4 style="   font-size:x-large; text-transform: capitalize; "> {{general.getText({ es : "Nuevo documento", en : "New document"})}}
+                </h4>
+            </div>
+        </div>
+        <span class="custom" style="flex: 1;margin:5px; flex: 2; margin-top: 10px ;   border: 1px solid #ced4da; border-radius: 3px;">
+          
+         </span>
+    </div>
+
+    <div style="display: flex; width: 100%;">
+        <span class="custom" style="margin:5px; flex: 2; margin-top: 10px ; width: 100%; border: 1px solid #ced4da; border-radius: 3px;">
+            <p-dropdown  [style]="{'minWidth':'100%'}" [(ngModel)]="categoria" [options]="categorias" placeholder="{{general.getText({ es : 'Categoria' , en : 'Category'})}}" optionLabel="text"></p-dropdown>
+         </span>
+    </div>
+    <div style="display: flex; width: 100%;">
+        <div class="inputbox " style="justify-content: space-between; ">
+            <h5 style="flex: 1; "> *{{general.getText({ es : "Título en español", en:"Title in Spanish"})}}
+            </h5>
+            <input placeholder="*" class="inputcorreo" style="flex: 2;" type="text" [(ngModel)]="nuevo.title.es" [placeholder]="general.getText({ es : 'Título', en:'Title'})">
+        </div>
+    </div>
+    <div style="display: flex; width: 100%;">
+        <div class="inputbox " style="justify-content: space-between; ">
+            <h5 style="flex: 1; "> * {{general.getText({ es : "Título en inglés", en:"English title"})}}
+            </h5>
+            <input placeholder="*" class="inputcorreo" style="flex: 2;" type="text" [(ngModel)]="nuevo.title.en" [placeholder]="general.getText({ es : 'Título', en:'Title'})">
+        </div>
+    </div>
+    <div style="display: flex; width: 100%;">
+        <div class="inputbox " style="justify-content: space-between; ">
+            <h5 style="flex: 1; "> *{{general.getText({ es : "Descripción en español", en:"Description in Spanish"})}}
+            </h5>
+            <input placeholder="*" class="inputcorreo" style="flex: 2;" type="text" [(ngModel)]="nuevo.description.es" [placeholder]="general.getText({ es : 'Descripción', en:'Description'})">
+        </div>
+    </div>
+    <div style="display: flex; width: 100%;">
+        <div class="inputbox " style="justify-content: space-between; ">
+            <h5 style="flex: 1; "> * {{general.getText({ es : "Descripción en inglés", en:"Description in english"})}}
+            </h5>
+            <input placeholder="*" class="inputcorreo" style="flex: 2;" type="text" [(ngModel)]="nuevo.description.en" [placeholder]="general.getText({ es : 'Descripción', en:'Description'})">
+        </div>
+    </div>
+    <div style="display: flex; width: 100%;">
+        <div class="inputbox" style="justify-content: space-between; width: 100%; ">
+            <h5 style="flex: 1; "> * {{general.getText({ es : "Documento en español", en:"Document in Spanish"})}}
+            </h5>
+            <div *ngIf="loadEs" style="flex: 5; display: flex; justify-content: center;">
+                <p-progressSpinner [style]="{width: '30px', height: '30px'}" strokeWidth="1"></p-progressSpinner>
+            </div>
+            <p style="color: #28ba9b;">{{docEs}}</p>
+            <input placeholder="*" id="financialReportEspañol" type="file" hidden (change)="setEs($event)" accept=".pdf,.xls,.xlw,.xlsx,.docx,.dotx,.doc,.dot">
+            <a (click)=" elegir() " style="flex: 1;" class="toggleTrue">
+                <span>   {{general.getText({ es : "Elegir", en:"Choose"})}}</span>
+            </a>
+        </div>
+    </div>
+
+    <div style="display: flex; width: 100%;">
+        <div class="inputbox " style="justify-content: space-between; width: 100%; ">
+            <h5 style="flex: 1; "> * {{general.getText({ es : "Documento en Inglés", en:"Document inEnglish"})}}
+            </h5>
+            <div *ngIf="loadEn" style="flex: 5; display: flex; justify-content: center;">
+                <p-progressSpinner [style]="{width: '30px', height: '30px'}" strokeWidth="1"></p-progressSpinner>
+            </div>
+            <p style="color: #28ba9b;">{{docEn}}</p>
+            <input placeholder="*" id="financialReportIngles" type="file" (change)="setEn($event)" hidden accept=".pdf,.xls,.xlw,.xlsx,.docx,.dotx,.doc,.dot">
+            <a (click)=" elegirEn()" style="flex: 1;" class="toggleTrue">
+                <span>   {{general.getText({ es : "Elegir", en:"Choose"})}}</span>
+            </a>
+        </div>
+    </div>
+</div>
+<div style="margin-top: 20px; margin-bottom: 20px; display: flex; justify-content: flex-end; width: 100%; ">
+
+    <button (click)="guardar()" pButton pRipple type="button " class="p-button-rounded p-button-success " style=" margin-top: 10px; margin-right: 25px; height: 45px; padding-left: 20px; padding-right: 20px; font-weight: 900; color: white; border:
+                none ;  background: #28ba9b; text-align: center; display: flex; justify-content: center; ">
+        {{general.getText({ es : "Guardar Cambios ", en:"Save Changes"})}}
+    </button>
+
+</div>

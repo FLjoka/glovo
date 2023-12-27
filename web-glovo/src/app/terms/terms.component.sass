@@ -1,0 +1,116 @@
+@import "../../themes/_colors.sass"
+.content
+    z-index: 200
+    display: flex
+    flex-direction: column
+    align-items: center
+    overflow: hidden
+.header
+    justify-content: flex-end
+    width: 80%
+.ripple
+    img
+        width: 20px
+        &:nth-child(2)
+            margin-left: 5px
+            color: white    
+.container-title
+    z-index: 1
+    max-width: 50%
+    min-width: 320px
+    .title
+        text-align: center
+.centro
+    .body
+        width: 83%
+        height: 100%
+        display: flex
+        justify-content: center
+        z-index: -1
+        overflow: auto
+        div
+            width: 80%
+            height: calc(100% - 200px)
+            margin-top: 80px
+            display: flex
+            justify-content: center
+            z-index: -1
+.top
+    padding-top: 120px
+.selected
+    background: #fec456
+    border: none
+.menu-item
+    div
+        width: 98%
+        height: 3px
+        border-radius: 2px
+        margin-top: 10px
+        transition: background .2s ease
+        position: absolute
+        margin-left: 1%
+
+    &:hover
+        div
+            background: #fec456 !important
+
+.cabecera
+    width: 100%
+    overflow: hidden
+    min-height: 200px
+    font-weight: bolder
+    position: relative
+    flex-direction: column
+.fondo
+    z-index: 1
+    width: 100%
+    height: 100%
+    position: absolute
+    background-size: cover
+    background-repeat: no-repeat
+    background-position: center
+.menu
+    z-index: 2
+.centro
+
+    z-index: 2
+    width: 120%
+    color: $dark-bg
+    border-radius: 50%/150px 150px 0 0
+    box-shadow: inset 0px 5px 10px 4px rgba(0,0,0,0.36)
+.menuActive
+    z-index: 1011111111
+    width: 60px
+    top: 0px
+    right: 0
+    display: flex
+    position: fixed
+    align-items: center
+    justify-content: flex-end
+    height: 50px
+    display: none
+.bg
+    background: #1D1D1D
+    width: 100%
+.marcado
+    color: #495057
+.marcado:hover
+    color: $item-select
+    background: $dark-bg
+.imgFondo
+    width: 100%
+
+@media screen and ( max-width: 600px  )
+    .centro
+        border-radius: 50%/ 50px 50px 0 0
+    .imgFondo
+        height: 100%
+        width: auto
+@media screen and ( max-width: 1250px )
+    .menu
+        display: none
+        color: red
+    .menuActive
+        display: flex
+.hidden
+    display: none

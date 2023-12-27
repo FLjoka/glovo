@@ -1,0 +1,257 @@
+<div style="width: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; padding-bottom: 200px;">
+    <div class="center" style="width: 100% !important ; height: 100% !important; min-width: 120px; min-height: 200px;   padding-bottom: 150px; ">
+
+        <div *ngIf="!new && !edit" style="width: 80%; max-width: 1200px;">
+            <div style="display: flex; flex-wrap: wrap; width: 100%; padding-bottom: 5px; justify-content: space-between; align-items: center;">
+                <input class="custom" (change)="setStart()" [(ngModel)]="admin.whistleblowerChannelFilters.created_at_start" placeholder="created_at_start" style=" min-width: 140px; padding-left: 10px; height: 40px; cursor: pointer; flex: 2; margin-top: 10px; border: 1px solid #ced4da; border-radius: 3px;"
+                    type="date">
+                <p style="font-size: 22px; margin:0; padding: 5px; padding-top: 10px;">&</p>
+                <input class="custom" (change)="setFin()" [(ngModel)]="admin.whistleblowerChannelFilters.created_at_end" placeholder="created_at_end" style=" min-width: 140px; height: 40px; padding-left: 10px; cursor: pointer;  flex: 2; margin-top: 10px; border: 1px solid #ced4da; border-radius: 3px;"
+                    type="date">
+                <div style="display: flex;  flex: 1; justify-content: space-between; min-width: 350px; margin-top: 10px; padding: 0px 8px 0px 5px;">
+                    <span class="p-input-icon-left custom" style=" flex:1;">
+                        <i class="pi pi-search"></i>
+                        <input type="text"  [style]="{'width':'100%' , 'height' : '40px'  }"  pInputText [(ngModel)]="admin.whistleblowerChannelFilters.search" placeholder=" {{general.getText( { en : 'Search', es : 'Buscar' } )}}">         
+                    </span>
+                    <button pButton pRipple type="button" (click)="buscar()" class="p-button-rounded p-button-success  " style="  font-weight: 900; color: white; border: none ; margin-left: 20px; background: #fec456;"> 
+                        <p style="padding: 0; padding-left: 10px; margin: 0; margin-right: 10px;"> {{general.getText( { en : 'Search', es : 'Buscar' } )}}</p>
+                    </button>
+                </div>
+
+
+            </div>
+            <div style="height: 350px; display: flex; justify-content: center; align-items: center;width: 100%;" *ngIf="admin.buscandoWhistleblowerChannel">
+                <p-progressSpinner></p-progressSpinner>
+            </div>
+            <div *ngIf="!admin.buscandoWhistleblowerChannel" style=" width: 100%; display: flex; justify-content: center; ">
+
+                <ng-container *ngIf="admin.whistleblowerChannel">
+                    <div style=" width: 100%; display: flex; justify-content: center; min-height: 500px;" *ngIf=" admin.whistleblowerChannel.data.length > 0">
+                        <div style="flex: 2;  display: flex; flex-direction: column; ">
+                            <span class="left" style=" width: 100% !important;  display: flex; align-items: center;  border-left: 2px dashed  #fec456; border-top:  2px dashed  #fec456; border-bottom: 2px dashed  #fec456; ">
+                            <h1 class="title" style="color: #fec456;" >{{general.getText( { es : 'Fecha', en : 'Date' } )}}</h1>
+                        </span>
+                            <span *ngFor="let data of admin.whistleblowerChannel.data; index as i " [style.background]=" i % 2 == 0 ? 'white' : '#f2f2f2' " style=" width: 100% !important;  background:#f2f2f2; height: 60px; display: flex; align-items: center; margin-top: 20px;  border-radius: 30px 0px 0px 30px / 50% 0px 0px 50%; ">
+                            <h1 class="event" >{{general.getFecha(data.created_at)}} </h1>
+                        </span>
+                        </div>
+
+
+
+
+                        <div style="flex: 4;  display: flex; align-items: center; position: relative;  flex-direction: column; ">
+
+                            <span style="position: absolute; height: 100%; left: 0;  border-left: 2px dashed #fec456 ;  background: transparent;  z-index: 2; "> </span>
+                            <span style="position: absolute; height: 100%; right: 0;  border-left: 2px dashed #fec456 ;  background: transparent;  z-index: 2; "> </span>
+                            <span style="width: 100%;  display: flex; align-items: center;  background: white;  border-top:  2px dashed  #fec456; border-bottom: 2px dashed  #fec456;  z-index: 2;">
+                                <h1 class="title" style="color: #fec456;" >{{general.getText( { en : 'Request option', es : 'Opción de solicitud' } )}}</h1>
+                            </span>
+                            <span *ngFor="let event of admin.whistleblowerChannel.data;index as i " [style.background]=" i % 2 == 0 ? 'white' : '#f2f2f2' " style=" width: 100%; background:#f2f2f2; display: flex; align-items: center;  height: 60px; margin-top: 20px;">
+                                <h1 class="event" >{{general.getText(event.request_option.option )}}</h1>
+                            </span>
+                        </div>
+                        <div class="hiddenColumn" style="flex: 2;  display: flex; align-items: center; position: relative;  flex-direction: column; ">
+                            <span style="position: absolute; height: 100%; right: 0;  border-left: 2px dashed #fec456 ;  background: transparent;  z-index: 2; "> </span>
+                            <span style="width: 100%;  display: flex; align-items: center;  background: white;  border-top:  2px dashed  #fec456; border-bottom: 2px dashed  #fec456;  z-index: 2;">
+                                <h1 class="title" style="color: #fec456;" >{{general.getText( { en : 'Name', es : ' Nombre' } )}}</h1>
+                            </span>
+                            <span *ngFor="let event of admin.whistleblowerChannel.data;index as i " [style.background]=" i % 2 == 0 ? 'white' : '#f2f2f2' " style=" width: 100%; background:#f2f2f2; display: flex; align-items: center;  height: 60px; margin-top: 20px;">
+                                <h1 class="event" >{{event.name}}</h1>
+                            </span>
+                        </div>
+                        <div style="flex: 1;  display: flex; flex-direction: column; ">
+
+                            <span class="right" style="width: 100%;   display: flex; align-items: center;  border-right: 2px dashed  #fec456; border-top:  2px dashed  #fec456; border-bottom: 2px dashed  #fec456; ">
+                                <h1 class="title" style="color: #fec456; padding-left: 10px; padding-right: 10px;  " >{{general.getText( { en : 'Actions', es : 'Acciones' } )}}</h1>
+                            </span>
+                            <span *ngFor="let data  of admin.whistleblowerChannel.data; index as i " [style.background]=" i % 2 == 0 ? 'white' : '#f2f2f2' " style=" padding:10px; width: 100%; height: 60px;background:#f2f2f2 ;  display: flex; align-items: center;  justify-content: center;  border-radius: 0px 30px 30px 0px / 0% 50% 50% 0%; margin-top: 20px;">
+                                <button pButton pRipple type="button"  (click)=" enviar( data.id)" class="p-button-rounded p-button-success btn" style="margin-right: 5px; height: 35px; padding-left: 20px; padding-right: 20px; font-weight: 900; color: white; border: none ;  background: #fec456; text-align: center; display: flex; align-items: center; justify-content: center;">
+                                    <i class="pi pi-send" style="fill: white; font-size: large; margin:5px;" ></i>
+                                    <p style="margin: 0;height: 15px;   height: min-content; margin-left: 5px;">{{general.getText({ es : "Reenviar", en:"Resend"})}}</p>
+                                </button>
+                             
+                                <button  pButton pRipple type="button"  (click)="detail = data; edit = true" class="p-button-rounded p-button-success  btn" style=" margin-right: 5px; height: 35px; padding-left: 20px; padding-right: 20px; font-weight: 900; color: white; border: none ;  background: #28ba9b; text-align: center; display: flex; align-items: center; justify-content: center;"> 
+                                    <i class="pi pi-sliders-h" style="fill: white; font-size: large; margin:5px;" ></i>
+                                    <p style="padding: 0; margin: 0; margin-right: 10px;"> {{general.getText( { en : 'Detail', es : 'Detalle' } )}}</p>
+                                </button>
+                            </span>
+
+                        </div>
+                    </div>
+                    <div *ngIf=" admin.whistleblowerChannel.data.length == 0" style="height: 300px; display: flex; justify-content: center; align-items: center;">
+                        <p>No Data</p>
+                    </div>
+
+                </ng-container>
+                <div *ngIf=" !admin.whistleblowerChannel " style="height: 300px; display: flex; justify-content: center; align-items: center;">
+                    <p>No Data</p>
+                </div>
+            </div>
+
+
+            <div class="paginacion" style=" margin-top: 20px;  border-radius: 20px / 50% ;  background: #28ba9b; height: 40px; display: flex; justify-content: center; overflow: hidden;   ">
+                <ng-container *ngIf=" admin.whistleblowerChannel">
+                    <ng-container *ngFor="let pagina of  admin.whistleblowerChannel.meta.links ; index as i ">
+                        <a class="ripple" *ngIf="i == 0 " (click)="admin.getWhistleblowerChannel(pagina.url, true)" style=" flex: 1; min-width: 20px; color: white;   padding: 5px; text-decoration: none; display: flex; justify-content: center; align-items: center; ">
+                            <img src="assets/icons/chevron-back-outline.svg" class="flecha" alt="">
+                        </a>
+                        <a class="ripple" *ngIf="i > 0  && i < (  admin.whistleblowerChannel.meta.links.length - 1) " (click)="admin.getWhistleblowerChannel(pagina.url, true)" [ngClass]=" { 'ripple' : true , 'paginaselect' : pagina.active ? true : false } " style=" min-width: 20px; flex: 1;  color: white; padding: 5px; text-decoration: none; display: flex; justify-content: center; align-items: center; ">
+                            <p class="paginationText">
+                                {{pagina.label}}
+                            </p>
+                        </a>
+
+                        <a class="ripple" *ngIf=" i ==  (  admin.whistleblowerChannel.meta.links.length - 1 ) " (click)="admin.getWhistleblowerChannel(pagina.url, true)" style="  flex: 1; min-width: 20px; color: white; padding: 5px; text-decoration: none; display: flex; justify-content: center; align-items: center; ">
+                            <img src="assets/icons/chevron-forward-outline.svg" class="flecha" alt="">
+                        </a>
+                    </ng-container>
+                </ng-container>
+            </div>
+        </div>
+
+        <div *ngIf="edit" style="width: 80%; max-width: 1100px; display: flex;  align-items: center; justify-content: center;  flex-direction: column;">
+            <br>
+            <button pButton pRipple type="button " (click)="edit = false" class="p-button-rounded p-button-success " style="margin-bottom: 20px; border: 3px solid #aaaaaa; margin-top: 10px;  height: 45px; padding-left: 20px; padding-right: 20px;
+                                font-weight: 900; color: #aaaaaa; background: transparent; text-align: center; display: flex; justify-content: center; ">
+            {{general.getText({ es : "Cerrar ", en:"Close"})}}
+        </button>
+            <app-detail [data]="detail" style="width: 100%;"></app-detail>
+        </div>
+    </div>
+
+    <form [formGroup]="nuevoForm" class="tarjeta2" style="width: 80%;  max-width: 1200px;">
+        <div style="width: 100%; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;  ">
+            <div style="display: flex; flex-direction: column;  justify-content: center;">
+                <div style="display: flex; flex-wrap: wrap; align-items: center; margin-right: 30px; ">
+                    <h4 style=" font-weight: bolder;  font-size:x-large;"> {{general.getText({ es : "Configuración del canal de denunciantes", en : "Whistleblower channel settings"})}}
+                    </h4>
+                </div>
+            </div>
+            <span class="custom" style="flex: 1;margin:5px; flex: 2; margin-top: 10px ;   border: 1px solid #ced4da; border-radius: 3px;">
+      
+     </span>
+        </div>
+        <div style="display: flex; width: 100%;">
+            <div class="inputbox " style="justify-content: space-between; ">
+                <h5 style="flex: 1; "> * {{general.getText({ es : "Texto de cabecera en español", en:"Header text in Spanish"})}}
+                </h5>
+                <input class="inputcorreo" style="flex: 2;" type="text" formControlName="headerEs" [placeholder]="general.getText({ es : '*Cabecera', en:'*Header'})">
+            </div>
+        </div>
+        <div style="display: flex; width: 100%;">
+            <div class="inputbox " style="justify-content: space-between; ">
+                <h5 style="flex: 1; "> * {{general.getText({ es : "Texto de cabecera en inglés", en:"Header text in English"})}}
+                </h5>
+                <input class="inputcorreo" style="flex: 2;" type="text" formControlName="headerEn" [placeholder]="general.getText({ es : '*Cabecera', en:'*Header'})">
+            </div>
+        </div>
+        <div style="display: flex; width: 100%;">
+            <div class="inputbox " style="justify-content: space-between; ">
+                <h5 style="flex: 1; "> * {{general.getText({ es : "Titulo en español", en:"Title en español"})}}
+                </h5>
+                <input class="inputcorreo" style="flex: 2;" type="text" formControlName="titleEs" [placeholder]="general.getText({ es : '*Titulo', en:'*Title'})">
+            </div>
+        </div>
+        <div style="display: flex; width: 100%;">
+            <div class="inputbox " style="justify-content: space-between; ">
+                <h5 style="flex: 1; "> * {{general.getText({ es : "Titulo en inglés", en:"Title in English"})}}
+                </h5>
+                <input class="inputcorreo" style="flex: 2;" type="text" formControlName="titleEn" [placeholder]="general.getText({ es : '*Titulo', en:'*Title'})">
+            </div>
+        </div>
+        <div style="display: flex; width: 100%;">
+            <div *ngIf="idiomaSet == 'es'" class="inputbox " style=" display: flex; flex-wrap: wrap; justify-content: space-between; ">
+                <div style="flex: 1; display: flex; align-items: center; flex-direction: column; min-width: 200px; ">
+                    <h5>{{general.getText({ es : "Cuerpo del la descripcón en español", en:"Body of the description in Spanish"})}}
+                    </h5>
+                    <button pButton pRipple type="button" (click)="idiomaSet = 'en'" class="p-button-rounded p-button-success  btn" style=" margin-right: 5px; height: 35px; padding-left: 20px; padding-right: 20px; font-weight: 900; color: white; border: none ;  background: #28ba9b; text-align: center; display: flex; align-items: center; justify-content: center;"> 
+                        <i class="pi pi-sliders-h" style="fill: white; font-size: large; margin:5px;" ></i>
+                        <p style="padding: 0; margin: 0; margin-right: 10px;"> {{general.getText( { en : 'Show in English', es : 'Mostrar en Inglés' } )}}</p>
+                    </button>
+                    <br>
+                </div>
+                <div style="flex: 2;  min-width: 270px; position: relative;">
+                    <div style="width: 100% ;" *ngFor="let textBody of body.es.parrafos; index as i">
+                        <div style=" width: 100%; display: flex; justify-content: flex-end; position: absolute;">
+                            <span (click)=" deleteParagrap( body.es.parrafos, i ) " style=" cursor: pointer; color: white; padding: 10px; font-weight: bold; font-size: 15px;  background: #28ba9b; border-radius:50%; width:25px ; height:25px; display: flex; justify-content: center; align-items: center; ">
+                            x
+                        </span>
+                        </div>
+                        <textarea class="inputcorreo" style="width: calc( 100% -  20px); height: auto; border: 1px solid #c7c7c7; padding: 10px; margin: 10px;" [ngModelOptions]="{standalone: true}" [ngModel]="body.es.parrafos[i]" (change)="ver($event,i,'es')" [placeholder]="general.getText({ es : 'párrafo', en:'New paragraph'})"
+                            id="" cols="30" rows="10">
+            
+                    </textarea>
+                    </div>
+                    <div style=" width: 100%; display: flex; justify-content: center; padding: 15px;">
+                        <span (click)="addEs()" style=" cursor: pointer; color: white; padding: 10px; font-weight: bold; font-size: 15px;  background: #28ba9b; border-radius:50%; width:25px ; height:25px; display: flex; justify-content: center; align-items: center; ">
+                            +
+                        </span>
+                    </div>
+
+                </div>
+            </div>
+
+
+
+
+            <div *ngIf="idiomaSet == 'en'" class="inputbox " style=" display: flex; flex-wrap: wrap; justify-content: space-between; ">
+                <div style="flex: 1; display: flex; align-items: center; flex-direction: column; min-width: 200px; ">
+                    <h5>{{general.getText({ es : "Cuerpo del la sección en inglés", en:"Body of the English section"})}}
+                    </h5>
+                    <button pButton pRipple type="button" (click)="idiomaSet = 'es'" class="p-button-rounded p-button-success  btn" style=" margin-right: 5px; height: 35px; padding-left: 20px; padding-right: 20px; font-weight: 900; color: white; border: none ;  background: #28ba9b; text-align: center; display: flex; align-items: center; justify-content: center;"> 
+                        <i class="pi pi-sliders-h" style="fill: white; font-size: large; margin:5px;" ></i>
+                        <p style="padding: 0; margin: 0; margin-right: 10px;"> {{general.getText( { en : 'Show in Spanish', es : 'Mostrar en Español' } )}}</p>
+                    </button>
+                    <br>
+                </div>
+
+                <div style="flex: 2;  min-width: 270px; position: relative;">
+                    <div style="width: 100% ;" *ngFor="let textBody of body.en.parrafos; index as i">
+                        <div style=" width: 100%; display: flex; justify-content: flex-end; position: absolute;">
+                            <span (click)=" deleteParagrap( body.en.parrafos, i )" style=" cursor: pointer; color: white; padding: 10px; font-weight: bold; font-size: 15px;  background: #28ba9b; border-radius:50%; width:25px ; height:25px; display: flex; justify-content: center; align-items: center; ">
+                            x
+                        </span>
+                        </div>
+                        <textarea class="inputcorreo" style="width: calc( 100% -  20px); height: auto; border: 1px solid #c7c7c7; padding: 10px; margin: 10px;" [ngModelOptions]="{standalone: true}" [ngModel]="body.en.parrafos[i]" (change)="ver($event,i,'en')" [placeholder]="general.getText({ es : 'párrafo', en:'New paragraph'})"
+                            id="" cols="30" rows="10">
+            
+                    </textarea>
+                    </div>
+                    <div style=" width: 100%; display: flex; justify-content: center; padding: 15px;">
+                        <span (click)="addEn()" style=" cursor: pointer; color: white; padding: 10px; font-weight: bold; font-size: 15px;  background: #28ba9b; border-radius:50%; width:25px ; height:25px; display: flex; justify-content: center; align-items: center; ">
+                            +
+                        </span>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div style="width: 100%; ">
+            <div style="display: flex; width: 100%;">
+                <div class="inputbox " style="justify-content: space-between; ">
+                    <h5 style="flex: 1; ">* {{ getControlsText("video")}}
+                    </h5>
+                    <input class="inputcorreo" id="url" style="flex: 2;" type="text" formControlName="video" placeholder="*a6ptOkLG5Zo">
+                    <span (click)="reload()" style=" cursor: pointer; color: white; padding: 10px; font-weight: bold; font-size: 15px;  background: #28ba9b; border-radius:50%; width:30px ; height:30px; display: flex; justify-content: center; align-items: center; ">
+                    <i class="pi pi-reply" style="font-size: 15px;"></i>
+                </span>
+                </div>
+            </div>
+
+            <!-- <div *ngIf="!load" style="display: flex; border-radius: 5px; justify-content: center; position: relative;  padding-bottom: 40.25%;height: 0;overflow: hidden;width: 100%; margin-bottom: 20px;">
+                <iframe width="100%" height="100%" (errro)="errorFrame()" style=" background-color:#f2f2f2;  border: 3px solid white; max-width: 1000px; max-height: 400px; top:0 ; bottom:0; position: absolute; z-index: 11111;" [src]="videoselect | safe" title="YouTube video player"
+                    frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div> -->
+
+
+        </div>
+    </form>
+
+    <div style="margin-top: 20px; margin-bottom: 20px; display: flex; justify-content: flex-end; width: 80%; max-width: 1200px;  ">
+        <button (click)="guardar()" pButton pRipple type="button " class="p-button-rounded p-button-success " style=" margin-top: 10px; margin-right: 25px; height: 45px; padding-left: 20px; padding-right: 20px; font-weight: 900; color: white; border:
+            none ;  background: #28ba9b; text-align: center; display: flex; justify-content: center; ">
+            {{general.getText({ es : "Guardar Cambios ", en:"Save Changes"})}}
+        </button>
+
+    </div>
+</div>

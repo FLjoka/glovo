@@ -1,0 +1,59 @@
+<div *ngIf="!buscando" style="display: flex; justify-content: center; flex-direction: column;  align-items: center;  ">
+    <div class="gente">
+        <img [src]="general.getImage(noticia.mime_type,noticia.image)" style="width: 100%;" alt="">
+
+    </div>
+    <div class="centro" style="background: #f2f2f2; width: 100%; padding-bottom: 150px; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 50; ">
+        <br>
+        <div style="width: 80%; max-width: 1000px; display: flex; justify-content: space-between;align-items: flex-end;  height: min-content;">
+            <div>
+                <div>
+                    <h1 class="title" style=" font-weight: bolder; text-transform: capitalize; margin-bottom: 10px;"> {{noticia.title}}</h1>
+                    <div class="barrita"></div>
+                </div>
+            </div>
+            <div *ngIf="noticia.event_date" class="tarjeta">
+                <div style="height: 20px; width: 100%;  background: rgb(255,204,102);background: radial-gradient(circle, rgba(255,204,102,1) 0%, rgba(255,197,84,1) 100%);"></div>
+                <div style="padding: 10px; display: flex; flex-direction: column; justify-content: space-between; height: calc( 100% - 20px );">
+                    <div>
+                        <h2 class="subtitle"> {{general.getMonth(noticia.event_date)}}</h2>
+                        <h2 class="subtitle">{{general.getYear(noticia.event_date)}}</h2>
+                        <div class="barrita"></div>
+                    </div>
+                    <br>
+                    <br>
+                    <div style="display: flex; justify-content: flex-end; width: 100%;">
+                        <button (click)="addCalendar( )" pButton pRipple type="button" class="p-button-rounded p-button-success p-button-sm" style=" margin-left: 20px; font-weight: 900; color: white; border: none ; background: #28ba9b;"><p style="white-space: nowrap; padding: 0;margin: 0;" > {{general.getText( { en : 'Add to Calendar', es : 'Agregar al Calendario' } )}}</p></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <p style="color: gray;">{{general.getFecha(noticia.updated_at)}}</p>
+        <div class="textos" *ngIf="  typeof( text(noticia.body )) !== 'object' ">
+            <p> {{text(noticia.body ) }}</p>
+        </div>
+        <div *ngIf=" typeof( text(noticia.body ) ) == 'object' " class="textos">
+            <p *ngFor=" let noticia of text(noticia.body ).parrafos "> {{noticia}}</p>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; width: 80%; justify-content: flex-start;max-width: 1000px;  margin-top: 120px; ">
+            <div class="tarjeta2" *ngFor="let recurso of noticia.documents" style=" display:flex; flex-direction: column; justify-content:  space-between;">
+                <h4 class="subtitle">{{recurso.title}}</h4>
+                <br>
+                <div style="width: 100%; display: flex; justify-content: flex-start;">
+                    <button pButton pRipple type="button" (click)="descargar( recurso.url,recurso.title )" class="p-button-rounded p-button-success  btn" style="  font-weight: 900; color: white; border: none ; background: #28ba9b;"> <span style="margin-right: 10px;" ><img src="assets/icons/descarga.svg" style="width: 17px;" alt=""></span><p  style="padding: 0; margin: 0; margin-right: 10px;"> {{general.getText( { en : 'Download', es : 'Descargar' } )}}</p>
+                </button>
+                </div>
+            </div>
+        </div>
+        <div style="display: none; width: 80%; flex-direction: column;  justify-content: center; align-items: center; max-width: 1000px;  margin-top: 120px;  ">
+            <h1 class="title2">
+                {{general.getText({ es : "Delegación de Voto ", en:"Voting Delegation"})}}
+            </h1>
+            <button pButton pRipple type="button" [routerLink]="['/private/shareholders-requests']" class="p-button-rounded p-button-success  btn" style=" padding-left: 20px; padding-right: 20px; font-weight: 900; color: white; border: none ; background: #28ba9b; text-align: center; display: flex; justify-content: center;"> <p class="form" > {{general.getText( { en : 'Form', es : 'Formulario' } )}}</p>
+            </button>
+        </div>
+    </div>
+</div>
+<div *ngIf="buscando" style="display: flex; width: 100%; justify-content: center; height: 400px; align-items: center;" class="loader">
+    <p-progressSpinner></p-progressSpinner>
+</div>

@@ -1,0 +1,23 @@
+<div *ngIf="view" class="view" style=" font-weight: 700; display: flex; justify-content: center;align-items: center; width: 100%; height: 100%; background: rgba(37, 38, 51, 0.247); z-index: 11111111111111111111111; min-height: 200px; position: fixed;">
+    <div (click)="cancel()" style=" cursor: pointer; position: absolute; z-index: -1; width: 100%; height: 100%; "></div>
+    <div class="noselect" style="font-size: 17px; padding: 20px; margin-left: 20px; margin-right: 20px; color:#1c1c1c ; min-width: 300px; display: flex; flex-direction: column; align-items: center; justify-content: space-between; min-height: 250px; max-width: 80%; background: white; border-radius: 20px; box-shadow: 0px 10px 27px 8px rgba(0,0,0,0.36);">
+        <div style="width: 100%; display: flex; justify-content: flex-end; ">
+
+        </div>
+        <div style="padding: 20px;   width: 100%; display: flex; flex-direction: column; justify-content: space-around; align-items: center;">
+            <h4 style="font-weight: bolder;">{{general.getText({en : "Change of password" , es :"Cambio de contraseña"})}}</h4>
+            <br>
+            <div>
+                <div style="display: flex;  ">
+                    <img src="assets/icons/correo.svg" style="width: 20px; padding: 3px; margin-right: 5px; padding-bottom: 10px;" alt="">
+                    <div style="padding: none; flex: 1; display: flex;     border-bottom: 1px solid #CACFD2  ">
+                        <input style="flex: 1;" [(ngModel)]="correo" placeholder="correo" class="inputcorreo" type="text">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="display: flex; justify-content: center; width: 100%; padding: 20px; ">
+            <a (click)="ir()" class="abtn " style="padding: 10px; cursor: pointer; "><span style="padding: 10px; margin: 0px; text-align: center; ">{{general.getText({ es : "Send" , en : "Enviar"})}}</span></a>
+        </div>
+    </div>
+</div>

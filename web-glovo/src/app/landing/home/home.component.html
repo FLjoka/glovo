@@ -1,0 +1,80 @@
+<div class="center" style="width: 100%; flex-direction: column; padding-top: 90px; ">
+    <div *ngIf="individual.buscandoAnuncios" class="loader">
+        <p-progressSpinner></p-progressSpinner>
+    </div>
+    <div *ngIf="!individual.buscandoAnuncios && !individual.anuncios.data[0]" class="loader">
+        <div>
+            <h1 class="title" style=" font-weight: bolder; text-transform: capitalize; margin-bottom: 10px;"> {{general.getText({ es: "No hay noticias Disponibles" , en : "No news available"})}}</h1>
+            <div class="barrita"></div>
+        </div>
+    </div>
+    <div class="noticia" *ngIf=" !individual.buscandoAnuncios && individual.anuncios.data[0]">
+        <div class="imagen" style=" z-index: -1; padding: -205px; border-radius: 60% 40% 47% 53% / 55% 71% 29% 45% ;width: 57%; overflow: hidden; max-width: 500px;">
+            <img [src]="general.getImage(individual.anuncios.data[0].mime_type , individual.anuncios.data[0].image )" style="height:100%; width: 100%;" alt="">
+        </div>
+        <div class="fecha">
+            <div>
+                <h1 class="title" style=" font-weight: bolder; text-transform: capitalize; margin-bottom: 10px; max-width: 550px;"> {{individual.anuncios.data[0].title}}</h1>
+                <div class="barrita"></div>
+            </div>
+            <br>
+            <div class="card">
+                <div class="chico" style=" z-index: -1; padding: -205px; margin-left: 20px; border-radius: 60% 40% 47% 53% / 55% 71% 29% 45% ;width: 57%; overflow: hidden; flex: 1; max-width: 500px;">
+                    <img [src]="general.getImage(individual.anuncios.data[0].mime_type , individual.anuncios.data[0].image )" style="height:100%; width: 100%;" alt="">
+                </div>
+                <div style=" border-radius: 60% 40% 40% 60% / 40% 56% 44% 60%; padding: 10px; margin-left: -40px; height: min-content; max-height: 96px; background: #fec456; display: flex; justify-content: center; align-items: center;">
+                    <img class="campana" src="../../../assets/icons/campana.svg" alt="">
+                </div>
+                <div style="margin-left: 10px;">
+                    <div class="tarjeta">
+                        <div style="height: 20px; width: 100%;   background: rgb(255,204,102);background: radial-gradient(circle, rgba(255,204,102,1) 0%, rgba(255,197,84,1) 100%);"></div>
+                        <div style="padding: 10px;">
+                            <h2 class="subtitle"> {{general.getMonth(individual.anuncios.data[0].updated_at)}}</h2>
+                            <h2 class="subtitle">{{general.getYear(individual.anuncios.data[0].updated_at)}}</h2>
+                        </div>
+                    </div>
+                    <br>
+                    <button [routerLink]=" '/private/news/' + individual.anuncios.data[0].id " pButton pRipple type="button" class="p-button-rounded p-button-success" style=" width: 120px; font-weight: 900; color: white; border: none ; background: #28ba9b;"> {{general.getText( { en : 'Read More', es : 'Leer Más' } )}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="margin-bottom: 120px;">
+        <div style="width: 100%; padding: 20px;  max-width: 1000px; display: flex; justify-content: center; align-items: center;  flex-direction: row-reverse; flex-wrap: wrap;">
+
+            <div *ngFor="let item of general.menu[1].subItems ; index as i " style="display: flex; margin-top: 50px;  max-width: 450px;width: 87%; padding: 10px; position: relative;">
+                <div>
+                    <div>
+                        <h1 class="title" style=" font-weight: bolder;   text-transform: capitalize; margin-bottom: 10px;"> {{general.getText(item.nombre)}}</h1>
+                        <div class="barrita"></div>
+                    </div>
+                    <p style="line-height: 1.4;">{{general.getText(item.description)}}</p>
+                    <button pButton pRipple type="button" (click)="menuSelectList( 1, i)" class="p-button-rounded p-button-success" style=" padding-left: 20px; padding-right: 20px; font-weight: 900; color: white; border: none ; background: #28ba9b; text-align: center; display: flex; justify-content: center;">{{general.getText( { en : 'Read More', es : 'Leer Más' } )}}</button>
+                    <br>
+                </div>
+                <div style="display: flex; justify-content: center; padding-top: 40px;">
+                    <div style=" min-width: 100px; width: 100px ; height: 120px; background-position: center; background-size:cover; border-radius:50% 50% 64% 36% / 46% 56% 44% 54%; overflow: hidden;">
+                        <img *ngIf="i == 0" src="../../../assets/compu.png" width="180px " style="left: -20px;" alt="">
+                        <img *ngIf="i == 1" src="../../../assets/muroc.png" width="180px " style="left: -20px;" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="homeFotter center">
+        <div style="width: 83%; max-width: 1000px; display: flex; justify-content: center; flex-wrap: wrap;">
+            <div *ngFor="let i of [2,3,4]" style="display: flex; flex-direction: column; align-items: center; max-width: 300px; padding: 20px;">
+                <div>
+                    <div>
+                        <h1 style=" font-weight: bolder;  font-size: xx-large; text-transform: capitalize; margin-bottom: 10px;  max-width: 240px;"> {{general.getText(general.menu[i].nombre)}}</h1>
+                        <div class="barrita"></div>
+                    </div>
+                    <p style="padding: 0px; max-width: 250px;">{{general.getText(general.menu[i].description)}}</p>
+                    <button pButton pRipple type="button" (click)="menuSelect(i)" class="p-button-rounded p-button-success" style=" width: 120px; font-weight: 900; color: white; border: none ; background: #28ba9b;">{{general.getText( { en : 'Read More', es : 'Leer Más' } )}}</button>
+                </div>
+                <br>
+            </div>
+        </div>
+    </div>
+</div>

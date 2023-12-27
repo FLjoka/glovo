@@ -1,0 +1,162 @@
+<div class="center" style="width: 100% !important ; height: 100% !important; min-width: 120px; min-height: 200px;   padding-bottom: 150px; background: white; ">
+
+    <div *ngIf="router.url === '/admin-public/compliance'" style="width: 80%; max-width: 1200px;">
+        <h4 style=" margin-bottom: 20px; font-size: 26px; font-weight: bold; ">{{general.getText({ en : "Tags", es :"Etiquetas"})}}</h4>
+        <div style="display: flex; flex-wrap: wrap; width: 100%; padding-bottom: 5px; justify-content: space-between;">
+            <span class="custom" style="margin:5px; flex: 2; margin-top: 10px ;   border: 1px solid #ced4da; border-radius: 3px;">
+                <p-dropdown  [style]="{'width':'100%' , 'height' : '38px'  }"  [(ngModel)]="admin.complianceFilters.statusSelected" [options]="status" (onChange)="buscar()" placeholder="rol de usuario" optionLabel="text"></p-dropdown>
+             </span>
+            <div style="display: flex; max-height: 35px; flex: 1; justify-content: space-between; min-width: 350px; margin-top: 10px; padding: 0px 8px 0px 5px;">
+                <span class="p-input-icon-left custom" style=" flex:1;">
+                    <i class="pi pi-search"></i>
+                    <input type="text"  [style]="{'width':'100%' , 'height' : '40px'  }"  [(ngModel)]="admin.complianceFilters.search"   pInputText  placeholder=" {{general.getText( { en : 'Search', es : 'Buscar' } )}}">         
+                </span>
+                <button pButton pRipple type="button" (click)="buscar()" class="p-button-rounded p-button-success  " style="  font-weight: 900; color: white; border: none ; margin-left: 20px; background: #fec456;"> 
+                    <p style="padding: 0; padding-left: 10px; margin: 0; margin-right: 10px;"> {{general.getText( { en : 'Search', es : 'Buscar' } )}}</p>
+                </button>
+            </div>
+        </div>
+        <br>
+        <div style="height: 350px; display: flex; justify-content: center; align-items: center;width: 100%;" *ngIf="admin.buscandoCompliance">
+            <p-progressSpinner></p-progressSpinner>
+        </div>
+        <div *ngIf="!admin.buscandoCompliance" style=" width: 100%; display: flex; justify-content: center; ">
+
+            <ng-container *ngIf="admin.compliance">
+                <div style=" width: 100%; display: flex; justify-content: center; min-height: 500px;" *ngIf=" admin.compliance.length > 0">
+                    <div style="flex: 2;  display: flex; flex-direction: column; ">
+                        <span class="left" style=" width: 100% !important;  display: flex; align-items: center;  border-left: 2px dashed  #fec456; border-top:  2px dashed  #fec456; border-bottom: 2px dashed  #fec456; ">
+                        <h1 class="title" style="color: #fec456;" >{{general.getText( { es : 'Fecha', en : 'Date' } )}}</h1>
+                    </span>
+                        <span *ngFor="let data of admin.compliance; index as i " [style.background]=" i % 2 == 0 ? 'white' : '#f2f2f2' " style=" width: 100% !important;  background:#f2f2f2; height: 60px; display: flex; align-items: center; margin-top: 20px;  border-radius: 30px 0px 0px 30px / 50% 0px 0px 50%; ">
+                        <h1 class="event" >{{general.getFecha(data.updated_at)}} </h1>
+                    </span>
+                    </div>
+
+
+
+
+                    <div style="flex: 4;  display: flex; align-items: center; position: relative;  flex-direction: column; ">
+
+                        <span style="position: absolute; height: 100%; left: 0;  border-left: 2px dashed #fec456 ;  background: transparent;  z-index: 2; "> </span>
+                        <span style="position: absolute; height: 100%; right: 0;  border-left: 2px dashed #fec456 ;  background: transparent;  z-index: 2; "> </span>
+                        <span style="width: 100%;  display: flex; align-items: center;  background: white;  border-top:  2px dashed  #fec456; border-bottom: 2px dashed  #fec456;  z-index: 2;">
+                            <h1 class="title" style="color: #fec456; white-space: nowrap;" >{{general.getText( { es : 'Nombre de etiqueta', en : 'Tag name' } )}}</h1>
+                        </span>
+                        <span *ngFor="let event of admin.compliance;index as i " [style.background]=" i % 2 == 0 ? 'white' : '#f2f2f2' " style=" width: 100%; background:#f2f2f2; display: flex; align-items: center; justify-content: space-between;  height: 60px; margin-top: 20px; padding-right:10px;">
+                            <h1 class="event" >{{general.getText(event.title)}}</h1>
+                        
+                        </span>
+                    </div>
+                    <div class="hiddenColumn" style="flex: 4;  display: flex; align-items: center; position: relative;  flex-direction: column; ">
+                        <span style="position: absolute; height: 100%; right: 0;  border-left: 2px dashed #fec456 ;  background: transparent;  z-index: 2; "> </span>
+                        <span style="width: 100%;  display: flex; align-items: center;  background: white;  border-top:  2px dashed  #fec456; border-bottom: 2px dashed  #fec456;  z-index: 2;">
+                            <h1 class="title" style="color: #fec456; white-space: nowrap;" >{{general.getText( { en : 'Touched by', es : 'Modificado por' } )}}</h1>
+                        </span>
+                        <span *ngFor="let event of admin.compliance;index as i " [style.background]=" i % 2 == 0 ? 'white' : '#f2f2f2' " style=" width: 100%; background:#f2f2f2; display: flex; align-items: center;  height: 60px; margin-top: 20px;">
+                            <h1 class="event" >{{event.last_touched_by.name}}</h1>
+                          
+                        </span>
+                    </div>
+                    <div style="flex: 1;  display: flex; flex-direction: column; ">
+
+                        <span class="right" style="width: 100%;   display: flex; align-items: center;  border-right: 2px dashed  #fec456; border-top:  2px dashed  #fec456; border-bottom: 2px dashed  #fec456; ">
+                            <h1 class="title" style="color: #fec456; padding-left: 10px; padding-right: 10px;  " >{{general.getText( { en : 'Actions', es : 'Acciones' } )}}</h1>
+                        </span>
+                        <span *ngFor="let data  of admin.compliance; index as i " [style.background]=" i % 2 == 0 ? 'white' : '#f2f2f2' " style=" padding:10px; width: 100%; height: 60px;background:#f2f2f2 ;  display: flex; align-items: center;  justify-content: flex-end;  border-radius: 0px 30px 30px 0px / 0% 50% 50% 0%; margin-top: 20px;">
+                            <button pButton pRipple type="button" *ngIf="data.deleted_at" (click)="restaurar(data.id)" class="p-button-rounded p-button-success btn" style="margin-right: 5px; height: 35px; padding-left: 20px; padding-right: 20px; font-weight: 900; color: white; border: none ;  background: #fec456; text-align: center; display: flex; align-items: center; justify-content: center;">
+                                <i class="pi pi-undo" style="fill: white; font-size: large; margin:5px;" ></i>
+                                <p style="margin: 0;height: 15px;   height: min-content; margin-left: 5px;"> {{general.getText({ es : "Habilitar", en:"Enable"})}}</p>
+                            </button>
+                            <button pButton pRipple type="button" *ngIf="!data.deleted_at" (click)="eliminar(data.id)" class="p-button-rounded p-button-success btn" style="margin-right: 5px; height: 35px; padding-left: 20px; padding-right: 20px; font-weight: 900; color: white; border: none ;  background: #fec456; text-align: center; display: flex; align-items: center; justify-content: center;">
+                                <i class="pi pi-times" style="fill: white; font-size: large; margin:5px;" ></i>
+                                <p style="margin: 0;height: 15px; white-space: nowrap;   height: min-content; margin-left: 5px;"> {{general.getText({ es : "Deshabilitar", en:"To disable"})}}</p>
+                            </button>
+                            <button routerLink="edit" (click)="admin.complianceSelect = data"  pButton pRipple type="button"  class="p-button-rounded p-button-success  btn" style=" margin-right: 5px; height: 35px; padding-left: 20px; padding-right: 20px; font-weight: 900; color: white; border: none ;  background: #28ba9b; text-align: center; display: flex; align-items: center; justify-content: center;"> 
+                                <i class="pi pi-sliders-h" style="fill: white; font-size: large; margin:5px;" ></i>
+                                <p style="padding: 0; margin: 0; margin-right: 10px;"> {{general.getText( { en : 'Detail', es : 'Detalle' } )}}</p>
+                            </button>
+                        </span>
+
+                    </div>
+                </div>
+                <div *ngIf="!admin.compliance" style="height: 300px; display: flex; justify-content: center; align-items: center;">
+                    <p>No admin.compliance</p>
+                </div>
+            </ng-container>
+            <div *ngIf="!admin.compliance" style="height: 300px; display: flex; justify-content: center; align-items: center;">
+                <p>No admin.compliance</p>
+            </div>
+        </div>
+
+        <div style="display: flex; justify-content: center;align-items: center; height:50px; width: 100%;  margin-top: 20px;">
+            <span routerLink="new" style=" cursor: pointer; color: white; font-weight: bold; font-size: 20px;  background: #28ba9b; border-radius:50%; width:45px ; height:45px; display: flex; justify-content: center; align-items: center; ">
+            +
+        </span>
+        </div>
+        <!--
+        <div class="paginacion" style=" margin-top: 20px;  border-radius: 20px / 50% ;  background: #28ba9b; height: 40px; display: flex; justify-content: center; overflow: hidden;   ">
+            <ng-container *ngIf=" admin.compliance">
+                <ng-container *ngFor="let pagina of  admin.compliance.meta.links ; index as i ">
+                    <a class="ripple" *ngIf="i == 0 " (click)="admin.getCompliance(pagina.url, true)" style=" flex: 1; min-width: 20px; color: white;   padding: 5px; text-decoration: none; display: flex; justify-content: center; align-items: center; ">
+                        <img src="assets/icons/chevron-back-outline.svg" class="flecha" alt="">
+                    </a>
+                    <a class="ripple" *ngIf="i > 0  && i < (  admin.compliance.meta.links.length - 1) " (click)="admin.getCompliance(pagina.url, true)" [ngClass]=" { 'ripple' : true , 'paginaselect' : pagina.active ? true : false } " style=" min-width: 20px; flex: 1;  color: white; padding: 5px; text-decoration: none; display: flex; justify-content: center; align-items: center; ">
+                        <p class="paginationText">
+                            {{pagina.label}}
+                        </p>
+                    </a>
+
+                    <a class="ripple" *ngIf=" i ==  (  admin.compliance.meta.links.length - 1 ) " (click)="admin.getCompliance(pagina.url, true)" style="  flex: 1; min-width: 20px; color: white; padding: 5px; text-decoration: none; display: flex; justify-content: center; align-items: center; ">
+                        <img src="assets/icons/chevron-forward-outline.svg" class="flecha" alt="">
+                    </a>
+                </ng-container>
+            </ng-container>
+        </div>
+-->
+        <form [formGroup]="nuevoForm" class="tarjeta2" style="width: 100%; margin-top: 90px; max-width: 1200px;">
+            <div style="width: 100%; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;  ">
+                <div style="display: flex; flex-direction: column;  justify-content: center;">
+                    <div style="display: flex; flex-wrap: wrap; align-items: center; margin-right: 30px; ">
+                        <h4 style=" font-weight: bolder;  font-size:x-large;"> {{general.getText({ es : "Configuración de la cabecera", en : "Header configuration"})}}
+                        </h4>
+                    </div>
+                </div>
+                <span class="custom" style="flex: 1;margin:5px; flex: 2; margin-top: 10px ;   border: 1px solid #ced4da; border-radius: 3px;">
+          
+         </span>
+            </div>
+            <div style="display: flex; width: 100%;">
+                <div class="inputbox " style="justify-content: space-between; ">
+                    <h5 style="flex: 1; "> * {{general.getText({ es : "Texto de cabecera en español", en:"Header text in Spanish"})}}
+                    </h5>
+                    <input class="inputcorreo" style="flex: 2;" type="text" formControlName="headerEs" [placeholder]="general.getText({ es : '*Titulo', en:'*Title'})">
+                </div>
+            </div>
+            <div style="display: flex; width: 100%;">
+                <div class="inputbox " style="justify-content: space-between; ">
+                    <h5 style="flex: 1; "> * {{general.getText({ es : "Titulo capacitación en inglés", en:"Header text in English"})}}
+                    </h5>
+                    <input class="inputcorreo" style="flex: 2;" type="text" formControlName="headerEn" [placeholder]="general.getText({ es : '*Titulo', en:'*Title'})">
+                </div>
+            </div>
+        </form>
+
+        <div style="margin-top: 20px; margin-bottom: 20px; display: flex; justify-content: flex-end; width: 100%; max-width: 1200px;  ">
+            <button (click)="guardar()" pButton pRipple type="button " class="p-button-rounded p-button-success " style=" margin-top: 10px; margin-right: 25px; height: 45px; padding-left: 20px; padding-right: 20px; font-weight: 900; color: white; border:
+                none ;  background: #28ba9b; text-align: center; display: flex; justify-content: center; ">
+        {{general.getText({ es : "Guardar Cambios ", en:"Save Changes"})}}
+    </button>
+
+        </div>
+
+    </div>
+
+    <div *ngIf="router.url !== '/admin-public/compliance'" style="width: 80%;  max-width: 1100px; display: flex;  align-items: center; justify-content: center;  flex-direction: column;">
+
+
+        <div style="width: 100%;">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>

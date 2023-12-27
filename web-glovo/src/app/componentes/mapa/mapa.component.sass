@@ -1,0 +1,88 @@
+
+$dark-shadow: #ffffff33
+$dark-light: #3f3f3f42
+$color-select: #339999
+$color-normal: #495057
+.pais
+    cursor: pointer
+    z-index: 2222222222
+    fill: #28ba9b !important
+    stroke: #28ba9b !important
+    &:hover
+        fill: rgba(255,204,102,1) !important
+        stroke: rgba(255,204,102,1) !important
+        fill: radial-gradient(circle, rgba(255,204,102,1) 0%, rgba(255,197,84,1) 100%) !important
+.mapa
+    fill: #333333
+    stroke: #6a6a6a
+    stroke-width: 0.20000001
+    stroke-miterlimit: 7.97446823
+    min-height: 400px
+    -webkit-tap-highlight-color: transparent
+
+.marcado
+    color: #495057
+    cursor: pointer
+    font-family: 'light'
+.marcado:hover
+    color: $color-select
+.popover
+    display: flex
+    flex-direction: column
+    border: 1px solidblack
+    border: none
+    padding: 0
+    font: inherit
+    outline: inherit
+    padding-top: 10px
+    padding-bottom: 10px
+    box-shadow: 0px 7px 17px -8px rgba(4,4,4,0.5)
+    background: white
+    position: absolute
+    margin-top: 30px
+    border-radius: 5px
+.izquierda
+    right: 0
+    .triangulo
+        right: 20px
+        left: unset
+.arriba
+    transform: translate( 0 , -200% )
+    .triangulo
+        top: unset
+        bottom: -11px
+        transform: rotate( 90deg)
+
+.triangulo
+    position: absolute
+    top: -11px
+    left: 20px
+    width: 0
+    height: 0
+    -ms-transform: rotate(-90deg)
+    -webkit-transform: rotate(-90deg)
+    transform: rotate(-90deg)
+    border-left: 10px solid #ffffff
+    border-top: 7px solid transparent
+    border-bottom: 7px solid transparent
+.select
+    color: $color-select
+.ripple
+    background-position: center
+    transition: background 0.5s
+    cursor: pointer
+
+.ripple:hover
+    background: $dark-shadow radial-gradient(circle, transparent 1%, $dark-shadow 1%) center/15000%
+
+.ripple:active
+    background-color: $dark-light
+    background-size: 100%
+    transition: background 0s
+p
+    margin-top: 5px
+    margin-bottom: 5px
+    padding-left: 15px
+    padding-right: 15px
+    font-size: 15px
+    white-space: nowrap

@@ -1,0 +1,131 @@
+<div class="content" style=" z-index: 200; display: flex; flex-direction: column; justify-content: center; align-items: center; position: relative;">
+    <div id="menuBar" class="menuActive">
+
+        <div id="menuBarItems" class="center hidden" style="z-index: 5; margin-left: 20px; ">
+
+
+
+            <div *ngFor="let item of general.menu ; index as i" style="position: relative;" class="menu-item">
+                <span (click)="menuSelect(i)" *ngIf="item.icon_only && item.show" (click)="mostrar()" class="ripple icon ">
+                <img [src]="item.icon" style="width: 20px; ">
+            </span>
+                <div [ngClass]="{'selected' : item.selected}" style="margin-top: 0px;"></div>
+            </div>
+            <div>
+                <span id="idiomaHeader3" class="ripple icon " style="margin-left: 15px; ">
+                    <img src="../../assets/icons/lg.svg " style="width: 20px; ">
+                    <img  src="../../assets/icons/chevron-down-outline.svg " style=" margin-left: 5px; color: white; width: 20px; ">
+                </span>
+                <globo-select [active]="'idiomaHeader3'" [items]="general.idiomas"></globo-select>
+            </div>
+
+        </div>
+        <a (click)="general.menuresponsive.abrir()" style="cursor: pointer; padding: 10px; ">
+            <img src="assets/icons/menu-outline.svg" style="width: 35px;" alt="">
+        </a>
+    </div>
+    <header class="cabecera center noselect" style="padding-top: 110px;">
+
+        <div class="center">
+            <a style="z-index: 3; width: 120px;">
+                <img [src]="general.menu[0].icon" style="max-width: 120px; z-index: 3; cursor: pointer; " alt="">
+            </a>
+            <div class="menu">
+                <ul style="list-style: none; display: flex; z-index: 111111111111111111;">
+                    <li *ngFor="let item of general.menu ; index as i" class="menu-item" style="position: relative; overflow: visible;">
+                        <span class="ripple  item " *ngIf="!item.icon_only && item.show " (click)="menuSelect(i)" style="white-space: nowrap;" id="{{item.nombre.en}}_{{i}}">
+                            {{ getText( item.nombre )  }}
+                        
+                        </span>
+                        <div [ngClass]="{'selected' : item.selected}"></div>
+                        <globo-select *ngIf="item.subItems" [idioma]="general.idioma()" [order]="i" [active]="item.nombre.en + '_' + i" [clicked]="menuSelectList" [items]="item.subItems"></globo-select>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="center " style="z-index: 5; margin-left: 20px; ">
+                <div *ngFor="let item of general.menu ; index as i" style="position: relative;" class="menu-item">
+                    <span (click)="menuSelect(i)" *ngIf="item.icon_only && item.show" (click)="mostrar()" class="ripple icon ">
+                    <img [src]="item.icon" style="width: 20px; ">
+                </span>
+                    <div [ngClass]="{'selected' : item.selected}" style="margin-top: 2px;"></div>
+                </div>
+                <div>
+                    <span id="idiomaHeader" class="ripple icon " style="margin-left: 15px; ">
+                        <img src="../../assets/icons/lg.svg " style="width: 20px; ">
+                        <img  src="../../assets/icons/chevron-down-outline.svg " style=" margin-left: 5px; color: white; width: 20px; ">
+                    </span>
+                    <globo-select [active]="'idiomaHeader'" [items]="general.idiomas"></globo-select>
+                </div>
+                <div class="menu">
+                    <span class="ripple icon " (click)="  cerrarSesion()" style=" display: flex; justify-content: center; align-items: center;">
+                        <i style="font-size: 15px; margin: 7px 2px 7px 2px; " class="pi pi-sign-out"></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="title " style="z-index: 1; max-width: 50%; min-width: 320px;">
+            <p class="title " style="text-align: center;">{{getTitle()}}</p>
+        </div>
+        <div style="z-index: 0;" class="fondo">
+
+            <div *ngIf="getFondo() !== ''" style=" width: 100%; display: flex; justify-content: center; align-items: center; height: 100%; background: rgba(0, 0, 0, 0.5);">
+                <div style="background: rgba(0, 0, 0, 0.5); width: 100%; height: 100%; position: absolute;"></div>
+                <img class="imgFondo" sizes="(max-width: 480px) 480px, 800px " [srcset]="getFondo()" alt="">
+            </div>
+        </div>
+    </header>
+
+    <div class="centro  center " [style.background]="pagebg()" style="z-index: 0; align-items: flex-start;  overflow: hidden;">
+        <div style="position: relative; width: 100%; height: 100%; ">
+            <router-outlet style="margin: 0px; padding: 0px; height: 100%; width: 100%; ">
+
+            </router-outlet>
+        </div>
+    </div>
+    <div class="fotter center ">
+        <div style="display: flex; position: relative; flex-wrap: wrap; width: 90%; max-width: 1200px;">
+            <div style=" flex:1; min-width: 200px; ">
+                <img width="120px " src="../../assets/logo.png " alt=" ">
+            </div>
+            <div style="flex:1;min-width: 200px;  ">
+                <ul style="list-style: none; margin-left: 0px; padding-left: 0px; ">
+                    <div *ngFor="let item of general.menu ; index as i">
+                        <li *ngIf="!item.subItems && !item.icon_only " (click)="menuSelect(i)" style="padding: 5px; cursor: pointer; ">{{getText( item.nombre )}}</li>
+                        <div *ngIf="item.subItems ">
+                            <li *ngFor="let subItem of item.subItems; index as subIndex" (click)="  menuSelectList2( i , subIndex) " style="padding: 5px; cursor: pointer;">{{getText( subItem.nombre )}}</li>
+                        </div>
+                    </div>
+                </ul>
+            </div>
+            <div style="flex:1;min-width: 200px; ">
+                <ul style="list-style: none; margin-left: 0px; padding-left: 0px; display: none;  ">
+                    <li routerLink="/terms" style="padding: 5px; cursor: pointer; "> {{getText( { en : "Terms & Conditions", es : "Terminos & Condiciones" } )}}</li>
+                    <li routerLink="/legal-privacy" style="padding: 5px; cursor: pointer; "> {{getText( { en : "Privacy Policy", es : "Política de Privacidad" } )}}</li>
+                    <li style="padding: 5px; cursor: pointer;"> {{getText( { en : "Cookies Policy", es : "Política de Cookies" } )}}</li>
+                </ul>
+            </div>
+            <div style="flex:1;display: flex; flex-direction: column; align-items: flex-start;min-width: 200px;  ">
+                <ul style="list-style: none; margin-left: 0px; padding-left: 0px; ">
+                    <li style="margin-bottom: 30px">
+                        <a [routerLink]="['/admin/shareholders-requests']" style=" display: none;  text-decoration: none; color: white; ">
+                            <div style=" width: fit-content; padding: 10px; padding-left: 30px; padding-right: 30px; font-weight: bolder; border: 2px solid white; border-end-end-radius: revert ;  border-radius: 80px / 75px 75px 75px 75px; ">
+                                {{getText( { en : "Requests", es : "Solicitudes" } )}}
+                            </div>
+                        </a>
+                    </li>
+                    <li style="padding: 5px; ">Sharedholders@glovo.com</li>
+                </ul>
+            </div>
+            <div style="flex:1; display: flex; align-items: flex-end;padding: 20px; max-width: 90px;   ">
+                <div>
+                    <span id="idiomaHeader2" class="ripple icon " style="margin-left: 15px; ">
+                        <img src="../../assets/icons/lg.svg " style="width: 20px; ">
+                        <img  src="../../assets/icons/chevron-down-outline.svg " style=" margin-left: 5px; color: white; width: 20px; ">
+                    </span>
+                    <globo-select [active]="'idiomaHeader2'" [items]="general.idiomas"></globo-select>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,24 @@
+<div id="org" style="display: flex; justify-content: center; align-items: center; flex-direction: column; padding-top: 90px;  width: 100%; height: 100%; background: white; ">
+
+    <div *ngIf="buscando" style="height: 500px; display: flex; justify-content: center; width: 100%; ">
+        <p-progressSpinner></p-progressSpinner>
+    </div>
+    <ng-container *ngIf="general.charts && !buscando">
+        <span *ngFor="let grafico of  general.charts.imagenes; index as i " [style.background]=" i%2 ? '#F0F3F4' : 'transparent' " style="padding: 5%; padding-bottom: 60px; width: 100%; max-width: 87%; display: flex; justify-content: center;">
+        <img [src]="grafico" style="width: 100%; max-width: 900px; " alt="">
+        <div>
+
+        </div>
+    </span>
+    </ng-container>
+    <div id="mapacontent" style=" background: #1D1D1D; width: 100%; display: flex; justify-content: center; flex-direction: column; align-items: center; padding-bottom: 120px;">
+        <div class="noselect" style="  color: white; width: 80%; max-width: 900px; ">
+            <h5 style="  font-weight: bolder;"> WE ARE IN</h5>
+            <h1 style="  font-weight: bolder;  text-transform: uppercase;">{{paises}} countries </h1>
+            <h1 style="  font-weight: bolder; text-transform: uppercase;"> {{ciudades}}+ cities </h1>
+        </div>
+        <div style="width: 100%;">
+            <app-mapa id="map" style=" max-height: 500px;  max-width: 1100px; border: 1px solid white;" [selected]="page"></app-mapa>
+        </div>
+    </div>
+</div>

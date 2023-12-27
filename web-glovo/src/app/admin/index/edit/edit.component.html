@@ -1,0 +1,292 @@
+<div class="tarjeta2">
+    <div style="width: 100%; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; ">
+        <div>
+            <div style="display: flex; flex-wrap: wrap; align-items: flex-end; ; ">
+                <h4 style="  font-size:x-large; text-transform: capitalize; margin-bottom: 10px;"> {{general.getText({ es : "Información", en : "Information"})}}
+                </h4>
+                <h4 style="font-size: medium; margin-bottom: 10px; margin-left: 10px;">{{user.roles[0]}}</h4>
+
+            </div>
+            <div class="barrita"></div>
+        </div>
+        <div class="btnPos">
+            <button (click)="edit = edit ? false : true; cambio = true" pButton pRipple type="button" class="p-button-rounded p-button-success" style=" margin-top: 10px; margin-right: 10px; height: 35px; padding-left: 20px; padding-right: 20px; font-weight: 900; color: white; border: none ;  background: #28ba9b; text-align: center; display: flex; justify-content: center;">
+            <img src="assets/icons/edit-solid.svg" style="width: 20px; fill: white; height: 20px; margin-right: 5px;" alt="">
+            {{general.getText({ es : "Editar", en:"Edit"})}}
+        </button>
+        </div>
+    </div>
+    <form [formGroup]="individualForm" [style.padding]=" edit ? '0px' : '10px'" style="width: 100%;">
+        <div style="display: flex; flex-wrap: wrap;  ">
+            <!-- separador  -->
+            <div *ngIf="edit" style="flex: 1; min-width: 250px;">
+                <div class="inputbox" style=" background: transparent;">
+                    <h5> {{general.getText({ es : "ID / Pasaporte ", en : "ID / Passport: "})}} {{individualForm.get("id")?.value}}</h5>
+                </div>
+            </div>
+            <div *ngIf="!edit" style="flex: 1; min-width: 250px; padding: 10px 0px 10px 0px;">
+                <h5> {{general.getText({ es : "ID / Pasaporte ", en : "ID / Passport "})}} {{individualForm.get("id")?.value}}</h5>
+                <div class="barrita"></div>
+            </div>
+            <!-- separador  -->
+            <div *ngIf="edit " style="flex: 1; min-width: 250px; ">
+                <div class="inputbox ">
+                    <h5 style="flex: 3; ">{{general.getText({ es : "Email de Registro: ", en : "Registration Email: "})}}</h5>
+                    <input placeholder="*" style="flex: 7;" formControlName="email" class="inputcorreo " type="text ">
+                </div>
+            </div>
+            <div *ngIf="!edit " style="flex: 1; min-width: 250px;padding: 10px 0px 10px 0px; ">
+                <h5>{{general.getText({ es : "Email de Registro: ", en : "Registration Email: "})}} {{individualForm.get("email")?.value}}</h5>
+                <div class="barrita "></div>
+            </div>
+        </div>
+        <!-- separador  -->
+        <div style="display: flex; flex-wrap: wrap;  ">
+            <!-- separador  -->
+            <div *ngIf="edit " style="flex: 1; min-width: 250px;">
+                <div class="inputbox " style="flex:1; display: flex; height: max-content;">
+                    <h5>{{general.getText({ es : "Teléfono: ", en : "Phone: "})}} </h5>
+                    <input placeholder="*" class="inputcorreo " formControlName="phone" type="text ">
+                </div>
+            </div>
+            <div *ngIf="!edit " style="flex: 1; min-width: 250px;height: 100%; padding: 10px 0px 10px 0px; ">
+                <h5>{{general.getText({ es : "Teléfono: ", en : "Phone: "})}}{{individualForm.get("phone")?.value}}</h5>
+                <div class="barrita "></div>
+            </div>
+            <!-- separador  -->
+            <div *ngIf="edit" style="flex: 1; min-width: 250px;">
+                <div class="inputbox">
+                    <h5 style="flex: 3;">{{general.getText({ es : "Nombre y apellido: ", en : "Name and surname: "})}} </h5>
+                    <input placeholder="*" style="flex: 7;" class="inputcorreo " formControlName="name" type=" text ">
+                </div>
+            </div>
+            <div *ngIf="!edit " style="flex: 1; min-width: 250px; padding: 10px 0px 10px 0px; ">
+                <h5>{{general.getText({ es : "Nombre y apellido: ", en : "Name and surname: "})}} {{individualForm.get("name")?.value}}</h5>
+                <div class="barrita "></div>
+            </div>
+        </div>
+        <!-- separador  -->
+        <div *ngIf="edit ">
+            <div class="inputbox ">
+                <h5 style="flex: 3; "> {{general.getText({ es : "Actividades profesionales y residencia fiscal: ", en : "Professional activities and tax residence: "})}} </h5>
+                <input placeholder="*" style="flex: 6; " class="inputcorreo" formControlName="address" type="text">
+            </div>
+        </div>
+        <div *ngIf="!edit " style="padding: 10px 0px 10px 0px; ">
+            <h5> {{general.getText({ es : "Actividades profesionales y residencia fiscal: ", en : "Professional activities and tax residence: "})}} {{individualForm.get("address")?.value}}</h5>
+            <div class="barrita "></div>
+        </div>
+        <div style="width: 100%; display: flex; justify-content: space-between; padding: 10px; ">
+            <button *ngIf="edit && !user.suspended_at " (click)="suspender()" pButton pRipple type="button " class="p-button-rounded p-button-success " style=" flex: 5;  margin:5px;height: 45px; padding-left: 20px; padding-right: 20px; font-weight: 900; color: white;
+            transition: all .5s ease;  border: none ;  background: #28ba9b; text-align: center; display: flex; justify-content: center; ">
+            {{general.getText({ es : "Suspender cuenta ", en:"Suspend account"})}}
+            </button>
+
+            <button *ngIf="edit &&  user.suspended_at" (click)="habilitar()" pButton pRipple type="button " class="p-button-rounded p-button-success " style=" flex: 5;  margin:5px;height: 45px; padding-left: 20px; padding-right: 20px; font-weight: 900; color: white;
+            transition: all .5s ease;  border: none ;  background: #28ba9b; text-align: center; display: flex; justify-content: center; ">
+            {{general.getText({ es : "Habilitar cuenta", en:"Enable account"})}}
+            </button>
+            <span *ngIf="suspend" style="display: flex; height: 100%; justify-content: flex-end; align-items: center; flex: 1; margin:5px;height: 45px; padding-left: 20px; padding-right: 20px; font-weight: 900;">
+                <i class="pi pi-spin pi-spinner" style="font-size: 2rem; color:#aaaaaa; "></i>
+            </span>
+
+        </div>
+        <div *ngIf="!edit &&user.suspended_at" style="padding: 10px 0px 10px 0px;">
+            <h5> {{general.getText({ es : "Estado de habilitación de la cuenta:", en : "Acount enablement status:"})}} {{ user.suspended_at ? ( general.getText({es :"Suspendida el " , en : "Suspended on "}) + fecha(user.suspended_at)) : this.general.getText({es:"Cuenta
+                habilitada",en:"Account enabled"}) }}
+            </h5>
+            <div class="barrita"></div>
+        </div>
+        <div *ngIf="!edit && !user.suspended_at" style="padding: 10px 0px 10px 0px;">
+            <h5> {{general.getText({ es : "Estado de habilitación de la cuenta: Habilitada", en : "Acount enablement status: Enabled"})}}
+            </h5>
+            <div class="barrita"></div>
+        </div>
+        <!-- shareholder individual  -->
+        <ng-container *ngIf="user.roles[0] == 'Shareholder Individual'">
+            <div style="display: flex; flex-wrap: wrap; justify-content: space-between; ">
+
+                <div style="flex: 1;" *ngIf="edit">
+                    <div class="inputbox">
+                        <h5 style="flex: 3;">{{general.getText({ es : "Email de contacto 1: ", en : "Contact email 1: "})}} </h5>
+                        <input placeholder="*" style="flex: 7;" formControlName="contactEmail1" class="inputcorreo" type="text">
+                    </div>
+                </div>
+                <div *ngIf="!edit" style=" flex: 1; padding: 10px 0px 10px 0px;">
+                    <h5>{{general.getText({ es : "Email de contacto 1: ", en : "Contact email 1: "})}}{{individualForm.get("contactEmail1")?.value}}</h5>
+                    <div class="barrita"></div>
+                </div>
+                <!-- separador  -->
+                <div style="flex: 1;" *ngIf="edit ">
+                    <div class="inputbox ">
+                        <h5 style="flex: 3; ">{{general.getText({ es : "Email de Contacto 2: ", en : "Contact Email 2: "})}}</h5>
+                        <input placeholder="*" style="flex: 7; " formControlName="contactEmail2" class="inputcorreo " type="text ">
+                    </div>
+                </div>
+                <div *ngIf="!edit " style=" flex: 1; padding: 10px 0px 10px 0px; ">
+                    <h5>{{general.getText({ es : "Email de Contacto 2: ", en : "Contact Email 2: "})}}{{individualForm.get("contactEmail2")?.value}}</h5>
+                    <div class="barrita "></div>
+                </div>
+
+                <!-- separador  -->
+
+            </div>
+            <div *ngIf="edit ">
+                <div class="inputbox " style="justify-content: space-between; ">
+                    <h5 style="flex: 7; "> {{general.getText({ es : "¿Tiene usted o algún familiar cercano alguna responsabilidad pública (PEP) ?: ", en : "Do you or a close relative have any public responsability (PEPs)?: "})}}
+                    </h5>
+                    <a (click)="toggle(individualForm.get('public_responsability')!)" class="toggleTrue ">
+                        <span>{{text(individualForm.get("public_responsability")?.value ) }}</span>
+                    </a>
+                </div>
+            </div>
+            <div *ngIf="!edit " style="padding: 10px 0px 10px 0px; ">
+                <h5> {{general.getText({ es : "¿Tiene usted o algún familiar cercano alguna responsabilidad pública (PEP) ?: ", en : "Do you or a close relative have any public responsability (PEPs)?: "})}} {{text(individualForm.get("public_responsability")?.value
+                    ) }}
+                </h5>
+                <div class="barrita "></div>
+            </div>
+            <div *ngIf="edit ">
+                <div class="inputbox " style="justify-content: space-between; ">
+                    <h5 style="flex: 7; "> {{general.getText({ es : "¿Se le considera una persona sancionada * ?: ", en : "Are you considered a sanctioned* person?: "})}}
+                    </h5>
+                    <a (click)="toggle(individualForm.get('sanctioned')!)" class="toggleTrue "><span>{{text(individualForm.get("sanctioned")?.value ) }}</span></a>
+                </div>
+            </div>
+            <div *ngIf="!edit " style="padding: 10px 0px 10px 0px; ">
+                <h5> {{general.getText({ es : "¿Se le considera una persona sancionada * ?: ", en : "Are you considered a sanctioned* person?: "})}} {{individualForm.get("sanctioned")?.value ? this.general.getText({es: "Si ",en:"Yes "}) : this.general.getText({es:"No",en:"No
+                    "}) }}
+                </h5>
+                <div class="barrita "></div>
+                <p style="font-size: 14px; ">{{general.getText({ es : "* Lista de sanciones: Naciones Unidas, Unión Europea, OFAC ", en : "*Sanction list: United Nations, European Union, OFAC "})}} </p>
+            </div>
+        </ng-container>
+        <ng-container *ngIf="user.roles[0] == 'Shareholder Legal Entity'">
+            <div style="display: flex; flex-wrap: wrap;  ">
+                <div style="flex: 1; min-width: 250px; ">
+                    <!-- separador  -->
+                    <div *ngIf="edit ">
+                        <div class="inputbox ">
+                            <h5 style="flex: 3; ">{{general.getText({ es : "Email de Contacto 2: ", en : "Contact Email 2: "})}}</h5>
+                            <input placeholder="*" style="flex: 7; " formControlName="contactEmail2" class="inputcorreo " type="text ">
+                        </div>
+                    </div>
+                    <div *ngIf="!edit " style="padding: 10px 0px 10px 0px; ">
+                        <h5>{{general.getText({ es : "Email de Contacto 2: ", en : "Contact Email 2: "})}}{{individualForm.get("contactEmail2")?.value}}</h5>
+                        <div class="barrita "></div>
+                    </div>
+                </div>
+                <div style="flex: 1; min-width: 250px; ">
+                    <!-- separador  -->
+                    <div *ngIf="edit">
+                        <div class="inputbox">
+                            <h5 style="flex: 3;">{{general.getText({ es : "Email de contacto 1: ", en : "Contact email 1: "})}} </h5>
+                            <input placeholder="*" style="flex: 7;" formControlName="contactEmail1" class="inputcorreo" type="text">
+                        </div>
+                    </div>
+                    <div *ngIf="!edit" style="padding: 10px 0px 10px 0px;">
+                        <h5>{{general.getText({ es : "Email de contacto 1: ", en : "Contact email 1: "})}}{{individualForm.get("contactEmail1")?.value}}</h5>
+                        <div class="barrita"></div>
+                    </div>
+
+                </div>
+                <!-- separador  -->
+
+            </div>
+            <div style="display: flex; flex-wrap: wrap; ">
+                <div style="flex: 1; min-width: 250px;">
+                    <div *ngIf="edit">
+                        <div class="inputbox">
+                            <h5> {{general.getText({ es : "Cetificado de registro Mercantil: ", en : "Commercial registration certificate: "})}}
+                            </h5>
+                            <input placeholder="*" class="inputcorreo" formControlName="commercial_certificate" type="text">
+                        </div>
+                    </div>
+                    <div *ngIf="!edit" style="padding: 10px 0px 10px 0px;">
+                        <h5> {{general.getText({ es : "Cetificado de registro Mercantil: ", en : "Commercial registration certificate: "})}} {{individualForm.get("commercial_certificate")?.value}}
+                        </h5>
+                        <div class="barrita"></div>
+                    </div>
+                </div>
+                <div style="flex: 1; min-width: 250px;">
+                    <div *ngIf="edit">
+                        <div class="inputbox">
+                            <h5> {{general.getText({ es : "UBO (excepto para empresas cotizadas): ", en : "UBO(exept for quoted companies): "})}}
+                            </h5>
+                            <input placeholder="*" class="inputcorreo" formControlName="ubo" type="text">
+                        </div>
+                    </div>
+                    <div *ngIf="!edit" style="padding: 10px 0px 10px 0px;">
+                        <h5> {{general.getText({ es : "UBO (excepto para empresas cotizadas): ", en : "UBO(exept for quoted companies): "})}} {{individualForm.get("ubo")?.value}}
+                        </h5>
+                        <div class="barrita"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div *ngIf="edit">
+                <div class="inputbox">
+                    <h5 style="flex: 7;"> {{general.getText({ es : "¿Operan en algún país listado de alto riesgo (lista del GAFI o equivalente) o país sancionado * ?: ", en : "Do they operate in some high risk listed country ( FATF list or equivalent) or sanctioned* country?:
+                        "})}}
+                    </h5>
+                    <a (click)="toggle(individualForm.get('high_risk_country')!)" class="toggleTrue"><span>{{text(individualForm.get("high_risk_country")?.value ) }}</span></a>
+                </div>
+            </div>
+            <div *ngIf="!edit" style="padding: 10px 0px 10px 0px;">
+                <h5> {{general.getText({ es : "¿Operan en algún país listado de alto riesgo (lista del GAFI o equivalente) o país sancionado * ?: ", en : "Do they operate in some high risk listed country ( FATF list or equivalent) or sanctioned* country?:
+                    "})}} {{individualForm.get("high_risk_country")?.value ? this.general.getText({es: "Si",en:"Yes"}) : this.general.getText({es:"No",en:"No"}) }}
+                </h5>
+                <div class="barrita"></div>
+                <p style="font-size: 14px;">{{general.getText({ es : "* Lista de sanciones: Naciones Unidas, Unión Europea, OFAC", en : "*Sanction list: United Nations, European Union, OFAC"})}} </p>
+            </div>
+            <div *ngIf="edit">
+                <div class="inputbox" style="justify-content: space-between;">
+                    <h5 style="flex: 7;"> {{general.getText({ es : "¿Se les considera una empresa sancionada * (o los directores / UBO una persona sancionada) ?: ", en : "Are they considered a sanctioned * company ( or the directors/UBO a sanctioned person)?: "})}}
+                    </h5>
+                    <a (click)="toggle(individualForm.get('sanctioned')!)" class="toggleTrue"><span>{{text(individualForm.get("sanctioned")?.value ) }}</span></a>
+                </div>
+            </div>
+            <div *ngIf="!edit" style="padding: 10px 0px 10px 0px;">
+                <h5> {{general.getText({ es : "¿Se les considera una empresa sancionada * (o los directores / UBO una persona sancionada) ?: ", en : "Are they considered a sanctioned * company ( or the directors/UBO a sanctioned person)?: "})}} {{individualForm.get("sanctioned")?.value
+                    ? this.general.getText({es: "Si",en:"Yes"}) : this.general.getText({es:"No",en:"No"}) }}
+                </h5>
+                <div class="barrita"></div>
+                <p style="font-size: 14px;">{{general.getText({ es : "* Lista de sanciones: Naciones Unidas, Unión Europea, OFAC", en : "*Sanction list: United Nations, European Union, OFAC"})}} </p>
+            </div>
+            <div *ngIf="edit">
+                <div class="inputbox" style="justify-content: space-between;">
+                    <h5 style="flex: 7;"> {{general.getText({ es : "¿Los directores / UBO tienen alguna responsabilidad pública (PEP) ?: ", en : "Do the directors/UBO have any public responsability (PEPs)?: "})}}
+                    </h5>
+                    <a (click)="toggle(individualForm.get('public_responsability')!)" class="toggleTrue">
+                        <span>{{text(individualForm.get("public_responsability")?.value ) }}</span>
+
+                    </a>
+                </div>
+            </div>
+            <div *ngIf="!edit" style="padding: 10px 0px 10px 0px;">
+                <h5> {{general.getText({ es : "¿Los directores / UBO tienen alguna responsabilidad pública (PEP) ?: ", en : "Do the directors/UBO have any public responsability (PEPs)?: "})}} {{text(individualForm.get("public_responsability")?.value ) }}
+                </h5>
+                <div class="barrita"></div>
+            </div>
+
+        </ng-container>
+        <div *ngIf="!edit && user.last_touched_by " style="padding: 10px 0px 10px 0px;">
+            <h5>{{general.getText({ es : "Tocado por última vez por", en:"Last touched by"})}}</h5>
+            <div style="padding-left: 20px;">
+                <h5>{{general.getText({es:"Nombre",en:"Name"})}}: {{user.last_touched_by.name}}</h5>
+                <h5>{{general.getText({es:"Correo",en:"Email"})}}: {{user.last_touched_by.email}}</h5>
+            </div>
+            <div class="barrita"></div>
+        </div>
+    </form>
+</div>
+<div style="margin-top: 20px; margin-bottom: 20px; display: flex; justify-content: flex-end; width: 100%; ">
+    <button *ngIf="edit " (click)="cancelar()" pButton pRipple type="button " class="p-button-rounded p-button-success " style=" border: 3px solid #aaaaaa; margin-top: 10px; margin-right: 25px; height: 45px; padding-left: 20px; padding-right: 20px;
+                            font-weight: 900; color: #aaaaaa; background: transparent; text-align: center; display: flex; justify-content: center; ">
+        {{general.getText({ es : "Cancelar ", en:"Cancel "})}}
+    </button>
+    <button *ngIf="edit " (click)="guardar()" pButton pRipple type="button " class="p-button-rounded p-button-success " style=" margin-top: 10px; margin-right: 25px; height: 45px; padding-left: 20px; padding-right: 20px; font-weight: 900; color: white;
+                            border: none ;  background: #28ba9b; text-align: center; display: flex; justify-content: center; ">
+        {{general.getText({ es : "Guardar Cambios ", en:"Save Changes "})}}
+    </button>
+</div>

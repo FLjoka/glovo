@@ -1,0 +1,168 @@
+<div style="width: 100%; display: flex; align-items: center; flex-direction: column;">
+    <div style="height: 90px;"></div>
+    <div *ngIf="!view && !new" style="display: flex; flex-direction: column; width: 80%; max-width: 1100px;">
+        <div style="display: flex; flex-wrap: wrap; width: 100%; padding-bottom: 5px; justify-content: space-between;">
+            <span class="custom" style="margin:5px; flex: 2; margin-top: 10px ;   border: 1px solid #ced4da; border-radius: 3px;">
+                <p-dropdown [style]="{'minWidth':'100%'}" [(ngModel)]="admin.usersFilters.selectedRol" [options]="admin.roles" (onChange)="log($event)" placeholder=" {{general.getText( { es : 'Rol de usuario', en : 'User role' } )}}" optionLabel=""></p-dropdown>
+             </span>
+            <span class="custom" style="margin:5px; flex: 1; margin-top: 10px ; min-width: 300px;   border: 1px solid #ced4da; border-radius: 3px;">
+                <p-dropdown [style]="{'minWidth':'100%'}" [(ngModel)]="admin.usersFilters.solicitud" [options]="solicitudes" (onChange)="log($event)" placeholder="{{general.getText( { es : 'Solicitudes de aprobación', en : 'Approval requests' } )}}" optionLabel="text"></p-dropdown>
+             </span>
+            <span class="custom" style="margin:5px; flex: 1; margin-top: 10px ; min-width: 300px;   border: 1px solid #ced4da; border-radius: 3px;">
+                <p-dropdown [style]="{'minWidth':'100%'}" [(ngModel)]="admin.usersFilters.habilitada" [options]="suspendidas" (onChange)="log($event)" placeholder=" {{general.getText( { es : 'Habilitación de cuentas', en : 'Enabling accounts' } )}}" optionLabel="text"></p-dropdown>
+             </span>
+            <div style="display: flex; max-height: 35px; flex: 1; justify-content: space-between; min-width: 350px; margin-top: 10px; padding: 0px 8px 0px 5px;">
+                <span class="p-input-icon-left custom" style=" flex:1;">
+                    <i class="pi pi-search"></i>
+                    <input type="text"  [style]="{'width':'100%'}"  pInputText [(ngModel)]="admin.usersFilters.search" placeholder="{{general.getText( { en : 'Search', es : 'Buscar' } )}}">         
+                </span>
+                <button pButton pRipple type="button" (click)="prueba($event)" class="p-button-rounded p-button-success  btn" style="  font-weight: 900; color: white; border: none ; margin-left: 20px; background: #fec456;"> 
+                    <p style="padding: 0; padding-left: 10px; margin: 0; margin-right: 10px;"> {{general.getText( { en : 'Search', es : 'Buscar' } )}}</p>
+                </button>
+            </div>
+            <button pButton pRipple type="button" (click)="reset()" class="p-button-rounded p-button-success  btn" style=" max-width: 400px; font-weight: 900; color: white; height: 35px; border: none ;margin-top: 10px; padding: 0px 8px 0px 5px;   background: #fec456;"> 
+                <p style="padding: 0; padding-left: 10px; margin: 0; margin-right: 10px;"> {{general.getText( { en : 'Reset filters', es : 'Resetear filtros' } )}}</p>
+            </button>
+
+        </div>
+
+        <div style="width: 100%; max-width: 1100px; margin-top: 10px; padding-left: 5px; padding-right: 5px; ">
+
+            <div style="height: 350px; display: flex; justify-content: center; align-items: center;width: 100%;" *ngIf="admin.buscandoUsers">
+                <p-progressSpinner></p-progressSpinner>
+            </div>
+            <ng-container *ngIf="!admin.buscandoUsers">
+                <ng-container *ngIf="admin.users">
+                    <div style=" width: 100%; display: flex; justify-content: center; min-height: 500px;" *ngIf=" admin.users.data.length > 0">
+
+                        <!-- id  -->
+                        <div style="flex: 1;  display: flex; flex-direction: column; ">
+                            <span class="left" style=" width: 100% !important;  display: flex; align-items: center;  border-left: 2px dashed  #fec456; border-top:  2px dashed  #fec456; border-bottom: 2px dashed  #fec456; ">
+                                <h1 class="title" style="color: #fec456; margin-left: 10px; " >{{general.getText( { es : 'Id', en : 'Id' } )}}</h1>
+                            </span>
+                            <span *ngFor="let data of admin.users.data; index as i " [style.background]=" i % 2 == 0 ? 'white' : '#f2f2f2' " style="padding-left: 10px; width: 100% !important;  background:#f2f2f2; height: 60px; display: flex; align-items: center; margin-top: 20px;  border-radius: 30px 0px 0px 30px / 50% 0px 0px 50%; ">
+                                <h1 class="event" >{{data.id}} </h1>
+                            </span>
+                        </div>
+                        <!-- id  -->
+                        <!-- nombre -->
+                        <div class="nombre" style="flex: 2;  display: flex; align-items: center; position: relative;   flex-direction: column; ">
+
+                            <span style="position: absolute; height: 100%; left: 0;  border-left: 2px dashed #fec456 ;  background: transparent;  z-index: 2; "> </span>
+
+                            <span style="width: 100%;  display: flex; align-items: center;  background: white;  border-top:  2px dashed  #fec456; border-bottom: 2px dashed  #fec456;  z-index: 2;">
+                    <h1 class="title" style="color: #fec456;" >{{general.getText( { en : 'Name', es : 'Nombre' } )}}</h1>
+                </span>
+                            <span *ngFor="let  data of admin.users.data; index as i " [style.background]=" i % 2 == 0 ? 'white' : '#f2f2f2' " style=" width: 100%; background:#f2f2f2; display: flex; align-items: center;  height: 60px; margin-top: 20px;">
+                    <h1 class="event" >{{data.name}}</h1>
+                </span>
+                        </div>
+                        <!-- nombre -->
+                        <!-- email -->
+                        <div style="flex: 2;  display: flex; align-items: center; position: relative;  flex-direction: column; ">
+                            <span style="position: absolute; height: 100%; left: 0;  border-left: 2px dashed #fec456 ;  background: transparent;  z-index: 2; "> </span>
+                            <span style="position: absolute; height: 100%; right: 0;  border-right: 2px dashed #fec456 ; z-index: 2;  background: transparent;  z-index: 2; "> </span>
+                            <span style="width: 100%;  display: flex; align-items: center;  background: white;  border-top:  2px dashed  #fec456; border-bottom: 2px dashed  #fec456;  z-index: 2;">
+                        <h1 class="title" style="color: #fec456;" >{{general.getText( { en : 'Email', es : 'Correo' } )}}</h1>
+                    </span>
+                            <span *ngFor="let  data of admin.users.data; index as i " [style.background]=" i % 2 == 0 ? 'white' : '#f2f2f2' " style=" width: 100%; background:#f2f2f2; display: flex; align-items: center;  height: 60px; margin-top: 20px;">
+                        <h1 class="event" >{{data.email}}</h1>
+                    </span>
+                        </div>
+                        <!-- email -->
+                        <div class="action" style="flex: 1;  display: flex; flex-direction: column; ">
+                            <span class="right" style="width: 100%;   display: flex; align-items: center;  border-right: 2px dashed  #fec456; border-top:  2px dashed  #fec456; border-bottom: 2px dashed  #fec456; ">
+                                <h1 class="title" style="color: #fec456; padding-left: 10px; padding-right: 10px;  " >{{general.getText( { en : 'Actions', es : 'Acciones' } )}}</h1>
+                            </span>
+                            <span *ngFor="let  data of admin.users.data; index as i " [style.background]=" i % 2 == 0 ? 'white' : '#f2f2f2' " style=" padding:10px; width: 100%; height: 60px;background:#f2f2f2 ;  display: flex; align-items: center;  justify-content: end;  border-radius: 0px 30px 30px 0px / 0% 50% 50% 0%; margin-top: 20px;">
+                                <button pButton pRipple type="button" *ngIf="!data.approved_account" (click)="aprobar(data.id, i ) " class="p-button-rounded p-button-success btn1" style="margin-right: 5px; height: 35px; padding-left: 20px; padding-right: 20px; font-weight: 900; color: white; border: none ;  background: #fec456; text-align: center; display: flex; align-items: center; justify-content: center;">
+                                    <i class="pi pi-check" style="fill: white; font-size: large; margin:5px;" ></i>
+    
+                                    <p style="margin: 0;height: 15px;   height: min-content; margin-left: 5px;"> {{general.getText({ es : "Aprobar", en:"Approve"})}}</p>
+                                </button>
+                                <button pButton pRipple type="button" (click)="view = data" class="p-button-rounded p-button-success btn1" style=" height: 35px; padding-left: 20px; padding-right: 20px; font-weight: 900; color: white; border: none ;  background: #28ba9b; text-align: center; display: flex; align-items: center; justify-content: center;">
+                                <i class="pi pi-sliders-h" style="fill: white; font-size: large; margin:5px;" ></i>
+
+                                <p style="margin: 0;height: 15px;   height: min-content; margin-left: 5px;"> {{general.getText({ es : "Detalle", en:"Detail"})}}</p>
+                            </button>
+                            
+                        </span>
+                        </div>
+
+                    </div>
+                    <div *ngIf=" admin.users.data.length == 0" style="height: 300px; display: flex; justify-content: center; align-items: center;">
+                        <p>No Data</p>
+                    </div>
+                </ng-container>
+                <div *ngIf=" !admin.users" style="height: 300px; display: flex; justify-content: center; align-items: center;">
+                    <p>No Data</p>
+                </div>
+
+                <div style="display: flex; justify-content: center;align-items: center; height:50px; width: 100%;  margin-top: 20px;">
+                    <span (click)="new = true" style=" cursor: pointer; color: white; font-weight: bold; font-size: 20px;  background: #28ba9b; border-radius:50%; width:45px ; height:45px; display: flex; justify-content: center; align-items: center; ">
+                    +
+                </span>
+                </div>
+            </ng-container>
+            <div class="paginacion" style=" margin-top: 20px;  border-radius: 20px / 50% ;  background: #28ba9b; height: 40px; display: flex; justify-content: center; overflow: hidden;   ">
+                <ng-container *ngIf=" admin.users">
+                    <ng-container *ngFor="let pagina of  admin.users.meta.links ; index as i ">
+                        <a class="ripple" *ngIf="i == 0 " (click)="admin.getUsers(pagina.url, true)" style=" flex: 1; min-width: 20px; color: white;   padding: 5px; text-decoration: none; display: flex; justify-content: center; align-items: center; ">
+                            <img src="assets/icons/chevron-back-outline.svg" class="flecha" alt="">
+                        </a>
+                        <a class="ripple" *ngIf="i > 0  && i < (  admin.users.meta.links.length - 1) " (click)="admin.getUsers(pagina.url, true)" [ngClass]=" { 'ripple' : true , 'paginaselect' : pagina.active ? true : false } " style=" min-width: 20px; flex: 1;  color: white; padding: 5px; text-decoration: none; display: flex; justify-content: center; align-items: center; ">
+                            <p class="paginationText">
+                                {{pagina.label}}
+                            </p>
+                        </a>
+
+                        <a class="ripple" *ngIf=" i ==  (  admin.users.meta.links.length - 1 ) " (click)="admin.getUsers(pagina.url, true)" style="  flex: 1; min-width: 20px; color: white; padding: 5px; text-decoration: none; display: flex; justify-content: center; align-items: center; ">
+                            <img src="assets/icons/chevron-forward-outline.svg" class="flecha" alt="">
+                        </a>
+                    </ng-container>
+                </ng-container>
+            </div>
+            <!--
+            <div class="paginacion" style=" margin-top: 20px;  border-radius: 20px / 50% ;  background: #28ba9b; height: 40px; display: flex; justify-content: center; ">
+                <ng-container *ngIf="admin.users">
+                    <ng-container *ngFor="let pagina of admin.users.meta.links ; index as i ">
+                        <a class="ripple" *ngIf="i == 0 " (click)="admin.getUsers(pagina.url,true)" style="  width: 30px; color: white;   padding: 5px; text-decoration: none; display: flex; justify-content: center; align-items: center; ">
+                            <img src="assets/icons/chevron-back-outline.svg" style="width: 20px; margin-top: 1px;" alt="">
+                        </a>
+                        <a class="ripple" *ngIf="i > 0  && i < ( admin.users.meta.links.length - 1) && ( i >= ( admin.users.meta.current_page -2)  ||  i >( admin.users.meta.links.length -6)  )  && (i <= (admin.users.meta.current_page +2) ||  i < 6   ) " (click)="admin.getUsers(pagina.url,true)"
+                            [ngClass]=" { 'ripple' : true , 'paginaselect' : pagina.active ? true : false } " style=" width: 30px;  color: white; padding: 5px; text-decoration: none; display: flex; justify-content: center; align-items: center; ">
+                            <p style=" font-size: 20px; padding: 0; margin: 0; ">
+                                {{pagina.label}}
+                            </p>
+                        </a>
+
+                        <a class="ripple" *ngIf=" i ==  ( admin.users.meta.links.length - 1 ) " (click)="admin.getUsers(pagina.url,true)" style=" width: 30px; color: white; padding: 5px; text-decoration: none; display: flex; justify-content: center; align-items: center; ">
+                            <img src="assets/icons/chevron-forward-outline.svg" style="width: 20px; margin-top: 1px;" alt="">
+                        </a>
+                    </ng-container>
+                </ng-container>
+            </div>
+            -->
+        </div>
+
+
+    </div>
+    <div *ngIf="view" style="width: 80%; max-width: 1100px; display: flex;  align-items: center; justify-content: center;  flex-direction: column;">
+        <br>
+        <button pButton pRipple type="button " (click)="view = null" class="p-button-rounded p-button-success " style=" margin-bottom: 20px; border: 3px solid #aaaaaa; margin-top: 10px; margin-right: 25px; height: 45px; padding-left: 20px; padding-right: 20px;
+                            font-weight: 900; color: #aaaaaa; background: transparent; text-align: center; display: flex; justify-content: center; ">
+        {{general.getText({ es : "Cerrar ", en:"Close"})}}
+    </button>
+        <app-edit [user]="view" style=" width: 100%;"></app-edit>
+    </div>
+    <div *ngIf="new" style="width: 80%; max-width: 1100px; display: flex;  align-items: center; justify-content: center;  flex-direction: column;">
+        <br>
+        <button pButton pRipple type="button " (click)="new = false " class="p-button-rounded p-button-success " style=" margin-bottom: 20px; border: 3px solid #aaaaaa; margin-top: 10px; margin-right: 25px; height: 45px; padding-left: 20px; padding-right: 20px;
+                            font-weight: 900; color: #aaaaaa; background: transparent; text-align: center; display: flex; justify-content: center; ">
+        {{general.getText({ es : "Cerrar ", en:"Close"})}}
+    </button>
+        <app-new style=" width: 100%;"></app-new>
+    </div>
+    <div style="height: 120px;"></div>
+    <div style="height: 120px;"></div>
+</div>

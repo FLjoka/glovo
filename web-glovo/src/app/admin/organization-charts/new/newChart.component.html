@@ -1,0 +1,65 @@
+<div class="tarjeta2">
+    <div style="width: 100%; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;  ">
+        <div style="display: flex; flex-direction: column;  justify-content: center;">
+            <div style="display: flex; flex-wrap: wrap; align-items: center; margin-right: 30px; ">
+                <h4 style=" font-size:x-large; text-transform: capitalize; "> {{general.getText({ es : "Nueva grafica", en : "New chart"})}}
+                </h4>
+            </div>
+        </div>
+        <span class="custom" style="flex: 1;margin:5px; flex: 2; margin-top: 10px ;   border: 1px solid #ced4da; border-radius: 3px;">
+          
+         </span>
+    </div>
+    <div style="display: flex; width: 100%;">
+        <div class="inputbox " style="justify-content: space-between; ">
+            <h5 style="flex: 1; ">{{general.getText({ es : "Título en español", en:"Title in Spanish"})}}
+            </h5>
+            <input placeholder="*" class="inputcorreo" style="flex: 2;" type="text" [(ngModel)]="nuevo.title.es" [placeholder]="general.getText({ es : 'Título', en:'Title'})">
+        </div>
+    </div>
+    <div style="display: flex; width: 100%;">
+        <div class="inputbox " style="justify-content: space-between; width: 100%; ">
+            <h5 style="flex: 1; "> {{general.getText({ es : "Imagen en español", en:"Picture in Spanish"})}}
+            </h5>
+            <div *ngIf="loadEs" style=" display: flex; justify-content: center;">
+                <p-progressSpinner [style]="{width: '30px', height: '30px'}" strokeWidth="1"></p-progressSpinner>
+            </div>
+            <div style="overflow: hidden;">
+                <img *ngIf="prevEs && !loadEs" id="prevEs" (load)="onImageLoad()" style="height: 70px; margin: 7px; cursor: pointer; " [src]="prevEs" alt="">
+            </div>
+            <input placeholder="*" #chartEspañol id="chartEspañol" (change)="setEs($event)" type="file" hidden accept=".jpg, .jpeg, .png">
+            <a (click)="elegir()" style="flex: 1;" class="toggleTrue">
+                <span>   {{general.getText({ es : "Elegir", en:"Choose"})}}</span>
+            </a>
+        </div>
+    </div>
+    <div style="display: flex; width: 100%;">
+        <div class="inputbox " style="justify-content: space-between; ">
+            <h5 style="flex: 1; "> {{general.getText({ es : "Título en inglés", en:"English title"})}}
+            </h5>
+            <input placeholder="*" class="inputcorreo" style="flex: 2;" type="text" [(ngModel)]="nuevo.title.en" [placeholder]="general.getText({ es : 'Título', en:'Title'})">
+        </div>
+    </div>
+    <div style="display: flex; width: 100%;">
+        <div class="inputbox " style="justify-content: space-between; width: 100%; ">
+            <h5 style="flex: 1; "> {{general.getText({ es : "Imagen en Inglés", en:"Picture in English"})}}
+            </h5>
+            <div *ngIf="loadEn" style="display: flex; justify-content: center;">
+                <p-progressSpinner [style]="{width: '30px', height: '30px'}" strokeWidth="1"></p-progressSpinner>
+            </div>
+            <div style="overflow: hidden;">
+                <img *ngIf="prevEn && !loadEn" id="prevEn" (load)="onImageLoadEn()" style="height: 70px; margin: 7px; cursor: pointer; " [src]="prevEn" alt="">
+            </div>
+            <input placeholder="*" #chartIngles id="chartIngles" (change)="setEn($event)" type="file" hidden accept=".jpg, .jpeg, .png">
+            <a (click)="elegirEn()" style="flex: 1;" class="toggleTrue">
+                <span>   {{general.getText({ es : "Elegir", en:"Choose"})}}</span>
+            </a>
+        </div>
+    </div>
+</div>
+<div style="margin-top: 20px; margin-bottom: 20px; display: flex; justify-content: flex-end; width: 100%; ">
+    <button (click)="guardar()" [disabled]=" loadEn && loadEs " pButton pRipple type="button " class="p-button-rounded p-button-success " style=" margin-top: 10px; margin-right: 25px; height: 45px; padding-left: 20px; padding-right: 20px; font-weight: 900; color: white; border:
+                none ;  background: #28ba9b; text-align: center; display: flex; justify-content: center; ">
+        {{general.getText({ es : "Guardar Cambios ", en:"Save Changes"})}}
+    </button>
+</div>

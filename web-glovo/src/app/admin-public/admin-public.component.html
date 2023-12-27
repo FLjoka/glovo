@@ -1,0 +1,193 @@
+<div class="content">
+  <div id="menuBar" class="menuActive">
+    <div id="menuBarItems" class="center hidden">
+      <div *ngFor="let item of general.menu; index as i" class="menu-item">
+        <span
+          (click)="menuSelect(i)"
+          *ngIf="item.icon_only && item.show"
+          (click)="mostrar()"
+          class="ripple icon"
+        >
+          <img [src]="item.icon" />
+        </span>
+        <div [ngClass]="{ selected: item.selected }"></div>
+      </div>
+      <div>
+        <span id="idiomaHeader3asdwa" class="ripple icon">
+          <img src="../../assets/icons/lg.svg " />
+          <img src="../../assets/icons/chevron-down-outline.svg " />
+        </span>
+        <globo-select
+          [active]="'idiomaHeader3asdwa'"
+          [items]="general.idiomas"
+        ></globo-select>
+      </div>
+    </div>
+    <a class="menu-icon" (click)="general.menuresponsive.abrir()">
+      <img src="assets/icons/menu-outline.svg" alt="" />
+    </a>
+  </div>
+  <header class="cabecera center noselect">
+    <div class="center">
+      <a class="img-logo">
+        <img [src]="general.menu[0].icon" (click)="menuSelect(0)" alt="" />
+      </a>
+      <div class="menu">
+        <ul>
+          <li *ngFor="let item of general.menu; index as i" class="menu-item">
+            <span
+              class="ripple item"
+              *ngIf="!item.icon_only && item.show"
+              (click)="menuSelect(i)"
+              id="{{ item.nombre.en }}_{{ i }}"
+            >
+              {{ getText(item.nombre) }}
+            </span>
+            <div [ngClass]="{ selected: item.selected }"></div>
+            <globo-select
+              *ngIf="item.subItems"
+              [idioma]="general.idioma()"
+              [order]="i"
+              [active]="item.nombre.en + '_' + i"
+              [clicked]="menuSelectList"
+              [items]="item.subItems"
+            ></globo-select>
+          </li>
+        </ul>
+      </div>
+      <div class="center menu-general">
+        <div *ngFor="let item of general.menu; index as i" class="menu-item">
+          <span
+            (click)="menuSelect(i)"
+            *ngIf="item.icon_only && item.show"
+            (click)="mostrar()"
+            class="ripple icon"
+          >
+            <img [src]="item.icon" />
+          </span>
+          <div [ngClass]="{ selected: item.selected }"></div>
+        </div>
+        <div>
+          <span id="idiomaHeader123154" class="ripple icon">
+            <img src="../../assets/icons/lg.svg " />
+            <img
+              src="../../assets/icons/chevron-down-outline.svg "
+              class="dropdown"
+            />
+          </span>
+          <globo-select
+            [active]="'idiomaHeader123154'"
+            [items]="general.idiomas"
+          ></globo-select>
+        </div>
+        <div class="menu">
+          <span class="ripple icon logout" (click)="cerrarSesion()">
+            <i class="pi pi-sign-out"></i>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="title">
+      <p class="title">{{ getTitle() }}</p>
+    </div>
+    <div class="fondo">
+      <div *ngIf="getFondo() !== ''">
+        <img
+          class="imgFondo"
+          sizes="(max-width: 480px) 480px, 800px "
+          [srcset]="getFondo()"
+          alt=""
+        />
+      </div>
+    </div>
+  </header>
+  <div class="centro center" [style.background]="pagebg()">
+    <div class="container-router">
+      <router-outlet class="router"> </router-outlet>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 149.88">
+        <defs>
+          <style>
+            .cls-1 {
+              fill: #1d1d1d;
+            }
+          </style>
+        </defs>
+        <g id="Capa_2" data-name="Capa 2">
+          <g id="Capa_1-2" data-name="Capa 1">
+            <path
+              class="cls-1"
+              d="M0,0A4774.57,4774.57,0,0,0,576,90c102.66,9.68,246.45,22.85,428,21,473.64-4.81,901.51-108.73,916-111h0V149.88H0Z"
+            />
+          </g>
+        </g>
+      </svg>
+    </div>
+  </div>
+
+  <div>
+    <div class="center">
+      <div class="footer">
+        <div>
+          <img src="../../assets/logo.png " alt=" " />
+        </div>
+        <div>
+          <ul>
+            <div *ngFor="let item of general.menu; index as i">
+              <li
+                *ngIf="!item.subItems && !item.icon_only"
+                (click)="menuSelect(i)"
+              >
+                {{ getText(item.nombre) }}
+              </li>
+              <div *ngIf="item.subItems">
+                <li
+                  *ngFor="let subItem of item.subItems; index as subIndex"
+                  (click)="menuSelectList2(i, subIndex)"
+                >
+                  {{ getText(subItem.nombre) }}
+                </li>
+              </div>
+            </div>
+          </ul>
+        </div>
+        <div>
+          <ul>
+            <li routerLink="/terms">
+              {{
+                getText({
+                  en: "Terms & Conditions",
+                  es: "Terminos & Condiciones"
+                })
+              }}
+            </li>
+            <li routerLink="/legal-privacy">
+              {{
+                getText({ en: "Privacy Policy", es: "Política de Privacidad" })
+              }}
+            </li>
+            <li>
+              {{ getText({ en: "Cookies Policy", es: "Política de Cookies" }) }}
+            </li>
+          </ul>
+        </div>
+        <div>
+          <ul>
+            <li class="idiom">
+              <span id="idiomaHeader2212" class="ripple icon">
+                <img src="../../assets/icons/lg.svg " />
+                <img
+                  src="../../assets/icons/chevron-down-outline.svg "
+                  style="margin-left: 5px; color: white"
+                />
+              </span>
+              <globo-select
+                [active]="'idiomaHeader2212'"
+                [items]="general.idiomas"
+              ></globo-select>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

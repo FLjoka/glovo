@@ -1,0 +1,239 @@
+@import "../../../themes/_colors.sass"
+
+.container
+    display: flex 
+    flex-direction: column
+    align-items: center
+    padding-top: 90px
+    width: 100%
+
+.content
+    width: 70%
+    max-width: 800px
+    display: flex
+    flex-direction: column
+
+.form-content
+    background: rgb(255, 204, 102)
+    background: radial-gradient(circle,rgba(255, 204, 102, 1) 0%,rgba(255, 197, 84, 1) 100%)
+    width: 100%
+    height: 100%
+    position: relative
+    background-position-y: bottom
+    background-size: cover
+    background-repeat: no-repeat
+    width: 100%
+    display: flex
+    flex-direction: column
+    align-items: center
+    svg
+        width: 100%
+        top: -2px
+        position: absolute
+        transform: rotate(180deg)
+        path
+            fill: #f2f2f2
+
+.cards-container
+    margin-bottom: 120px
+    display: flex
+    justify-content: space-around
+    max-width: 1100px
+    position: relative
+    width: 80%
+    flex-wrap: wrap
+
+
+.centro
+    z-index: 2
+    width: 120%!important
+    color: $dark-bg
+    border-radius: 50%/150px 150px 0 0
+.megaTitle
+    font-size: xxx-large
+    font-weight: bolder
+    color: #1D1D1D
+    margin-bottom: 10px
+.megaText
+    font-family: 'Gotham', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+    font-size: large
+    font-weight: 300
+    color: #1D1D1D
+    line-height: 1.4
+    
+.subtitle
+    font-weight: bold
+    color: #3a3a3a
+    font-size: medium
+.card
+    min-width: 300px
+    display: flex
+    flex: 1
+    margin: 20px
+    max-width: 700px
+    flex-direction: column
+    justify-content: space-between
+    align-items: center
+    min-height: 250px
+    background: white
+    border-radius: 20px
+    box-shadow: 0px 10px 27px 8px rgba(0,0,0,0.36)
+    padding: 20px
+    .head-card
+        width: 100%
+        h1
+            font-weight: bold
+    form
+        width: 100%
+        padding: 10px
+        .select
+            display: flex
+            border-bottom: 1px solid #1d1d1d
+            width: 100%
+            padding-bottom: 5px
+            span
+                width: 100%
+.text-area
+    display: flex
+    flex-direction: column
+    label
+        font-weight: 300
+        margin-bottom: 5px
+        display:flex
+        span
+            color: #fec456
+    
+.document
+    border-bottom: 1px solid #1d1d1d
+    display: flex
+    justify-content: space-between
+    align-items: center
+    label
+        font-weight: 300
+        padding: 10px
+        white-space: nowrap
+    button
+        padding-left: 20px
+        padding-right: 20px
+        height: 27px
+        font-weight: 900
+        color: white
+        border: none
+        background: #28ba9b
+        text-align: center
+        display: flex
+        justify-content: center
+
+.button-style
+    padding: 10px 20px
+    font-weight: 900
+    color: white
+    border: none
+    background: #28ba9b
+    text-align: center
+    display: flex
+    justify-content: center
+    gap: 10px
+    margin-top: 30px
+    text-decoration: none
+    width: 140px
+
+hr
+    width: 100%
+    height: 3px
+    margin-bottom: 25px
+    margin-top: 10px
+    background: #fec456
+    border-radius: 3px
+    border: none
+.select
+    border: none
+.p-cascadeselect
+    background: red !important
+.textarea
+    font-family: 'Gotham', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+    width: 100%
+    max-width: 100%
+    min-width: 100%
+
+.textarea:focus
+    outline: 0
+
+.custom
+    min-width: 200px
+
+.inputW
+    margin-top: 5px
+    margin-bottom: 5px
+    width: 100%
+    border: none
+    border-bottom: 1px solid black
+    font-size: 17px
+    padding: 4px
+.inputW:focus
+    outline: none
+
+.send
+    padding: 20px
+    width: 100%
+    button
+        padding: 10px 20px 10px 20px
+        font-weight: 900
+        color: white
+        border: none
+        background: #28ba9b
+        text-align: center
+        display: flex
+        justify-content: center
+    a
+        padding: 10px 20px 10px 20px
+        font-weight: 900
+        color: white
+        border: none
+        background: #28ba9b
+        text-align: center
+        display: flex
+        justify-content: center
+        border-radius: 50px
+        text-decoration: none
+.canal-externo
+    width: 100%
+    overflow: hidden
+    margin-bottom: 5px
+    text-align: center
+    img
+        width: 140px
+        height: auto
+    p
+        text-align: center
+        font-size: 14pt
+
+.glovo-info
+    margin-top: 20px
+    text-align: justify
+    width: 95%
+
+.divis
+    height: 2px
+    background-color: black
+    width: 95%
+
+
+@media screen and ( max-width: 1000px)
+    .megaTitle
+        font-size: xx-large
+    
+    .megaText
+        font-size: large
+@media screen and ( max-width: 700px  )
+    #custom
+        font-size: x-large
+    .circulos
+        display: none
+@media screen and ( max-width: 600px  )
+    .centro
+        border-radius: 50%/ 50px 50px 0 0
+    .form
+        margin: 7px
+    .custom
+        width: 100%

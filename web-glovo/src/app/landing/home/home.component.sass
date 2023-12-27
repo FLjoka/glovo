@@ -1,0 +1,87 @@
+@import "../../../themes/_colors.sass"
+
+.barrita
+    width: 50px
+    height: 5px
+    border-radius: 3px / 2px
+    background: $dark-orange
+    bottom: -20px
+.homeFotter
+    background: $dark-contrast
+    width: 100%
+    padding-top: 50px
+    padding-bottom: 120px
+    border-radius: 50%/ 100px 100px 0 0
+    @media screen and ( max-width: 700px )
+        border-radius: 50%/ 50px 50px 0 0
+        padding-bottom: 120px
+.fecha
+    margin-left: -30px
+.card
+    display: flex
+    width: calc( 100% + 30px )
+    margin-left: -30px
+    justify-content: space-between
+.title
+    font-size: xx-large
+.subtitle
+    font-size: large
+.noticia
+    max-width: 1200px
+    width: 80%
+    display: flex
+    justify-content: center
+    position: relative
+.imagen
+    top: 0
+.campana
+    width: 80px
+.tarjeta
+    background: white
+    border-radius: 15px
+    box-shadow: 0px 5px 15px 4px rgba(0,0,0,0.36)
+    overflow: hidden
+    width: 200px
+.chico
+    display: none
+@media screen and ( max-width: 700px )
+    .chico
+        display: flex
+    .title
+        font-size: 20px
+    .subtitle
+        font-size: 16px
+    .imagen
+        position: absolute
+        display: none
+        top: 60px
+        left: 0px
+    .fecha
+        margin-left: 0px
+        justify-content: center
+        align-items: center
+        display: flex
+        flex-direction: column
+    .noticia
+        justify-content: flex-end
+        align-items: flex-start
+    .tarjeta
+        width: 170px
+    .card
+        width: 100%
+        margin-left: 0px
+@media screen and ( max-width: 600px )
+    .campana
+        width: 50px
+    .card
+        justify-content: flex-end
+
+@media screen and ( max-width: 480px )
+    .tarjeta
+        width: 120px
+    .campana
+        width: 30px
+    .noticia
+        width: 73%
+    .card
+        justify-content: flex-end

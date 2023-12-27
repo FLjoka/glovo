@@ -1,0 +1,51 @@
+<p-toast position="top-right"></p-toast>
+<div class="center" style="height: 100%; width: 100%; color:#1D1D1D; align-items: flex-start; flex-direction: column; align-items: center;     padding-bottom: 150px">
+    <div class="shared" style=" max-width: 600px;  ">
+        <div>
+            <h1 style=" font-weight: bolder;  font-size: xx-large; text-transform: capitalize; margin-bottom: 10px;"> subheader</h1>
+            <div class="barrita"></div>
+        </div>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus natus voluptate quo dignissimos, explicabo molestiae fugit autem, aspernatur assumenda impedit non consectetur veniam rerum sequi asperiores esse quod sint distinctio debitis nihil
+            recusandae! Aliquam quidem, illo mollitia inventore nisi expedita.</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus natus voluptate quo dignissimos, explicabo molestiae fugit autem, aspernatur assumenda impedit non consectetur veniam rerum sequi asperiores esse quod sint distinctio debitis nihil
+            recusandae! Aliquam quidem, illo mollitia inventore nisi expedita.</p>
+    </div>
+    <br> <br>
+    <div class="tarjeta2">
+        <div style="width: 100%; ">
+            <h1 style=" font-weight: bolder;  font-size: xx-large; text-transform: capitalize; margin-bottom: 10px;">Fill de Form</h1>
+            <div class="barrita"></div>
+        </div>
+        <form [formGroup]="form" style="width: 100%; padding: 10px;">
+
+            <div style="display: flex; border-bottom: 1px solid #1D1D1D; width: 100%; padding-bottom: 5px; ">
+                <span class="custom" style="width:100%;">
+                    <p-dropdown formControlName="option" autoWidth="false" [style]="{'width':'100%'}"   [options]="options" placeholder="Select Option" optionLabel="text"></p-dropdown>
+            </span>
+            </div>
+            <br>
+            <div style="display: flex; flex-direction: column;">
+                <label for="" style="font-weight: 300;"> Text <span style="color:#fec456" >*</span></label>
+                <textarea name="" maxlength="1000" formControlName="text" id="" placeholder="Un texto aquí" class="textarea" rows="10"></textarea>
+            </div>
+            <br>
+            <div style="border-bottom: 1px solid #1D1D1D; display: flex; justify-content: space-between; align-items: center;">
+                <label for="" style="font-weight: 300;padding: 10px; white-space: nowrap;"> {{general.getText({ en : "Document" , es : "Documento" })}} </label>
+                <p *ngIf="!loadDoc" style="color: #28ba9b;">{{docName}}</p>
+                <span *ngIf="loadDoc" style="display: flex; height: 100%; justify-content: flex-end; align-items: center; flex: 1; margin:5px;height: 45px; padding-left: 20px; padding-right: 20px; font-weight: 900;">
+                    <i class="pi pi-spin pi-spinner" style="font-size: 2rem; color:#aaaaaa; "></i>
+                </span>
+                <input type="file" id="document" (change)="set($event)" formControlName="document" hidden accept=".pdf,.xls,.xlw,.xlsx,.docx,.dotx,.doc,.dot">
+                <button pButton (click)="elegir()" pRipple type="button" class="p-button-rounded p-button-success btn p-button-sm " style=" padding-left: 20px; padding-right: 20px;height: 27px; font-weight: 900; color: white; border: none ; background: #28ba9b; text-align: center; display: flex; justify-content: center;">  {{general.getText( { en : 'Select', es : 'Elegir' } )}}
+                </button>
+            </div>
+            <br>
+            <div style="padding:20px ; width:100%;" class="center">
+                <button (click)="submit()" pButton pRipple type="button" class="p-button-rounded p-button-success  btn" style=" padding-left: 30px; padding-right: 30px; font-weight: 900; color: white; border: none ; background: #28ba9b; text-align: center; display: flex; justify-content: center;"> <p class="form" > {{general.getText( { en : 'Submit', es : 'ENVIAR' } )}}</p>
+                </button>
+            </div>
+        </form>
+    </div>
+    <br>
+
+</div>

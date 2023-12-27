@@ -1,0 +1,106 @@
+.desplegable
+    transition: margin-left .5s ease
+    background: rgb(255,204,102)
+    background: radial-gradient(circle, rgba(255,204,102,1) 0%, rgba(255,197,84,1) 100%)
+    height: 100%
+    width: 100%
+    margin-left: -100%
+    position: relative
+    display: flex
+    flex-direction: column
+    overflow: hidden
+    align-items: center
+    .body-desplegable
+        flex: 1
+        display: flex
+        justify-content: space-between
+        width: 100%
+        padding: 10px
+        span
+            cursor: pointer
+            text-decoration: none
+            color: #1d1d1d
+            display: flex
+            align-items: center
+            -webkit-tap-highlight-color: transparent
+            justify-content: center
+            width: 40px
+            height: 40px
+            border-radius: 50%
+            font-size: 20px
+.menu
+    position: fixed
+    z-index: 10000
+    width: 100%
+    height: 100%
+    transition: display 2
+
+.hidden
+    display: none
+.container-list
+    flex: 5
+    width: 100%
+    ul
+        list-style: none
+        margin-left: 0px
+        padding: 0
+        li
+            height: 40px
+            padding: 10px 10px 10px 30px !important
+            cursor: pointer
+            display: flex
+            justify-content: space-between
+            align-items: center
+.footer
+        flex: 2
+        width: 120%
+        background: #1d1d1d
+        border-radius: 50%/ 50px 50px 0 0
+        display: flex
+        padding-top: 40px
+        flex-direction: column
+        align-items: center
+        .logo
+            z-index: 3
+            width: 120px
+            a
+                max-width: 120px
+                z-index: 3
+                cursor: pointer
+.fondo
+    z-index: -1
+    width: 100%
+    height: 100%
+    position: absolute
+    cursor: pointer
+    transition: background .5s ease
+.fondoColor
+    background: rgba(0, 0, 0, 0.3)
+.desplegar
+    margin-left: 0%
+#block
+    width: 100%
+    height: 100%
+    position: absolute
+    z-index: 11111
+.bg2
+    background: #28ba9b
+    background: radial-gradient(circle, rgba(40, 186, 155, 1) 0%, rgba(29, 171, 141, 1) 100%)
+    color: white !important
+.item
+    color: #1D1D1D
+.sesion
+    border-radius: 20px / 50%
+    padding: 10px 20px
+    cursor: pointer
+    display: flex
+    align-items: center
+    padding-right: 30px
+    text-decoration: none
+    color: #ffffff
+    display: flex
+    align-items: center
+    -webkit-tap-highlight-color: transparent
+    justify-content: center
+    height: 40px
+    font-size: 15px

@@ -1,0 +1,96 @@
+<form [formGroup]="nuevoForm" style="width: 100%;">
+
+    <div style="display: flex; width: 100%;">
+        <div class="inputbox " style="justify-content: space-between; ">
+            <h5 style="flex: 1; ">{{general.getText({ es : "Titulo en español", en:"Title in Spanish"})}}
+            </h5>
+            <input class="inputcorreo" style="flex: 2;" type="text" formControlName="tituloEs" [placeholder]="general.getText({ es : '*Titulo', en:'*Tilte'})">
+        </div>
+    </div>
+    <div style="display: flex; width: 100%;">
+        <div class="inputbox " style="justify-content: space-between; ">
+            <h5 style="flex: 1; "> {{general.getText({ es : "Titulo en inglés", en:"Title in English"})}}
+            </h5>
+            <input class="inputcorreo" style="flex: 2;" type="text" formControlName="tituloEn" [placeholder]="general.getText({ es : '*Titulo', en:'*Tilte'})">
+        </div>
+    </div>
+    <div style="display: flex; width: 100%;">
+        <div class="inputbox " style="justify-content: space-between; width: 100%; ">
+            <h5 style="flex: 1; "> {{general.getText({ es : "Imagen en español", en:"Picture in Spanish"})}}
+            </h5>
+            <div *ngIf="loadEs" style="flex: 5; display: flex; justify-content: center;">
+                <p-progressSpinner [style]="{width: '30px', height: '30px'}" strokeWidth="1"></p-progressSpinner>
+            </div>
+            <div style="overflow: hidden;">
+                <img *ngIf="prevEs && !loadEs" id="newsPrevEs" (load)="onImageLoad()" style="height: 70px; margin: 7px; cursor: pointer; " [src]="prevEs" alt="">
+            </div>
+            <input #newsImageEs id="newsImageEs" (change)="setImageEs($event)" type="file" hidden accept=".jpg, .jpeg, .png">
+            <a (click)="elegir()" style="flex: 1;max-width: 120px;" class="toggleTrue">
+                <span>   {{general.getText({ es : "Elegir", en:"Choose"})}}</span>
+            </a>
+        </div>
+    </div>
+    <div style="display: flex; width: 100%;">
+        <div class="inputbox " style="justify-content: space-between; width: 100%; ">
+            <h5 style="flex: 1; "> {{general.getText({ es : "Imagen en Inglés", en:"Picture in English"})}}
+            </h5>
+            <div *ngIf="loadEn" style="flex: 5; display: flex; justify-content: center;">
+                <p-progressSpinner [style]="{width: '30px', height: '30px'}" strokeWidth="1"></p-progressSpinner>
+            </div>
+            <div style="overflow: hidden;">
+                <img *ngIf="prevEn && !loadEn" id="newsPrevEn" (load)="onImageLoadEn()" style="height: 70px; margin: 7px; cursor: pointer; " [src]="prevEn" alt="">
+            </div>
+            <input #newsImageEn id="newsImageEn" (change)="setImageEn($event)" type="file" hidden accept=".jpg, .jpeg, .png">
+            <a (click)="elegirEn()" style="flex: 1; max-width: 120px;" class="toggleTrue">
+                <span>   {{general.getText({ es : "Elegir", en:"Choose"})}}</span>
+            </a>
+        </div>
+    </div>
+    <div style="display: flex; width: 100%;">
+        <div class="inputbox" style="justify-content: space-between; width: 100%; ">
+            <h5 style="flex: 1; "> * {{general.getText({ es : "Documento en español", en:"Document in Spanish"})}}
+            </h5>
+            <div *ngIf="loadEsDoc" style="flex: 5; display: flex; justify-content: center;">
+                <p-progressSpinner [style]="{width: '30px', height: '30px'}" strokeWidth="1"></p-progressSpinner>
+            </div>
+            <a *ngIf="admin.complianceSelect && !downEs" style=" overflow: hidden; text-decoration: none; flex: 1;" [href]="admin.complianceSelect.docUrl.es">
+                <p style="color: #28ba9b; overflow-wrap: break-word; overflow: hidden;">{{docEs}}</p>
+            </a>
+            <a *ngIf="downEs" style="text-decoration: none; flex: 1;overflow: hidden; " (click)="downGen(downEs)">
+                <p style="color: #28ba9b; overflow-wrap: break-word; overflow: hidden;">{{docEs}}</p>
+            </a>
+            <input placeholder="*" id="financialReportEspañol" type="file" hidden (change)="setEs($event)" accept=".pdf,.xls,.xlw,.xlsx,.docx,.dotx,.doc,.dot">
+            <a (click)=" elegirDoc() " style="flex: 1; max-width: 120px;" class="toggleTrue">
+                <span>   {{general.getText({ es : "Elegir", en:"Choose"})}}</span>
+            </a>
+        </div>
+    </div>
+
+    <div style="display: flex; width: 100%;">
+        <div class="inputbox " style="justify-content: space-between; width: 100%; ">
+            <h5 style="flex: 1; "> * {{general.getText({ es : "Documento en Inglés", en:"Document inEnglish"})}}
+            </h5>
+            <div *ngIf="loadEnDoc" style="flex: 5; display: flex; justify-content: center;">
+                <p-progressSpinner [style]="{width: '30px', height: '30px'}" strokeWidth="1"></p-progressSpinner>
+            </div>
+            <a *ngIf="admin.complianceSelect && !downEs" style=" overflow: hidden; text-decoration: none; flex: 1;" [href]="admin.complianceSelect.docUrl.es">
+                <p style="color: #28ba9b; overflow-wrap: break-word; overflow: hidden;">{{docEn}}</p>
+            </a>
+            <a *ngIf="downEs" style="text-decoration: none; flex: 1;overflow: hidden; " (click)="downGen(downEn)">
+                <p style="color: #28ba9b; overflow-wrap: break-word; overflow: hidden;">{{docEn}}</p>
+            </a>
+            <input placeholder="*" id="financialReportIngles" type="file" (change)="setEn($event)" hidden accept=".pdf,.xls,.xlw,.xlsx,.docx,.dotx,.doc,.dot">
+            <a (click)=" elegirEnDoc()" style="flex: 1;max-width: 120px;" class="toggleTrue">
+                <span>   {{general.getText({ es : "Elegir", en:"Choose"})}}</span>
+            </a>
+        </div>
+    </div>
+</form>
+<div style="margin-top: 20px; margin-bottom: 20px; display: flex; justify-content: flex-end; width: 100%;  ">
+
+    <button (click)="guardar()" pButton pRipple type="button " class="p-button-rounded p-button-success " style=" margin-top: 10px; margin-right: 25px; height: 45px; padding-left: 20px; padding-right: 20px; font-weight: 900; color: white; border:
+                none ;  background: #28ba9b; text-align: center; display: flex; justify-content: center; ">
+        {{general.getText({ es : "Guardar Cambios ", en:"Save Changes"})}}
+    </button>
+
+</div>

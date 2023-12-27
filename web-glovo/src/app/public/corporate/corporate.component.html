@@ -1,0 +1,289 @@
+<div class="center">
+  <div class="centro">
+    <div class="centro fondo">
+      <svg
+        class="svg"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 1920 149.88"
+      >
+        <g id="Capa_2" data-name="Capa 2">
+          <g id="Capa_1-2" data-name="Capa 1">
+            <path
+              style="fill: #ffffff"
+              d="M0,0A4774.57,4774.57,0,0,0,576,90c102.66,9.68,246.45,22.85,428,21,473.64-4.81,901.51-108.73,916-111h0V149.88H0Z"
+            />
+          </g>
+        </g>
+      </svg>
+    </div>
+    <div *ngIf="data.corporate" class="container-video">
+      <div class="grande">
+        <!-- <iframe [src]="data.corporate.data[0].url | safe" width="100%" height="100%" style=" background-color:#f2f2f2; border: 3px solid white; max-width: 900px; max-height: 400px; top:0 ; bottom:0; position: absolute; z-index: 11111;" src="https://www.youtube.com/embed/zU_kQF5Ko3w"
+                    title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+            
+            </iframe> -->
+        <iframe
+          width="100%"
+          height="100%"
+          src="https://www.youtube.com/embed/0kLUNzcqOO8"
+          title="YouTube video player"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        >
+        </iframe>
+      </div>
+    </div>
+
+    <!-- <div *ngIf="data.corporate" style="width:60%; max-width: 912px; display: flex; flex-wrap: wrap; padding: 0px; justify-content:space-between; ">
+            <ng-container *ngFor="let corp of data.corporate.data ; index as i ">
+                <div *ngIf=" i > 0" style="flex: 1; flex-basis: 200px; display: flex; flex-direction: column; padding: 7px;  ">
+                    <div style="display: flex; justify-content: center; position: relative;  padding-bottom: 50.25%;height: 0;overflow: hidden;margin-bottom: 5px;">
+                        <iframe [src]="corp.url | safe" width="100%" height="100%" style="  background-color:#f2f2f2;  border: 3px solid white; max-width: 900px; max-height: 400px; top:0 ; bottom:0; position: absolute; z-index: 11111;" src="https://www.youtube.com/embed/vlneT-a-KkQ"
+                            title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <div style="padding: 5px;">
+                        <h3 style="padding: 5px;">{{corp.person_name}}</h3>
+                        <div class="barrita"></div>
+                        <div style="display: flex;">
+                            <p style="font-weight: 300; min-width: 80px;">puesto: </p>
+                            <p>{{corp.job}}</p>
+                        </div>
+                        <div style="display: flex; margin-top: -20px;">
+                            <p style="font-weight: 300; min-width: 80px;">pais: </p>
+                            <p>{{corp.country}}</p>
+                        </div>
+
+                    </div>
+                </div>
+            </ng-container>
+        </div> -->
+    <!-- <div *ngIf="data.corporate" style="width:60%; max-width: 912px; display: flex; flex-wrap: wrap; padding: 0px; justify-content:space-between; ">
+            <ng-container *ngFor="let corp of data.corporate.data ; index as i ">
+                <div *ngIf=" i > 0" style="flex: 1; flex-basis: 200px; display: flex; flex-direction: column; padding: 7px;  ">
+                    <div style="display: flex; justify-content: center; position: relative;  padding-bottom: 50.25%;height: 0;overflow: hidden;margin-bottom: 5px;">
+                        <iframe [src]="corp.url | safe" width="100%" height="100%" style="  background-color:#f2f2f2;  border: 3px solid white; max-width: 900px; max-height: 400px; top:0 ; bottom:0; position: absolute; z-index: 11111;" src="https://www.youtube.com/embed/vlneT-a-KkQ"
+                            title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <div style="padding: 5px;">
+                        <a [routerLink]="['/public/whistleblower-channel']" (click)="window.scrollTo(0, 0)" style="  text-decoration: none; color: white; ">
+                            <div style=" width: fit-content; padding: 10px; padding-left: 30px; padding-right: 30px; font-weight: bolder; border: 2px solid white; border-end-end-radius: revert ;  border-radius: 80px / 75px 75px 75px 75px; ">
+                                {{general.getText({ es: "Canal de denuncias", en: "Whistleblower Channel" })}}
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </ng-container>
+        </div> -->
+
+    <!--Info corporativo-->
+    <div class="content">
+      <h2>
+        {{
+          general.getText({
+            es: "En Glovo se empezó a implementar el programa a través de:",
+            en: "At Glovo, the programme was started to be implemented through:"
+          })
+        }}
+      </h2>
+      <!-- <hr> -->
+      <div class="card-container">
+        <div>
+          <img
+            src="../../../assets/icons/corporate/corporate_icon-1.png"
+            height="90px"
+            alt="Icon"
+          />
+          <p>
+            {{
+              general.getText({
+                es: "La creación del Código Ético Global",
+                en: "The creation of the Global Code of Ethics"
+              })
+            }}
+          </p>
+        </div>
+        <div>
+          <img
+            src="../../../assets/icons/corporate/corporate_icon-2.png"
+            height="90px"
+            alt="Icon"
+          />
+          <p>
+            {{
+              general.getText({
+                en: "As time has gone by, the creation of other specific policies",
+                es: "Con el paso del tiempo, la creación de otras políticas específicas"
+              })
+            }}
+          </p>
+        </div>
+        <div>
+          <img
+            src="../../../assets/icons/corporate/corporate_icon-3.png"
+            height="90px"
+            alt="Icon"
+          />
+          <p>
+            {{
+              general.getText({
+                en: "The communication to all employees about the above mentioned policies",
+                es: "La comunicación a todos los empleados sobre lo anterior políticas"
+              })
+            }}
+          </p>
+        </div>
+      </div>
+      <br />
+      <div class="card-container">
+        <div>
+          <img
+            src="../../../assets/icons/corporate/corporate_icon-4.png"
+            height="90px"
+            alt="Icon"
+          />
+          <p>
+            {{
+              general.getText({
+                en: "We believe that compliance is not only applicable to employees but to all the business partners",
+                es: "Creemos que el cumplimiento no solo es aplicable a los empleados sino también a todos los socios comerciales"
+              })
+            }}
+          </p>
+        </div>
+        <div>
+          <img
+            src="../../../assets/icons/corporate/corporate_icon-5.png"
+            height="90px"
+            alt="Icon"
+          />
+          <p>
+            {{
+              general.getText({
+                en: "The publication of them in internal media is an important asset to make everyone aware of our commitment!",
+                es: "La publicación de los mismos en medios internos es un activo importante para ¡haz que todos sean conscientes de nuestro compromiso!"
+              })
+            }}
+          </p>
+        </div>
+        <div>
+          <img
+            src="../../../assets/icons/corporate/corporate_icon-6.png"
+            height="90px"
+            alt="Icon"
+          />
+          <p>
+            {{
+              general.getText({
+                en: "For us, it’s important to bear in mind that it requires everyone’s commitment!",
+                es: "¡Para nosotros es importante tener en cuenta que requiere el compromiso de todos!"
+              })
+            }}
+          </p>
+        </div>
+      </div>
+      <br />
+      <div class="card-container">
+        <div>
+          <img
+            src="../../../assets/icons/corporate/corporate_icon-7.png"
+            height="90px"
+            alt="Icon"
+          />
+          <p>
+            {{
+              general.getText({
+                en: "We believe that we are more likely to make ethical choices when integrity, honesty, and compliance guide our decision-making",
+                es: "Creemos que es más probable que tomemos decisiones éticas cuando la integridad, la honestidad y el cumplimiento guían nuestra toma de decisiones"
+              })
+            }}
+          </p>
+        </div>
+        <div>
+          <img
+            src="../../../assets/icons/corporate/corporate_icon-8.png"
+            height="90px"
+            alt="Icon"
+          />
+          <p>
+            {{
+              general.getText({
+                en: "An annual global compliance training is carried out by all employees",
+                es: "Todos los empleados llevan a cabo una capacitación anual de cumplimiento global"
+              })
+            }}
+          </p>
+        </div>
+        <div>
+          <img
+            src="../../../assets/icons/corporate/corporate_icon-9.png"
+            height="90px"
+            alt="Icon"
+          />
+          <p>
+            {{
+              general.getText({
+                en: "We have implemented a whistleblower channel to support everyone to speak up and report unethical behaviour",
+                es: "Hemos implementado un canal de denuncias para ayudar a todos a hablar y denunciar conductas poco éticas"
+              })
+            }}
+          </p>
+        </div>
+      </div>
+      <br />
+      <div class="card-container">
+        <div>
+          <img
+            src="../../../assets/icons/corporate/corporate_icon-10.png"
+            height="90px"
+            alt="Icon"
+          />
+          <p>
+            {{
+              general.getText({
+                en: "A global risk management programme is carried out in order to identify risks, assess them and create mitigation plans and internal controls for them",
+                es: "Se lleva a cabo un programa global de gestión de riesgos con el fin de identificar riesgos, evaluarlos y crear planes de mitigación y controles internos para ellos"
+              })
+            }}
+          </p>
+        </div>
+        <div>
+          <img
+            src="../../../assets/icons/corporate/corporate_icon-11.png"
+            height="90px"
+            alt="Icon"
+          />
+          <p>
+            {{
+              general.getText({
+                en: "All of the above is applicable to Glovoapp23, SA and all its subsidiaries",
+                es: "Todo lo anterior es de aplicación a Glovoapp23, SA y todas sus filiales."
+              })
+            }}
+          </p>
+        </div>
+        <div>
+          <img
+            src="../../../assets/icons/corporate/corporate_icon-12.png"
+            height="90px"
+            alt="Icon"
+          />
+          <p>
+            {{
+              general.getText({
+                en: "Glovo also adapts the Global Compliance Programme to the specific jurisdictions",
+                es: "Glovo también adapta el Programa de Cumplimiento Global a las necesidades específicas jurisdicciones"
+              })
+            }}
+          </p>
+        </div>
+      </div>
+
+      <!-- <a [routerLink]="['/public/whistleblower-channel']" (click)="window.scrollTo(0, 0)" style="text-decoration: none; color: black; ">
+                        <div style=" width: fit-content; padding: 10px; padding-left: 30px; padding-right: 30px; font-weight: bolder; border: 2px solid black; border-end-end-radius: revert ;  border-radius: 80px / 75px 75px 75px 75px; ">
+                            {{general.getText({ es: "Canal de denuncias", en: "Whistleblower Channel" })}}
+                        </div>
+                    </a> -->
+    </div>
+  </div>
+</div>

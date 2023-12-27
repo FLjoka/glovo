@@ -1,0 +1,173 @@
+<div style="display: flex; justify-content: center; flex-direction: column; align-items: center; width: 100%!important;  padding-top: 120px; padding-bottom: 170px;">
+    <!--
+    <form [formGroup]="nuevoForm" class="tarjeta2" style="width: 80%; max-width: 1100px;">
+        <div style="width: 100%; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;  ">
+            <div style="display: flex; flex-direction: column;  justify-content: center;">
+                <div style="display: flex; flex-wrap: wrap; align-items: center; margin-right: 30px; ">
+                    <h4 style=" font-weight: bolder;  font-size:x-large;"> {{general.getText({ es : "Configuración de la cabecera", en : "Header configuration"})}}
+                    </h4>
+                </div>
+            </div>
+            <span class="custom" style="flex: 1;margin:5px; flex: 2; margin-top: 10px ;   border: 1px solid #ced4da; border-radius: 3px;">
+              
+             </span>
+        </div>
+    </form>
+-->
+
+    <form [formGroup]="nuevoForm" class="tarjeta2" style="width: 80%; max-width: 1100px;">
+        <div style="width: 100%; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;  ">
+            <div style="display: flex; flex-direction: column;  justify-content: center;">
+                <div style="display: flex; flex-wrap: wrap; align-items: center; margin-right: 30px; ">
+                    <h4 style=" font-weight: bolder;  font-size:x-large;"> {{general.getText({ es : "Configuraciones del inicio", en : "Home settings"})}}
+                    </h4>
+                </div>
+            </div>
+            <span class="custom" style="flex: 1;margin:5px; flex: 2; margin-top: 10px ;   border: 1px solid #ced4da; border-radius: 3px;">
+              
+             </span>
+        </div>
+        <div style="display: flex; width: 100%;">
+            <div class="inputbox " style="justify-content: space-between; ">
+                <h5 style="flex: 1; "> * {{ getControlsText("headerEs")}}
+                </h5>
+                <input class="inputcorreo" style="flex: 2;" type="text" formControlName="headerEs" [placeholder]="general.getText({ es : '*Titulo', en:'*Title'})">
+            </div>
+        </div>
+        <div style="display: flex; width: 100%;">
+            <div class="inputbox " style="justify-content: space-between; ">
+                <h5 style="flex: 1; "> * {{ getControlsText("headerEn")}}
+                </h5>
+                <input class="inputcorreo" style="flex: 2;" type="text" formControlName="headerEn" [placeholder]="general.getText({ es : '*Titulo', en:'*Title'})">
+            </div>
+        </div>
+        <div style="display: flex; width: 100%;">
+            <div class="inputbox " style="justify-content: space-between; ">
+                <h5 style="flex: 1; "> * {{ getControlsText("footerEs")}}
+                </h5>
+                <input class="inputcorreo" style="flex: 2;" type="text" formControlName="footerEs" [placeholder]="general.getText({ es : '*Texto', en:'*Title'})">
+            </div>
+        </div>
+        <div style="display: flex; width: 100%;">
+            <div class="inputbox " style="justify-content: space-between; ">
+                <h5 style="flex: 1; "> * {{ getControlsText("footerEn")}}
+                </h5>
+                <input class="inputcorreo" style="flex: 2;" type="text" formControlName="footerEn" [placeholder]="general.getText({ es : '*Texto', en:'*Title'})">
+            </div>
+        </div>
+        <div style="display: flex; width: 100%;">
+            <div class="inputbox " style="justify-content: space-between; ">
+                <h5 style="flex: 1; ">* {{ getControlsText("video")}}
+                </h5>
+                <input class="inputcorreo" id="url" style="flex: 2;" type="text" formControlName="video" placeholder="*a6ptOkLG5Zo">
+
+                <span (click)="reload()" style=" cursor: pointer; color: white; padding: 10px; font-weight: bold; font-size: 15px;  background: #28ba9b; border-radius:50%; width:30px ; height:30px; display: flex; justify-content: center; align-items: center; ">
+                    <i class="pi pi-reply" style="font-size: 15px;"></i>
+                </span>
+            </div>
+        </div>
+
+        <div *ngIf="!load" style="display: flex; border-radius: 5px; justify-content: center; position: relative;  padding-bottom: 40.25%;height: 0;overflow: hidden;width: 100%; margin-bottom: 20px;">
+            <iframe width="100%" height="100%" (errro)="errorFrame()" style=" background-color:#f2f2f2;  border: 3px solid white; max-width: 1000px; max-height: 400px; top:0 ; bottom:0; position: absolute; z-index: 11111;" [src]="videoselect | safe" title="YouTube video player"
+                frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+
+        <div style="display: flex; width: 100%;">
+            <div class="inputbox " style="justify-content: space-between; ">
+                <h5 style="flex: 1; "> * {{ getControlsText("title1Es")}}
+                </h5>
+                <input class="inputcorreo" style="flex: 2;" type="text" formControlName="title1Es" [placeholder]="general.getText({ es : '*Titulo', en:'*Title'})">
+            </div>
+        </div>
+        <div style="display: flex; width: 100%;">
+            <div class="inputbox " style="justify-content: space-between; ">
+                <h5 style="flex: 1; "> * {{ getControlsText("title1En")}}
+                </h5>
+                <input class="inputcorreo" style="flex: 2;" type="text" formControlName="title1En" [placeholder]="general.getText({ es : '*Titulo', en:'*Title'})">
+            </div>
+        </div>
+        <div style="display: flex; width: 100%;">
+            <div class="inputbox " style="justify-content: space-between; ">
+                <h5 style="flex: 1; ">* {{ getControlsText("body1Es")}}
+                </h5>
+                <input class="inputcorreo" style="flex: 2;" type="text" formControlName="body1Es" [placeholder]="general.getText({ es : '*Descripción', en:'*Description'})">
+            </div>
+        </div>
+        <div style="display: flex; width: 100%;">
+            <div class="inputbox " style="justify-content: space-between; ">
+                <h5 style="flex: 1; ">* {{ getControlsText("body1En")}}
+                </h5>
+                <input class="inputcorreo" style="flex: 2;" type="text" formControlName="body1En" [placeholder]="general.getText({ es : '*Descripción', en:'*Description'})">
+            </div>
+        </div>
+        <div class="inputbox " style="justify-content: space-between; width: 100%; ">
+            <h5 style="flex: 1; ">* {{ getControlsText("image1")}}
+            </h5>
+            <div *ngIf="loadTrainingImage" style="flex: 5; display: flex; justify-content: center;">
+                <p-progressSpinner [style]="{width: '30px', height: '30px'}" strokeWidth="1"></p-progressSpinner>
+            </div>
+            <div style="overflow: hidden;">
+                <img *ngIf="trainingPrev && !loadTrainingImage" id="TrainingImagePrev" (load)="onImageLoad()" style="height: 70px; margin: 7px; cursor: pointer; " [src]="trainingPrev" alt="">
+            </div>
+            <input #trainingImage id="trainingImage" (change)="setImageTraining($event)" type="file" hidden accept=".jpg, .jpeg, .png">
+            <a (click)="elegir()" style="flex: 1;" class="toggleTrue">
+                <span>   {{general.getText({ es : "Elegir", en:"Choose"})}}</span>
+            </a>
+        </div>
+        <span class="custom" style="flex: 1;margin:5px; flex: 2; margin-top: 10px ;  width: 100%;  border: 1px solid #ced4da; border-radius: 3px;">
+              
+        </span>
+
+        <div style="display: flex; width: 100%;">
+            <div class="inputbox " style="justify-content: space-between; ">
+                <h5 style="flex: 1; ">* {{ getControlsText("title2Es")}}
+                </h5>
+                <input class="inputcorreo" style="flex: 2;" type="text" formControlName="title2Es" [placeholder]="general.getText({ es : '*Titulo', en:'*Title'})">
+            </div>
+        </div>
+
+        <div style="display: flex; width: 100%;">
+            <div class="inputbox " style="justify-content: space-between; ">
+                <h5 style="flex: 1; ">* {{ getControlsText("title2En")}}
+                </h5>
+                <input class="inputcorreo" style="flex: 2;" type="text" formControlName="title2En" [placeholder]="general.getText({ es : '*Titulo', en:'*Title'})">
+            </div>
+        </div>
+        <div style="display: flex; width: 100%;">
+            <div class="inputbox " style="justify-content: space-between; ">
+                <h5 style="flex: 1; ">* {{ getControlsText("body2Es")}}
+                </h5>
+                <input class="inputcorreo" style="flex: 2;" type="text" formControlName="body2Es" [placeholder]="general.getText({ es : '*Descripción', en:'*Description'})">
+            </div>
+        </div>
+        <div style="display: flex; width: 100%;">
+            <div class="inputbox " style="justify-content: space-between; ">
+                <h5 style="flex: 1; ">* {{ getControlsText("body2En")}}
+                </h5>
+                <input class="inputcorreo" style="flex: 2;" type="text" formControlName="body2En" [placeholder]="general.getText({ es : '*Descripción', en:'*Description'})">
+            </div>
+        </div>
+        <div class="inputbox " style="justify-content: space-between; width: 100%; ">
+            <h5 style="flex: 1; ">* {{ getControlsText("image2")}}
+            </h5>
+            <div *ngIf="loadCompliance" style="flex: 5; display: flex; justify-content: center;">
+                <p-progressSpinner [style]="{width: '30px', height: '30px'}" strokeWidth="1"></p-progressSpinner>
+            </div>
+            <div style="overflow: hidden;">
+                <img *ngIf="compliancePrev && !loadCompliance" id="complianceImagePrev" (load)="onImageLoad()" style="height: 70px; margin: 7px; cursor: pointer; " [src]="compliancePrev" alt="">
+            </div>
+            <input #complianceImage id="complianceImage" (change)="setImageCompliance($event)" type="file" hidden accept=".jpg, .jpeg, .png">
+            <a (click)="elegir2()" style="flex: 1;" class="toggleTrue">
+                <span>   {{general.getText({ es : "Elegir", en:"Choose"})}}</span>
+            </a>
+        </div>
+    </form>
+    <div style="margin-top: 20px; margin-bottom: 20px; display: flex; justify-content: flex-end; width: 80%; max-width: 1100px;  ">
+
+        <button (click)="guardar()" pButton pRipple type="button " class="p-button-rounded p-button-success " style=" margin-top: 10px; margin-right: 25px; height: 45px; padding-left: 20px; padding-right: 20px; font-weight: 900; color: white; border:
+                    none ;  background: #28ba9b; text-align: center; display: flex; justify-content: center; ">
+            {{general.getText({ es : "Guardar Cambios ", en:"Save Changes"})}}
+        </button>
+
+    </div>
+</div>

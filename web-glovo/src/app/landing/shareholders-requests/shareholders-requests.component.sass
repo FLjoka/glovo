@@ -1,0 +1,65 @@
+@import "../../../themes/_colors.sass"
+select
+    width: 100%
+    overflow: hidden
+    white-space: pre-wrap
+    word-wrap: normal !important
+    overflow-wrap: break-word
+    font-size: 17px
+    padding: 5px
+    padding-left: 10px
+    border: none
+option
+    border: none
+    white-space: normal
+    text-overflow: ellipsis
+    -webkit-appearance: none
+.p-dropdown-item.p-ripple
+    white-space: normal
+.ui-dropdown-panel .ui-dropdown-items-wrapper 
+    overflow: auto
+    white-space: normal
+    min-width: 360px
+
+.barrita
+    width: 50px
+    height: 5px
+    border-radius: 3px / 2px
+    background: $dark-orange
+    bottom: -20px
+.shared
+    padding-top: 120px
+    width: 75%
+.tarjeta2
+    min-width: 300px
+    display: flex
+    width: 75%
+    max-width: 700px
+    flex-direction: column
+    align-items: center
+    min-height: 250px
+    background: white
+    border-radius: 20px
+    box-shadow: 0px 10px 27px 8px rgba(0,0,0,0.36)
+    padding: 20px
+.select
+    border: none
+.p-cascadeselect
+    background: red !important
+.textarea
+    font-family: 'Gotham'
+    width: 100%
+    max-width: 100%
+    min-width: 100%
+
+.textarea:focus
+    outline: 0
+
+.custom
+    min-width: 200px
+
+@media screen and ( max-width: 600px )
+    .form
+        margin: 7px
+    .custom
+        width: 100%

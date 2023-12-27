@@ -1,0 +1,40 @@
+<div class="content" [style.height]="getHeight()">
+  <header class="cabecera center noselect">
+    <div class="center header">
+      <div class="center">
+        <div>
+          <span
+            id="idiomaHeaderTerms12"
+            class="ripple icon"
+            style="margin-left: 15px"
+          >
+            <img src="../../assets/icons/lg.svg " />
+            <img src="../../assets/icons/chevron-down-outline.svg " />
+          </span>
+          <globo-select
+            [active]="'idiomaHeaderTerms12'"
+            [items]="general.idiomas"
+          ></globo-select>
+        </div>
+      </div>
+    </div>
+    <div class="title container-title">
+      <p class="title">
+        {{
+          general.getText({
+            es: "Condiciones Generales de Uso y Contratación",
+            en: "General Terms of Use and Contracting"
+          })
+        }}
+      </p>
+    </div>
+  </header>
+  <div class="centro center" [style.height]="get70()">
+    <div class="body">
+      <div>
+        <app-es *ngIf="general.idioma() == 'es'"></app-es>
+        <app-en *ngIf="general.idioma() == 'en'"></app-en>
+      </div>
+    </div>
+  </div>
+</div>

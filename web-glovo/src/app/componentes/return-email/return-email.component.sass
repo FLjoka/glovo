@@ -1,0 +1,43 @@
+@import ../../../themes/_colors
+.abtn
+    background: $btn-color
+    border-radius: 17px / 50%
+    color: white
+.abtn:hover
+    background: #299e85 
+    border-radius: 17px / 50%
+    color: white
+@keyframes aparecer
+    from
+        opacity: 0
+    to
+        opacity: 1
+.view
+    animation-name: aparecer
+    animation-duration: .3s
+.pendiente
+    border-bottom: 1px solid #3498DB
+.valido
+    border-bottom: 1px solid #28B463
+.sinfoco
+    border-bottom: 1px solid #CACFD2
+.invalido
+    border-bottom: 1px solid #CB4335
+.inputcorreo
+    flex: 1
+    border: none
+    padding-bottom: 7px
+    font-size: 16px
+    font-weight: 300
+    font-family: 'Gotham', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+.inputcorreo:focus
+    outline: none
+    font-family: 'Gotham', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+    font-weight: 300
+
+.inputcorreo::placeholder
+    font-family: 'Gotham', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+.inputcorreo::after
+    font-family: 'Gotham', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+.inputcorreo::before
+    font-family: 'Gotham', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif

@@ -1,0 +1,11 @@
+<div style="position: relative; ">
+    <button (focusout)="visible = false" id="popover" *ngIf="visible" class="popover ">
+        <div class="triangulo"></div>
+        <div *ngFor="let item of items ; index as i">
+            <span (click)="selected( i ); clicked( items , order , i ); visible = false" class=" marcado ripple " [ngClass]="{'select' : item.selected}" style="z-index: 2;">
+                <p *ngIf="idioma == 'en'" >{{item.nombre.en}}  </p>
+                <p *ngIf="idioma == 'es'" >{{item.nombre.es}}  </p>
+            </span>
+        </div>
+    </button>
+</div>

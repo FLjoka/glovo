@@ -1,0 +1,71 @@
+<div *ngIf="!load" class="tarjeta2">
+    <div style="width: 100%; display: flex; justify-content: space-between; align-items: flex-start; ">
+        <div>
+            <div style="display: flex; flex-wrap: wrap; align-items: flex-start;  ">
+                <h4 style="  font-size:x-large; text-transform: capitalize; margin-bottom: 0; margin-top: 0px; "> {{general.getText({ es : "Información", en : "Information"})}}
+                </h4>
+                <h4 style="font-size: medium; margin-top: 7px; margin-bottom: 0;   margin-left: 10px;">{{allData.shareholder.roles[0]}}</h4>
+            </div>
+            <div class="barrita" style="margin-top: 10px;"></div>
+        </div>
+        <h5 style="margin-top: 10px;">{{general.getFecha(allData.created_at)}} </h5>
+    </div>
+
+    <div style="display: flex; flex-wrap: wrap; ">
+        <div style="flex:1;">
+            <div style="flex: 1; min-width: 250px; padding: 10px 0px 10px 0px;">
+                <h5> {{general.getText({ es : "ID / Pasaporte ", en : "ID / Passport "})}}: {{allData.shareholder.id}}</h5>
+                <div class="barrita"></div>
+            </div>
+            <div style="flex: 1; min-width: 250px; padding: 10px 0px 10px 0px;">
+                <h5> {{general.getText({ es : "Nombre ", en : "Name "})}}: {{allData.shareholder.name}}</h5>
+                <div class="barrita"></div>
+            </div>
+        </div>
+        <div style="flex:1;">
+            <div style="flex: 1; min-width: 250px; padding: 10px 0px 10px 0px;">
+                <h5> {{general.getText({ es : "Opción de solicitud ", en : "Request option "})}}: {{general.getText(allData.request_option.option)}}</h5>
+                <div class="barrita"></div>
+            </div>
+            <div style="flex: 1; min-width: 250px; padding: 10px 0px 10px 0px;">
+                <h5> {{general.getText({ es : "Correo ", en : "Email "})}}: {{allData.shareholder.email}}</h5>
+                <div class="barrita"></div>
+            </div>
+        </div>
+    </div>
+    <div style="flex: 1; min-width: 250px; padding: 10px 0px 10px 0px;">
+        <h5> {{general.getText({ es : "Descripción de la solicitud ", en : "Description of the request "})}}: {{allData.description}}</h5>
+        <div class="barrita"></div>
+    </div>
+
+    <div style="width: 100%; display: flex; justify-content: space-between; padding: 10px; ">
+        <button (click)="enviar()" pButton pRipple type="button " class="p-button-rounded p-button-success " style=" flex: 5;  margin:5px;height: 45px; padding-left: 20px; padding-right: 20px; font-weight: 900; color: white;
+        transition: all .5s ease;  border: none ;  background: #28ba9b; text-align: center; display: flex; justify-content: center; ">
+        {{general.getText({ es : "Reenviar solicitud", en:"Resend request"})}}
+        </button>
+        <span *ngIf="enviando" style="display: flex; height: 100%; justify-content: flex-end; align-items: center; flex: 1; margin:5px;height: 45px; padding-left: 20px; padding-right: 20px; font-weight: 900;">
+            <i class="pi pi-spin pi-spinner" style="font-size: 2rem; color:#aaaaaa; "></i>
+        </span>
+
+    </div>
+    <div style="flex:1; display: flex; flex-wrap: wrap;">
+
+        <div *ngIf="allData.file" style="flex: 2; min-width: 250px; padding: 10px 0px 10px 0px; display: flex; justify-content: space-between; align-items: flex-start;">
+            <div>
+                <h5 style="margin-bottom: 3px;"> {{general.getText({ es : "Recurso recibido ", en : "Resource received"})}}:</h5>
+                <h5 style="margin-top: 0px;"> {{allData.file.filename}}</h5>
+                <div class="barrita"></div>
+            </div>
+            <button (click)="download()" pButton pRipple type="button " class="p-button-rounded p-button-success " style=" justify-content: space-between;  width: 142px!important; margin:5px;height: 45px; padding-left: 20px; padding-right: 20px; font-weight: 900; color: white;
+            transition: all .5s ease;  border: none ;  background: #28ba9b; text-align: center; display: flex; justify-content: center; ">
+                    <i class="event" style="font-weight: 300;"  style=" padding:10px" class="pi pi-download" ></i>
+            {{general.getText({ es : "Descargar ", en:"Download"})}}
+    
+            </button>
+
+        </div>
+    </div>
+</div>
+<div *ngIf="load" style="flex: 5; display: flex; justify-content: center;">
+    <p-progressSpinner strokeWidth="1"></p-progressSpinner>
+</div>

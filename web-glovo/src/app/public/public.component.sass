@@ -1,0 +1,237 @@
+@import "../../themes/_colors.sass"
+
+.content
+    z-index: 200
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: center
+    position: relative
+
+.menu-icon
+    cursor: pointer
+    padding: 10px
+    img
+        width: 35px
+
+.menuActive
+    z-index: 1011111111
+    width: 60px
+    top: 0px
+    right: 0
+    display: flex
+    position: fixed
+    align-items: center
+    justify-content: flex-end
+    height: 50px
+    display: none
+    
+.centro
+    margin-top: -120px
+    z-index: 2
+    width: 120%
+    color: $dark-bg
+    border-radius: 50%/150px 150px 0 0
+    box-shadow: inset 0px 5px 10px 4px rgba(0,0,0,0.36)
+
+.idiom-login
+    z-index: 2
+    margin-bottom: 5px
+    display: flex
+    gap: 7px
+
+.hidden
+    display: none
+
+.cabecera
+    width: 100%
+    padding-top: 110px
+    overflow: hidden
+    min-height: 300px
+    font-weight: bolder
+    position: relative
+    flex-direction: column
+    padding-bottom: 110px
+
+.logo
+    width: 120px
+    z-index: 3
+    img
+        max-width: 120px
+        cursor: pointer
+
+.menu
+    z-index: 2
+    ul
+     list-style: none
+     display: flex
+
+.menu-item
+    position: relative
+    overflow: visible
+    &:hover
+        div
+            background: #fec456 !important
+    div
+        width: 98%
+        height: 3px
+        border-radius: 2px
+        margin-top: 5px
+        transition: background .2s ease
+        position: absolute
+        margin-left: 1%
+     
+
+.title
+    z-index: 1
+    max-width: 50%
+    min-height: 50px
+    margin-bottom: 30px
+    min-width: 320px
+    p
+        text-align: center
+
+.fondo
+    z-index: 0
+    width: 100%
+    height: 100%
+    position: absolute
+    background-size: cover
+    background-repeat: no-repeat
+    background-position: center
+    div
+        display: flex
+        justify-content: center
+        align-items: center
+        height: 100%
+        background: rgba(0, 0, 0, 0.5)
+    .overlay
+        width: 100%
+        height: 100%
+        position: absolute
+        background: rgba(0, 0, 0, 0.5)
+    
+.imgFondo
+    width: 100%
+
+.icon
+    margin-bottom: 0px
+    img 
+        width: 20px
+
+.canal-denuncias
+    position: relative
+    background: #f2f2f2
+
+.selected
+    background: #fec456
+    border: none
+  
+
+svg
+    width: 100%
+    position: absolute
+    bottom: -2px
+    z-index: 11111111111
+
+.footer
+    width: 90%
+    display: flex
+    flex-direction: column
+    align-items: center
+    position: relative
+    background: transparent
+    div
+        position: relative
+
+.footer-container
+    display: flex
+    position: relative
+    flex-wrap: wrap
+    width: 100%
+    max-width: 1200px
+
+.col-1
+    flex: 1 
+    min-width: 200px
+    ul
+        list-style: none
+        margin-left: 0px 
+        padding-left: 0px
+        li
+            padding: 5px 
+            cursor: pointer
+
+.container-btn
+    flex: 1
+    display: flex
+    flex-direction: column
+    align-items: flex-start
+    min-width: 200px
+    padding-top: 2rem
+    ul
+        list-style: none
+        margin-left: 0px 
+        padding-left: 0px
+        li
+            padding: 5px 
+            cursor: pointer
+            a
+                color: white
+                text-decoration: none
+                .btn
+                    white-space: nowrap
+                    width: fit-content
+                    padding: 10px
+                    padding-left: 30px
+                    padding-right: 30px
+                    font-weight: bolder
+                    border: 2px solid white
+                    border-end-end-radius: revert
+                    border-radius: 80px / 75px 75px 75px 75px
+    ul
+        .idiom
+            padding: 5px
+            width: 60px
+            float: right
+.links
+    a
+        text-decoration: none
+a:visited
+    color: white 
+
+.bg
+    background: #1D1D1D
+    width: 100%
+.marcado
+    color: #495057
+    font-family: 'Gotham', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+.marcado:hover
+    color: $item-select
+    background: $dark-bg
+
+.ft
+    width: 120%
+    z-index: 11111
+    background: tomato
+    height: 100px
+.shape
+    height: 100px
+    width: 200px
+    background: tomato
+    shape-outside: border-box
+    shape-outside: path('M0.5,1 C0.5,1,0,0.7,0,0.3 A0.25,0.25,1,1,1,0.5,0.3 A0.25,0.25,1,1,1,1,0.3 C1,0.7,0.5,1,0.5,1 Z')
+
+
+@media screen and ( max-width: 600px  )
+    .centro
+        border-radius: 50%/ 50px 50px 0 0
+    .imgFondo
+        height: 100%
+        width: auto
+@media screen and ( max-width: 1150px )
+    .menu
+        display: none
+        color: red
+    .menuActive
+        display: flex

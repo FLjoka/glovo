@@ -1,0 +1,306 @@
+<div class="top" style="width: 100%; display: flex; flex-direction: column;   align-items: center;  ">
+    <div *ngIf="!selectReport  && !selectedUser" style="width: 80%; max-width: 1200px; position: relative; display: flex; justify-content: center; flex-direction: column; ">
+        <div style="display: flex;">
+            <span class="custom" style="max-width: 500px;margin:5px; flex: 2; margin-top: 10px ;   border: 1px solid #ced4da; border-radius: 3px;">
+                <p-dropdown [style]="{'minWidth':'100%'}" [(ngModel)]="tipo" [options]="selectOptions" (onChange)="setFilter()"  [placeholder]="general.getText({es: 'Opciones de registros', en : 'Record options'})" optionLabel="text"></p-dropdown>
+             </span>
+            <!--
+            <button pButton pRipple type="button" class="p-button-rounded p-button-success  " style=" width: 165px; font-weight: 900; color: white; border: none ;  background: #28ba9b;"> 
+                <span style="margin-right: 10px; transform: rotate(-90deg);" > <i style="font-size: 15px; margin: 7px 2px 7px 2px; " class="pi pi-sign-out"></i></span>
+                <p style="padding: 0; margin: 0; margin-right: 10px;"> {{general.getText( { en : 'Upload new', es : 'Subir nuevo' } )}}</p>
+                </button>
+                -->
+        </div>
+        <ng-container *ngIf="tipo.code !== 'users'">
+            <div style="display: flex; flex-direction: column; width: 100%; overflow: hidden;  min-height: 250px; margin-bottom: 20px;">
+                <h4 style="margin-left: 10px;" *ngIf="tipo.code !== 'announcement'">{{general.getText({ es : "Registro de descargas", en :"Download record"})}}</h4>
+                <h4 style="margin-left: 10px;" *ngIf="tipo.code == 'announcement'">{{general.getText({ es : "Registro de visualizaciones", en :"View log"})}}</h4>
+                <p-chart type="line" width="100" [height]="height()" [data]="admin.reportsGrafica " [options]="options"></p-chart>
+            </div>
+            <br>
+            <h4 style=" margin-bottom: 20px; font-size: 26px; font-weight: bold; ">{{general.getText({ en : "Details", es :"Detalle"})}}</h4>
+
+
+            <div style="height: 350px; margin-bottom: 120px; display: flex; justify-content: center; align-items: center;width: 100%;" *ngIf="admin.buscandoDailyReport">
+                <p-progressSpinner></p-progressSpinner>
+            </div>
+            <div *ngIf="!admin.buscandoDailyReport" style="width: 100%  ">
+                <ng-container *ngIf="admin.reportsDaily">
+                    <div *ngIf=" admin.reportsDaily.data.length > 0" style=" width: 100%; display: flex; justify-content: center; ">
+                        <div style="flex: 2;  display: flex; flex-direction: column; ">
+                            <span class="colTitle" style=" width: 100% !important;  display: flex; align-items: center; border-bottom: 3px  solid #c2c2c2;">
+                        <h1 class="title"  >{{general.getText( { es : 'Fecha', en : 'Date' } )}}</h1>
+                    </span>
+                            <span *ngFor="let data of admin.reportsDaily.data; index as i " [style.background]=" i % 2 == 0 ? 'white' : '#f2f2f2' " style=" padding: 5px; width: 100% !important;  background:#f2f2f2; height: 60px; display: flex; align-items: center; margin-top: 20px;  border-radius: 30px 0px 0px 30px / 50% 0px 0px 50%; ">
+                    <h1 class="event" style="font-weight: 300;">{{general.getFecha(data.date)}} </h1>
+                </span>
+                        </div>
+
+
+                        <div style="flex: 2;  display: flex; align-items: center; position: relative;  flex-direction: column; ">
+
+                            <span style="position: absolute; width: 100%; height: 100%;  border-left: 2px dashed #fec456 ; background: transparent;  z-index: 2; "> </span>
+
+                            <span class="colTitle" style="width: 100%;  display: flex; align-items: center;  background: white;  border-bottom: 3px  solid #c2c2c2;  z-index: 2;">
+                    <h1 class="title" style=" font-weight:300;white-space: nowrap;"  >{{general.getText( { en : 'Title', es : 'Titulo' } )}}</h1>
+                </span>
+                            <span *ngFor="let event of admin.reportsDaily.data; index as i " [style.background]=" i % 2 == 0 ? 'white' : '#f2f2f2' " style=" z-index: 1; padding-left: 5px; width: 100%; background:#f2f2f2; display: flex; align-items: center;  height: 60px; margin-top: 20px;">
+                    <h1 class="event" style="font-weight: 300;" >{{event.related.title}}</h1>
+                </span>
+                        </div>
+
+                        <div style="flex: 1;  display: flex; align-items: center; position: relative;  flex-direction: column; ">
+
+                            <span style="position: absolute; width: 100%; height: 100%;  background: transparent; border-right: 2px dashed #fec456 ; z-index: 2; "> </span>
+
+                            <span class="colTitle descargaText" style="width: 100%;  display: flex; align-items: center; justify-content: center;  background: white;  border-bottom: 3px  solid #c2c2c2;  z-index: 2;">
+                    <h1 class="title"  style=" padding-left: 10px;   " >{{general.getText( { es : 'Lecturas', en : 'Readings' } )}}</h1>
+                    <span style="margin-right: 10px; margin-left: 10px; " > <img src="assets/icons/eye-regular-dark.svg" style="width: 18px; " ></span>
+                            </span>
+                            <span *ngFor="let event of admin.reportsDaily.data; index as i " [style.background]=" i % 2 == 0 ? 'white' : '#f2f2f2' " style=" z-index: 1; width: 100%; background:#f2f2f2; display: flex; justify-content: center; align-items: center;  height: 60px; margin-top: 20px;">
+                    <h1 class="event" style="font-weight: 300;" >{{event.total}}</h1>
+                </span>
+                        </div>
+                        <div id="por" style="flex: 1;  display: flex; align-items: center; position: relative;  flex-direction: column; ">
+
+                            <span style="position: absolute; width: 100%; height: 100%; background: transparent;  z-index: 2; "> </span>
+
+                            <span class="colTitle" style="width: 100%;  display: flex; align-items: center;  background: white;  border-bottom: 3px  solid #c2c2c2;  z-index: 2;">
+                    <h1 class="title"  style=" font-weight:300;white-space: nowrap;" >{{general.getText( { en : 'Uploaded by', es : 'Subido por' } )}}</h1>
+                
+                </span>
+                            <span *ngFor="let event of admin.reportsDaily.data; index as i " [style.background]=" i % 2 == 0 ? 'white' : '#f2f2f2' " style=" padding-left: 5px;  z-index: 2;width: 100%; background:#f2f2f2; display: flex; align-items: center;  height: 60px; margin-top: 20px;">
+                    <h1 class="event" style="font-weight: 300;" >{{event.related.uploaded_by.name}}</h1>
+                </span>
+
+                        </div>
+                        <div id="por" style="flex: 1;  display: flex; align-items: center; position: relative;  flex-direction: column; ">
+                            <span style="position: absolute; width: 100%; height: 100%; background: transparent;  z-index: 2; "> </span>
+                            <span class="colTitle" style="width: 100%;  display: flex; align-items: center; justify-content: center;  background: white;  border-bottom: 3px  solid #c2c2c2;  z-index: 2;">
+                    <h1 class="title"  style=" font-weight:300;white-space: nowrap;" >{{general.getText( { en : 'Status', es : 'Estado' } )}}</h1>
+                </span>
+                            <span *ngFor="let event of admin.reportsDaily.data; index as i " [style.background]=" i % 2 == 0 ? 'white' : '#f2f2f2' " style="justify-content: center; padding-left: 5px;  z-index: 2;width: 100%; background:#f2f2f2; display: flex; align-items: center;  height: 60px; margin-top: 20px;">
+                    <h1 *ngIf="!event.related.deleted_at" class="event" style="font-weight: 300;" > {{general.getText({ es : "Activo", en : "Active"})}}</h1>
+                    <h1 *ngIf="event.related.deleted_at" class="event" style="font-weight: 300;" > {{general.getText({ es : "Inactivo", en : "Inactive"})}}</h1>
+                </span>
+
+                        </div>
+                        <div style="flex: 1;  display: flex; flex-direction: column; ">
+                            <span class="colTitle descargaText" style="width: 100%; justify-content: center;  display: flex; align-items: center;  border-bottom: 3px  solid #c2c2c2; ">
+                    <h1 class="title" style=" padding-left: 10px; padding-right: 10px;  " >{{general.getText( { en : 'Report', es : 'Informe' } )}}</h1>
+                    <img id="infoads" src="assets/icons/analytics-outline-dark.svg" >
+                </span>
+                            <span *ngFor="let report of admin.reportsDaily.data; index as i " [style.background]=" i % 2 == 0 ? 'white' : '#f2f2f2' " style=" z-index: 2; padding:10px; width: 100%; height: 60px;background:#f2f2f2 ;  display: flex; align-items: center;  justify-content: center;   margin-top: 20px;">
+                    <button   pButton pRipple type="button"  (click)="ir(report)"  class="p-button-rounded p-button-success btn" style="  font-weight: 900; color: white;  background: #28ba9b; border: none ;  "> 
+                        <span style="margin-right: 10px; " > <img src="assets/icons/analytics-outline.svg" style="width: 17px; " ></span>
+                            <p style="padding: 0; margin: 0; margin-right: 10px;"> {{general.getText( { en : 'Report', es : 'Informe' } )}}</p>
+                            </button>
+                            </span>
+
+                        </div>
+
+                        <div style="flex: 1;  display: flex; flex-direction: column; ">
+                            <span *ngIf="tipo.code !== 'announcement'" class="colTitle descargaText" style="width: 100%; justify-content: center;  display: flex; align-items: center;  border-bottom: 3px  solid #c2c2c2; ">
+                    <h1  class="title" style=" padding-left: 10px; padding-right: 10px;  " > {{general.getText( { en : 'Download', es : 'Descargar' } )}}</h1>
+                    <i class="event" style="font-weight: 300;"  style=" padding:10px" class="pi pi-download" ></i>
+                </span>
+                            <span *ngIf="tipo.code == 'announcement'" class="colTitle descargaText" style="width: 100%; justify-content: center;  display: flex; align-items: center;  border-bottom: 3px  solid #c2c2c2; ">
+                    <h1  class="title" style=" padding-left: 10px; padding-right: 10px;  " >  {{general.getText( { en : 'Edit', es : 'Editar' } )}}</h1>
+                    <i class="event" style="font-weight: 300;"  style=" padding:10px" class="pi pi-pencil" ></i>
+                </span>
+                            <ng-container *ngIf="tipo.code !== 'announcement'">
+                                <span *ngFor="let report of admin.reportsDaily.data; index as i " [style.background]=" i % 2 == 0 ? 'white' : '#f2f2f2' " style=" padding:10px; padding-left: 0px; width: 100%; height: 60px;background:#f2f2f2 ;  display: flex; align-items: center;  justify-content: center;  border-radius: 0px 30px 30px 0px / 0% 50% 50% 0%; margin-top: 20px;">
+                            <button   pButton pRipple type="button"  (click)="  descargar(report.related.url, report.related.title) "  class="p-button-rounded p-button-success btn btnRaro" style="  font-weight: 900; color: #28ba9b; background: transparent; border: none ;  "> 
+                                <span style="margin-right: 10px;" ><i class="pi pi-download" ></i></span>
+                                <p style="padding: 0; margin: 0; margin-right: 10px;"> {{general.getText( { en : 'Download', es : 'Descargar' } )}}</p>
+                                </button>
+                                </span>
+                            </ng-container>
+                            <ng-container *ngIf="tipo.code == 'announcement'">
+                                <span *ngFor="let report of admin.reportsDaily.data; index as i " [style.background]=" i % 2 == 0 ? 'white' : '#f2f2f2' " style=" padding:10px; padding-left: 0px; width: 100%; height: 60px;background:#f2f2f2 ;  display: flex; align-items: center;  justify-content: center;  border-radius: 0px 30px 30px 0px / 0% 50% 50% 0%; margin-top: 20px;">
+                            <button   pButton pRipple type="button"  [routerLink]="'/admin/news/' + report.related.id" class="p-button-rounded p-button-success btn btnRaro" style="  font-weight: 900; color: #28ba9b; background: transparent; border: none ;  "> 
+                                <span style="margin-right: 10px;" ><i class="pi pi-pencil" ></i></span>
+                                <p style="padding: 0; margin: 0; margin-right: 10px;"> {{general.getText( { en : 'Edit', es : 'Editar' } )}}</p>
+                                </button>
+                                </span>
+                            </ng-container>
+                        </div>
+
+
+                    </div>
+                    <div *ngIf=" admin.reportsDaily.data.length == 0" style="height: 300px; display: flex; justify-content: center; align-items: center;">
+                        <p>No Data</p>
+                    </div>
+                </ng-container>
+                <div *ngIf=" !admin.reportsDaily" style="height: 300px; display: flex; justify-content: center; align-items: center;">
+                    <p>No Data</p>
+                </div>
+
+
+                <div class="paginacion" style=" margin-top: 20px;  border-radius: 20px / 50% ;  background: #28ba9b; height: 40px; display: flex; justify-content: center; overflow: hidden;   ">
+                    <ng-container *ngIf=" admin.reportsDaily">
+                        <ng-container *ngFor="let pagina of  admin.reportsDaily.meta.links ; index as i ">
+                            <a class="ripple" *ngIf="i == 0 " (click)="admin.getReportDaily(pagina.url, true)" style=" flex: 1; min-width: 20px; color: white;   padding: 5px; text-decoration: none; display: flex; justify-content: center; align-items: center; ">
+                                <img src="assets/icons/chevron-back-outline.svg" class="flecha" alt="">
+                            </a>
+                            <a class="ripple" *ngIf="i > 0  && i < (  admin.reportsDaily.meta.links.length - 1) " (click)="admin.getReportDaily(pagina.url, true)" [ngClass]=" { 'ripple' : true , 'paginaselect' : pagina.active ? true : false } " style=" min-width: 20px; flex: 1;  color: white; padding: 5px; text-decoration: none; display: flex; justify-content: center; align-items: center; ">
+                                <p class="paginationText">
+                                    {{pagina.label}}
+                                </p>
+                            </a>
+
+                            <a class="ripple" *ngIf=" i ==  (  admin.reportsDaily.meta.links.length - 1 ) " (click)="admin.getReportDaily(pagina.url, true)" style="  flex: 1; min-width: 20px; color: white; padding: 5px; text-decoration: none; display: flex; justify-content: center; align-items: center; ">
+                                <img src="assets/icons/chevron-forward-outline.svg" class="flecha" alt="">
+                            </a>
+                        </ng-container>
+                    </ng-container>
+                </div>
+
+
+                <div style="width:100%;height:180px;">
+                </div>
+            </div>
+        </ng-container>
+        <ng-container *ngIf="tipo.code == 'users'">
+
+            <div style="height: 350px; margin-bottom: 120px; display: flex; justify-content: center; align-items: center;width: 100%;" *ngIf="admin.buscandoUsersReports">
+                <p-progressSpinner></p-progressSpinner>
+            </div>
+
+            <div style="display: flex; max-height: 35px; flex: 1; margin-bottom: 20px; justify-content: space-between; min-width: 350px; margin-top: 10px; padding: 0px 8px 0px 5px;">
+                <span class="p-input-icon-left custom" style=" flex:1;">
+                    <i class="pi pi-search"></i>
+                    <input type="text"  [style]="{'width':'100%'}"  pInputText [(ngModel)]="userSearch" placeholder=" {{general.getText( { en : 'Search', es : 'Buscar' } )}}">         
+                </span>
+                <button pButton pRipple type="button" (click)="setFilter() " class="p-button-rounded p-button-success  " style="  font-weight: 900; color: white; border: none ; margin-left: 20px; background: #fec456;"> 
+                    <p style="padding: 0; padding-left: 10px; margin: 0; margin-right: 10px;"> {{general.getText( { en : 'Search', es : 'Buscar' } )}}</p>
+                </button>
+            </div>
+            <div *ngIf="!admin.buscandoUsersReports" style="width: 100%  ">
+                <ng-container *ngIf="admin.usersReports">
+                    <div *ngIf=" admin.usersReports.data.length > 0" style=" width: 100%; display: flex; justify-content: center; ">
+                        <div style="flex: 1;  display: flex; flex-direction: column; ">
+                            <span class="colTitle" style=" width: 100% !important;  display: flex; align-items: center; border-bottom: 3px  solid #c2c2c2;">
+                        <h1 class="title"  >{{general.getText( { es : 'ID', en : 'ID' } )}}</h1>
+                    </span>
+                            <span *ngFor="let data of admin.usersReports.data; index as i " [style.background]=" i % 2 == 0 ? 'white' : '#f2f2f2' " style=" padding: 5px; width: 100% !important;  background:#f2f2f2; height: 60px; display: flex; align-items: center; margin-top: 20px;  border-radius: 30px 0px 0px 30px / 50% 0px 0px 50%; ">
+                    <h1 class="event" style="font-weight: 300;">{{data.id}} </h1>
+                </span>
+                        </div>
+
+
+                        <div style="flex: 2;  display: flex; align-items: center; position: relative;  flex-direction: column; ">
+
+                            <span style="position: absolute; width: 100%; height: 100%;  border-left: 2px dashed #fec456 ; background: transparent;  z-index: 2; "> </span>
+
+                            <span class="colTitle" style="width: 100%;  display: flex; align-items: center;  background: white;  border-bottom: 3px  solid #c2c2c2;  z-index: 2;">
+                    <h1 class="title" style=" font-weight:300;white-space: nowrap;"  >{{general.getText( { en : 'Name', es : 'Nombre' } )}}</h1>
+                </span>
+                            <span *ngFor="let event of admin.usersReports.data; index as i " [style.background]=" i % 2 == 0 ? 'white' : '#f2f2f2' " style=" z-index: 1; padding-left: 5px; width: 100%; background:#f2f2f2; display: flex; align-items: center;  height: 60px; margin-top: 20px;">
+                    <h1 class="event" style="font-weight: 300;" >{{event.name}}</h1>
+                </span>
+                        </div>
+
+                        <div style="flex: 2;  display: flex; align-items: center; position: relative;  flex-direction: column; ">
+
+                            <span style="position: absolute; width: 100%; height: 100%;  background: transparent; border-right: 2px dashed #fec456 ; z-index: 2; "> </span>
+
+                            <span class="colTitle " style="width: 100%;  display: flex; align-items: center; justify-content: center;  background: white;  border-bottom: 3px  solid #c2c2c2;  z-index: 2;">
+                    <h1 class="title"  style=" padding-left: 10px;   " >{{general.getText( { es : 'Rol', en : 'Role' } )}}</h1>
+
+                            </span>
+                            <span *ngFor="let event of admin.usersReports.data; index as i " [style.background]=" i % 2 == 0 ? 'white' : '#f2f2f2' " style=" z-index: 1; width: 100%; background:#f2f2f2; display: flex; justify-content: center; align-items: center;  height: 60px; margin-top: 20px;">
+                    <h1 class="event" style="font-weight: 300;" >{{event.roles[0]}}</h1>
+                </span>
+                        </div>
+                        <div id="por" style="flex: 1;  display: flex; align-items: center; position: relative;  flex-direction: column; ">
+
+                            <span style="position: absolute; width: 100%; height: 100%; background: transparent;  z-index: 2; "> </span>
+
+                            <span class="colTitle" style="width: 100%;  display: flex; align-items: center;  background: white;  border-bottom: 3px  solid #c2c2c2;  z-index: 2;">
+                    <h1 class="title"  style=" font-weight:300;white-space: nowrap;" >{{general.getText( { en : 'Email', es : 'Correo' } )}}</h1>
+                
+                </span>
+                            <span *ngFor="let event of admin.usersReports.data; index as i " [style.background]=" i % 2 == 0 ? 'white' : '#f2f2f2' " style=" padding-left: 5px;  z-index: 2;width: 100%; background:#f2f2f2; display: flex; align-items: center;  height: 60px; margin-top: 20px;">
+                    <h1 class="event" style="font-weight: 300;" >{{event.email}}</h1>
+                </span>
+
+                        </div>
+                        <div id="por" style="flex: 1;  display: flex; align-items: center; position: relative;  flex-direction: column; ">
+                            <span style="position: absolute; width: 100%; height: 100%; background: transparent;  z-index: 2; "> </span>
+                            <span class="colTitle" style="width: 100%;  display: flex; align-items: center; justify-content: center;  background: white;  border-bottom: 3px  solid #c2c2c2;  z-index: 2;">
+                    <h1 class="title"  style=" font-weight:300;white-space: nowrap;" >{{general.getText( { en : 'Status', es : 'Estado' } )}}</h1>
+                </span>
+                            <span *ngFor="let event of admin.usersReports.data; index as i " [style.background]=" i % 2 == 0 ? 'white' : '#f2f2f2' " style="justify-content: center; padding-left: 5px;  z-index: 2;width: 100%; background:#f2f2f2; display: flex; align-items: center;  height: 60px; margin-top: 20px;">
+                    <h1 *ngIf="!event.suspended_at" class="event" style="font-weight: 300;" > {{general.getText({ es : "Activo", en : "Active"})}}</h1>
+                    <h1 *ngIf="event.suspended_at" class="event" style="font-weight: 300;" > {{general.getText({ es : "Inactivo", en : "Inactive"})}}</h1>
+                </span>
+
+                        </div>
+                        <div style="flex: 1;  display: flex; flex-direction: column; ">
+                            <span class="colTitle descargaText" style="width: 100%; justify-content: center;  display: flex; align-items: center;  border-bottom: 3px  solid #c2c2c2; ">
+                    <h1 class="title" style=" padding-left: 10px; padding-right: 10px;  " >{{general.getText( { en : 'Report', es : 'Informe' } )}}</h1>
+                    <img id="infoads" src="assets/icons/analytics-outline-dark.svg" >
+                </span>
+                            <span *ngFor="let report of admin.usersReports.data; index as i " [style.background]=" i % 2 == 0 ? 'white' : '#f2f2f2' " style=" z-index: 2; padding:10px; width: 100%; height: 60px;background:#f2f2f2 ;  display: flex; align-items: center;  justify-content: center;   margin-top: 20px;   border-radius: 0px 30px 30px 0px / 0% 50% 50% 0%; margin-top: 20px;">
+                    <button   pButton pRipple type="button"  (click)="userSet(report)"  class="p-button-rounded p-button-success btn" style="  font-weight: 900; color: white;  background: #28ba9b; border: none ;  "> 
+                        <span style="margin-right: 10px; " > <img src="assets/icons/analytics-outline.svg" style="width: 17px; " ></span>
+                            <p style="padding: 0; margin: 0; margin-right: 10px;"> {{general.getText( { en : 'Report', es : 'Informe' } )}}</p>
+                            </button>
+                            </span>
+
+                        </div>
+
+                    </div>
+                    <div *ngIf=" admin.usersReports.data.length == 0" style="height: 300px; display: flex; justify-content: center; align-items: center;">
+                        <p>No Data</p>
+                    </div>
+                </ng-container>
+                <div *ngIf=" !admin.usersReports " style="height: 300px; display: flex; justify-content: center; align-items: center;">
+                    <p>No Data</p>
+                </div>
+
+
+                <div class="paginacion" style=" margin-top: 20px;  border-radius: 20px / 50% ;  background: #28ba9b; height: 40px; display: flex; justify-content: center; overflow: hidden;   ">
+                    <ng-container *ngIf=" admin.usersReports">
+                        <ng-container *ngFor="let pagina of  admin.usersReports.meta.links ; index as i ">
+                            <a class="ripple" *ngIf="i == 0 " (click)="admin.getUsersReports(pagina.url, true)" style=" flex: 1; min-width: 20px; color: white;   padding: 5px; text-decoration: none; display: flex; justify-content: center; align-items: center; ">
+                                <img src="assets/icons/chevron-back-outline.svg" class="flecha" alt="">
+                            </a>
+                            <a class="ripple" *ngIf="i > 0  && i < (  admin.usersReports.meta.links.length - 1) " (click)="admin.getUsersReports(pagina.url, true)" [ngClass]=" { 'ripple' : true , 'paginaselect' : pagina.active ? true : false } " style=" min-width: 20px; flex: 1;  color: white; padding: 5px; text-decoration: none; display: flex; justify-content: center; align-items: center; ">
+                                <p class="paginationText">
+                                    {{pagina.label}}
+                                </p>
+                            </a>
+
+                            <a class="ripple" *ngIf=" i ==  (  admin.usersReports.meta.links.length - 1 ) " (click)="admin.getUsersReports(pagina.url, true)" style="  flex: 1; min-width: 20px; color: white; padding: 5px; text-decoration: none; display: flex; justify-content: center; align-items: center; ">
+                                <img src="assets/icons/chevron-forward-outline.svg" class="flecha" alt="">
+                            </a>
+                        </ng-container>
+                    </ng-container>
+                </div>
+
+
+                <div style="width:100%;height:180px;">
+                </div>
+            </div>
+
+        </ng-container>
+    </div>
+    <div *ngIf="selectedUser" style="width: 80%; max-width: 1100px; display: flex;  align-items: center; justify-content: center;  flex-direction: column;">
+        <br>
+        <button pButton pRipple type="button " (click)="selectedUser = undefined" class="p-button-rounded p-button-success " style="margin-bottom: 20px; border: 3px solid #aaaaaa; margin-top: 10px; margin-right: 25px; height: 45px; padding-left: 20px; padding-right: 20px;
+                        font-weight: 900; color: #aaaaaa; background: transparent; text-align: center; display: flex; justify-content: center; ">
+            {{general.getText({ es : "Cerrar ", en:"Close"})}}
+        </button>
+        <app-user-report [user]="selectedUser" style=" width: 100%;"></app-user-report>
+    </div>
+
+    <div *ngIf="selectReport" style="width: 80%; max-width: 1100px; display: flex;  align-items: center; justify-content: center;  flex-direction: column;">
+        <br>
+        <button pButton pRipple type="button " (click)="selectReport = undefined" class="p-button-rounded p-button-success " style="margin-bottom: 20px; border: 3px solid #aaaaaa; margin-top: 10px; margin-right: 25px; height: 45px; padding-left: 20px; padding-right: 20px;
+                        font-weight: 900; color: #aaaaaa; background: transparent; text-align: center; display: flex; justify-content: center; ">
+            {{general.getText({ es : "Cerrar ", en:"Close"})}}
+        </button>
+        <app-informe [informe]="selectReport" style=" width: 100%;"></app-informe>
+    </div>

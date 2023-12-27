@@ -1,0 +1,115 @@
+<div class="tarjeta2" style="width: 100%!important;">
+    <div style="width: 100%; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;  ">
+        <div style="display: flex; flex-direction: column;  justify-content: center;">
+            <div style="display: flex; flex-wrap: wrap; align-items: center; margin-right: 30px; ">
+                <h4 style=" font-weight: bolder;  font-size:x-large; text-transform: capitalize; "> {{general.getText({ es : "Editar corporativo", en : "Edit corporate"})}}
+                </h4>
+            </div>
+        </div>
+        <span class="custom" style="flex: 1;margin:5px; flex: 2; margin-top: 10px ;   border: 1px solid #ced4da; border-radius: 3px;">
+      
+     </span>
+    </div>
+    <div style="display: flex; width: 100%; flex-wrap: wrap; margin-bottom: 20px;">
+        <button pButton pRipple type="button " (click)="tab = 0;" class="p-button-rounded p-button-success " style=" margin-left: 20px;  border: 3px solid #aaaaaa; margin-top: 10px;  height: 45px; padding-left: 20px; padding-right: 20px;
+                        font-weight: 900; color: #aaaaaa; background: transparent; text-align: center; display: flex; justify-content: center; ">
+        {{general.getText({ es : "Detalle del reporte ", en:"Report detail"})}}
+        </button>
+        <button pButton pRipple type="button " (click)="tab = 1;" class="p-button-rounded p-button-success " style=" margin-left: 20px; border: 3px solid #aaaaaa; margin-top: 10px;  height: 45px; padding-left: 20px; padding-right: 20px;
+                            font-weight: 900; color: #aaaaaa; background: transparent; text-align: center; display: flex; justify-content: center; ">
+            {{general.getText({ es : "Información adicional", en:"Additional Information"})}}
+        </button>
+    </div>
+    <form [formGroup]="nuevoForm" style="width: 100%;" *ngIf="tab == 0 ">
+
+
+        <div style="display: flex; width: 100%;">
+            <div class="inputbox " style="justify-content: space-between; ">
+                <h5 style="flex: 1; ">{{general.getText({ es : "Nombre", en:"Name"})}}
+                </h5>
+                <input class="inputcorreo" style="flex: 2;" type="text" formControlName="person_name" [placeholder]="general.getText({ es : '*Nombre', en:'*Name'})">
+            </div>
+        </div>
+        <div style="display: flex; width: 100%;">
+            <div class="inputbox " style="justify-content: space-between; ">
+                <h5 style="flex: 1; "> {{general.getText({ es : "Puesto", en:"Position"})}}
+                </h5>
+                <input class="inputcorreo" style="flex: 2;" type="text" formControlName="job" [placeholder]="general.getText({ es : '*Puesto', en:'*Position'})">
+            </div>
+        </div>
+        <div style="display: flex; width: 100%;">
+            <div class="inputbox " style="justify-content: space-between; ">
+                <h5 style="flex: 1; ">{{general.getText({ es : "Pais", en:"Country"})}}
+                </h5>
+                <input class="inputcorreo" style="flex: 2;" type="text" formControlName="country" [placeholder]="general.getText({ es : '*Pais', en:'*Country'})">
+            </div>
+        </div>
+        <div style="display: flex; width: 100%;">
+            <div class="inputbox " style="justify-content: space-between; ">
+                <h5 style="flex: 1; ">{{general.getText({ es : "vídeo id", en:"video id"})}}
+                </h5>
+                <input class="inputcorreo" id="url" style="flex: 2;" type="text" formControlName="url" placeholder="*a6ptOkLG5Zo">
+
+                <span (click)="reload()" style=" cursor: pointer; color: white; padding: 10px; font-weight: bold; font-size: 15px;  background: #28ba9b; border-radius:50%; width:30px ; height:30px; display: flex; justify-content: center; align-items: center; ">
+                <i class="pi pi-reply" style="font-size: 15px;"></i>
+            </span>
+            </div>
+        </div>
+
+        <div *ngIf="!load" style="display: flex; border-radius: 5px; justify-content: center; position: relative;  padding-bottom: 40.25%;height: 0;overflow: hidden;width: 100%; margin-bottom: 20px;">
+            <iframe width="100%" height="100%" (errro)="errorFrame()" style=" background-color:#f2f2f2;  border: 3px solid white; max-width: 900px; max-height: 400px; top:0 ; bottom:0; position: absolute; z-index: 11111;" [src]="videoselect | safe" title="YouTube video player"
+                frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+    </form>
+    <div style="width: 100%;" *ngIf="tab == 1">
+        <div style="display: flex; width: 100%;">
+            <div class="inputbox " style="justify-content: space-between; ">
+                <h5 style="flex: 1; ">{{general.getText({ es : "subido por", en:"Uploaded by"})}}
+                </h5>
+                <div style="flex: 2;">
+                    <div style="display: flex; width: 100%; justify-content: space-between;">
+                        <p>{{general.getText({es:"Nombre",en:"Name"})}}:</p>
+                        <p>{{informacion.uploaded_by.name}}</p>
+                    </div>
+                    <div style="display: flex; width: 100%; justify-content: space-between;">
+                        <p>{{general.getText({es:"Correo",en:"Email"})}}:</p>
+                        <p>{{informacion.uploaded_by.email}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="inputbox " style="justify-content: space-between; ">
+            <h5 style="flex: 1; ">{{general.getText({ es : "Tocado por última vez por", en:"Last touched by"})}}
+            </h5>
+            <div style="flex: 2;">
+                <div style="display: flex; width: 100%; justify-content: space-between;">
+                    <p>{{general.getText({es:"Nombre",en:"Name"})}}:</p>
+                    <p *ngIf="informacion.last_touched_by">{{informacion.last_touched_by.name}}</p>
+                    <p *ngIf="!informacion.last_touched_by"> -- </p>
+                </div>
+                <div style="display: flex; width: 100%; justify-content: space-between;">
+                    <p>{{general.getText({es:"Correo",en:"Email"})}}:</p>
+                    <p *ngIf="informacion.last_touched_by">{{informacion.last_touched_by.email}}</p>
+                    <p *ngIf="!informacion.last_touched_by"> -- </p>
+                </div>
+            </div>
+        </div>
+        <div style="display: flex; width: 100%;">
+            <div class="inputbox " style="justify-content: space-between; ">
+                <h5 style="flex: 1; ">{{general.getText({ es : "Creado el", en:"Created at"})}}
+                </h5>
+                <div style="flex: 2; justify-content: flex-end; display: flex;">
+                    <p> {{general.getFecha(informacion.created_at)}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div style="margin-top: 20px; margin-bottom: 20px; display: flex; justify-content: flex-end; width: 100%;  ">
+
+    <button (click)="guardar()" pButton pRipple type="button " class="p-button-rounded p-button-success " style=" margin-top: 10px; margin-right: 25px; height: 45px; padding-left: 20px; padding-right: 20px; font-weight: 900; color: white; border:
+                none ;  background: #28ba9b; text-align: center; display: flex; justify-content: center; ">
+        {{general.getText({ es : "Guardar Cambios ", en:"Save Changes"})}}
+    </button>
+
+</div>

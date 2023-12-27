@@ -1,0 +1,161 @@
+@import "../../../themes/_colors.sass"
+.centro
+    z-index: 2
+    width: 120%!important
+    color: $dark-bg
+    border-radius: 50%/150px 150px 0 0
+.container
+    align-items: center
+    justify-content: flex-end
+    width: 100%
+    flex-direction: column
+    padding-bottom: 120px
+.content
+    position: relative
+    background: radial-gradient(circle,rgba(255, 204, 102, 1) 0%,rgba(255, 197, 84, 1) 100%)
+    background-position-x: center
+    padding-bottom: 12%
+    background-position-y: bottom
+    background-size: contain
+    background-repeat: no-repeat
+    max-height: 700px
+    width: 85%
+    display: flex
+    flex-direction: column
+    align-items: center
+    .buttons
+        display: flex
+        justify-content: center
+        width: 90%
+        max-width: 900px
+        padding: 20px
+        flex-wrap: wrap
+        button
+            padding: 10px 20px 10px 20px
+            margin: 10px
+            font-weight: 900
+            color: #1d1d1d
+            border: none
+            background: wheat
+            text-align: center
+            display: flex
+            justify-content: center
+    .img-container
+        position: absolute
+        z-index: 222222
+        bottom: 0
+        display: flex
+        width: 100%
+        justify-content: center
+        align-items: center
+        div
+            border-radius: 53% 47% 47% 53% / 40% 55% 45% 60%
+            z-index: 11000
+            position: absolute
+            width: 20%
+            max-width: 120px
+            padding: 20px
+            overflow: hidden
+            background: white
+            img
+                width: 75%
+
+
+.megaTitle
+    font-size: xxx-large
+    font-weight: bolder
+    color: #1D1D1D
+    
+    margin-bottom: 10px
+.megaText
+    font-family: 'Gotham', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+    font-size: x-large
+    font-weight: 300
+    color: #1D1D1D
+    
+.event
+    font-size: 20px
+    margin-left: 20px
+    font-weight: 300
+    .barrita
+        width: 100%
+        height: 5px
+        border-radius: 3px / 2px
+    &:hover
+        .barrita2
+            background: $dark-orange
+
+.compliance
+    display: flex
+    max-width: 900px
+    width: 90%
+    .body
+        flex: 1
+        max-width: 90%
+        display: flex
+        flex-direction: column
+        align-items: center
+        margin-top: 2rem
+        margin-left: auto
+        margin-right: auto
+        .body-content
+            display: flex
+            width: 90%
+            flex-wrap: wrap
+            justify-content: space-between
+            align-items: center
+            margin-right: 20px
+            margin-left: 20px
+            padding-left: 20px
+            padding-right: 20px
+            a
+                text-decoration: none
+                width: 140px !important
+                height: 35px
+                width: 90%
+                font-weight: 900
+                color: white
+                border: none
+                background: #28ba9b
+                p
+                    padding: 0
+                    padding-left: 10px
+                    margin: 0
+                    margin-right: 10px
+  
+.tarjeta2
+    min-width: 300px
+    display: flex
+    flex: 1
+    margin: 20px
+    max-width: 700px
+    flex-direction: column
+    justify-content: space-between
+    align-items: center
+    min-height: 250px
+    background: white
+    border-radius: 20px
+    padding: 20px
+    .body-tarjeta2
+        width: 90%
+        margin-bottom: 1rem
+    img
+        width: 100%
+        
+
+@media screen and ( max-width: 1000px)
+    .megaTitle
+        font-size: xx-large
+    .megaText
+        font-size: large
+@media screen and ( max-width: 700px  )
+    #custom
+        font-size: x-large
+    .circulos
+        display: none
+    .compliance
+        flex-direction: column
+        align-items: center
+@media screen and ( max-width: 600px  )
+    .centro
+        border-radius: 50%/ 50px 50px 0 0

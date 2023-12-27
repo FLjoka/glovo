@@ -1,0 +1,116 @@
+@import "../../../themes/_colors.sass"
+
+.center
+    width: 100%
+
+.centro
+    z-index: 2
+    color: $dark-bg
+    border-radius: 50%/150px 150px 0 0
+    position: relative
+    padding-bottom: 12%
+    background-position-y: bottom
+    background-size: cover
+    background-repeat: no-repeat
+    width: 120% !important
+    display: flex
+    flex-direction: column
+    align-items: center
+
+.svg
+    width: 100%
+    bottom: 0
+    z-index: -1
+    position: absolute
+    margin-bottom: -1px
+    
+.container-video
+    width: 72%
+    max-width: 1100px
+    padding-left: 7px
+    padding-right: 7px
+    display: flex
+    justify-content: center
+    iframe
+        background-color: #f2f2f2
+        border: 3px solid white
+        max-width: 900px
+        max-height: 400px
+        top: 0
+        bottom: 0
+        position: absolute
+        z-index: 11111
+    
+.content
+    margin-top: 3rem
+    width: 60%
+    max-width: 912px
+    display: flex
+    flex-wrap: wrap
+    padding: 0px
+    justify-content: space-between
+
+.card-container
+    display: flex
+    position: relative
+    flex-wrap: wrap
+    width: 100%
+    max-width: 1200px
+    margin-top: 1rem
+    div
+        flex: 1
+        min-width: 200px
+        text-align: center
+        padding: 1rem 2rem
+
+.megaTitle
+    font-size: xxx-large
+    font-weight: bolder
+    color: #1D1D1D
+    margin-bottom: 10px
+.megaText
+    font-family: 'Gotham', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+    font-size: x-large
+    font-weight: 300
+    color: #1D1D1D
+.grande
+    display: flex
+    justify-content: center
+    position: relative
+    padding-bottom: 35.25%
+    height: 0
+    overflow: hidden
+    width: 100%
+    max-height: 420px!important
+    max-width: 900px!important
+    margin-bottom: 10px
+.fondo
+    z-index: -1
+    position: absolute
+    background: rgb(255,204,102)
+    background: radial-gradient(circle, rgba(255,204,102,1) 0%, rgba(255,197,84,1) 100%)
+    width: 100%
+    height: 100%
+    max-height: 500px
+
+@media screen and ( max-width: 1000px)
+    .fondo
+        max-height: 350px
+    .grande
+        padding-bottom: 45.25%
+    .megaTitle
+        font-size: xx-large
+    .megaText
+        font-size: large
+@media screen and ( max-width: 700px  )
+    .fondo
+        max-height: 230px
+    #custom
+        font-size: x-large
+    .circulos
+        display: none
+    .grande
+        padding-bottom: 50.25%
+@media screen and ( max-width: 600px  )
+    .centro
+        border-radius: 50%/ 50px 50px 0 0

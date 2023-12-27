@@ -1,0 +1,226 @@
+<div class="container">
+  <div class="content">
+    <h1 class="megaText" style="font-weight: bold">
+      {{ general.getText(data.whistleblowerSettings.title) }}
+    </h1>
+    <div class="barrita"></div>
+    <br />
+    <ng-container
+      *ngIf="
+        typeof(text(general.getText(data.whistleblowerSettings.body))) ==
+        'object'
+      "
+    >
+      <p
+        *ngFor="
+          let text of text(general.getText(data.whistleblowerSettings.body))
+            .parrafos
+        "
+        class="megaText"
+      >
+        {{ text }}
+      </p>
+    </ng-container>
+    <p
+      *ngIf="
+        typeof(text(general.getText(data.whistleblowerSettings.body))) ==
+        'string'
+      "
+      class="megaText"
+    >
+      {{ general.getText(data.whistleblowerSettings.body) }}
+    </p>
+
+    <div *ngIf="general.idioma() === 'es'">
+      <h1 class="subtitle">Procedimiento de gestión</h1>
+      <a
+        pButton
+        href="../../../assets/pdf/WEBSITE VERSION - 2023 05_V3_ENG_Ethics Management Procedure - APPROVED BY BOD (1)-es_es.docx.pdf"
+        target="_blank"
+        pRipple
+        type="button"
+        class="button-style p-button-rounded p-button-success btn p-button-sm"
+      >
+        Descargar
+        <span
+          ><img src="assets/icons/descarga-w.svg" style="width: 17px" alt=""
+        /></span>
+      </a>
+    </div>
+    <br />
+    <hr />
+    <h1 class="subtitle">
+      {{
+        general.getText({
+          es: "¿Quién quieres que reciba tu click?",
+          en: "Who do you want to receive your click?"
+        })
+      }}
+    </h1>
+  </div>
+  <div class="form-content">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1921.51 178.53">
+      <g id="Capa_2" data-name="Capa 2">
+        <g id="Capa_2-2" data-name="Capa 2">
+          <path
+            class="cls-1"
+            d="M1,98.53c26.42-2.89,66.42-7.32,115-13,259.9-30.36,337.21-46.08,461-60,171.22-19.25,299.76-33.7,473-19,205.43,17.43,395.77,69.23,413,74,78.72,21.77,176.08,53.55,318,62a1177.08,1177.08,0,0,0,140,0l-.5,35.5H.5Z"
+          />
+        </g>
+      </g>
+    </svg>
+
+    <div class="cards-container">
+      <div class="card">
+        <div class="head-card">
+          <h1 class="megaText">
+            {{
+              general.getText({ es: "Canal interno", en: "Internal channel" })
+            }}
+          </h1>
+          <div class="barrita"></div>
+        </div>
+        <form [formGroup]="form">
+          <div class="select">
+            <span class="custom">
+              <p-dropdown
+                formControlName="option"
+                autoWidth="false"
+                [style]="{ width: '100%' }"
+                [options]="options"
+                placeholder="Select Option"
+                optionLabel="text"
+              ></p-dropdown>
+            </span>
+          </div>
+
+          <input
+            class="inputW"
+            [placeholder]="this.general.getText({ es: 'Nombre', en: 'Name' })"
+            type="text"
+            formControlName="name"
+          />
+          <br />
+
+          <input
+            class="inputW"
+            [placeholder]="this.general.getText({ es: 'Correo', en: 'Email' })"
+            type="email"
+            formControlName="email"
+          />
+
+          <br />
+          <div class="text-area">
+            <label for="">
+              {{ general.getText({ es: "Texto", en: "Text" }) }}
+              <span>*</span></label
+            >
+            <textarea
+              name=""
+              maxlength="1000"
+              formControlName="text"
+              id=""
+              placeholder="Un texto aquí"
+              class="textarea"
+              rows="10"
+            ></textarea>
+          </div>
+          <br />
+          <div class="document">
+            <label for="">
+              {{ general.getText({ en: "Document", es: "Documento" }) }}
+            </label>
+            <p *ngIf="!loadDoc">{{ docName }}</p>
+            <span *ngIf="loadDoc">
+              <i class="pi pi-spin pi-spinner"></i>
+            </span>
+            <input
+              type="file"
+              id="document"
+              (change)="set($event)"
+              formControlName="document"
+              hidden
+              accept=".pdf,.xls,.xlw,.xlsx,.docx,.dotx,.doc,.dot"
+            />
+            <button
+              pButton
+              (click)="elegir()"
+              pRipple
+              type="button"
+              class="p-button-rounded p-button-success btn p-button-sm"
+            >
+              {{ general.getText({ en: "Select", es: "Elegir" }) }}
+            </button>
+          </div>
+
+          <div class="center send">
+            <button
+              (click)="submit()"
+              pButton
+              pRipple
+              type="button"
+              class="p-button-rounded p-button-success btn"
+            >
+              {{ general.getText({ en: "Submit", es: "Enviar" }) }}
+            </button>
+          </div>
+        </form>
+        <div class="glovo-info">
+          {{
+            general.getText({
+              es: "Glovo Spain Platform, S.L.U. con domicilio en c/ Llull 108, 08005, Barcelona, España, podrá tratar los datos que nos proporcione para realizar investigaciones que determinen si se ha producido un incumplimiento de alguna norma, así como gestionar consultas. Para obtener más información sobre cómo procesamos sus datos y cómo ejercer su derecho de acceso, rectificación, supresión y oposición al tratamiento, consulte nuestra Política de Privacidad ",
+              en: "Glovo Spain Platform, S.L.U. which is located at c/ Llull 108, 08005, Barcelona, Spain may process the data you provide for conducting investigations to determine if a breach of any regulation has occurred and managing consultations. For more information on how we process your data and how to exercise your right of access, rectification, erasure, object to processing, please refer to our Privacy Policy "
+            })
+          }}
+          <a
+            [href]="[
+              general.idioma() === 'es'
+                ? 'https://glovoapp.com/docs/en/legal/privacy/?country=es'
+                : 'https://glovoapp.com/docs/en/legal/privacy/?country=en'
+            ]"
+            >{{
+              general.getText({
+                es: "(enlace)",
+                en: "(link)"
+              })
+            }}</a
+          >
+        </div>
+      </div>
+      <div class="card">
+        <div class="head-card">
+          <h1 class="megaText">
+            {{
+              general.getText({ es: "Canal externo", en: "External channel" })
+            }}
+          </h1>
+          <div class="barrita"></div>
+        </div>
+        <!-- <div style="display: flex; justify-content: center; width: 100%; position: relative;  padding-bottom: 50.25%;height: 0;overflow: hidden;margin-bottom: 5px;"> -->
+        <div class="canal-externo">
+          <img src="assets/icons/corporate/corporate_icon-3.png" alt="" />
+          <p>
+            {{
+              general.getText({
+                es: "Comunícate a través del siguiente enlace.",
+                en: "Get in touch through the following link."
+              })
+            }}
+          </p>
+          <!-- <iframe width="100%" height="100%" [src]="data.whistleblowerSettings.video | safe" style="  background-color:#f2f2f2;  border: 3px solid white; max-width: 900px; max-height: 400px; top:0 ; bottom:0; position: absolute; z-index: 11111;" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
+        </div>
+        <div class="center send">
+          <a
+            target="_blank"
+            href="https://glovo.c-etico.es/?locale=en"
+            class="p-button-rounded p-button-success btn"
+            >{{ general.getText({ en: "Access", es: "Acceder" }) }}</a
+          >
+          <!-- <button routerLink="/login" pButton pRipple type="button" class="p-button-rounded p-button-success btn" style=" padding: 10px 20px 10px 20px ;  font-weight: 900; color: white; border: none ; background: #28ba9b; text-align: center; display: flex; justify-content: center;">  {{general.getText( { en : 'To access', es : 'Acceder' } )}}
+                    </button> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

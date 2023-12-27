@@ -1,0 +1,213 @@
+<div style="display: flex; justify-content: center; flex-direction: column; align-items: center; width: 100%!important;  padding-top: 120px; padding-bottom: 170px;">
+
+    <form [formGroup]="nuevoForm" class="tarjeta2" style="width: 80%; max-width: 1100px;">
+        <div style="width: 100%; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;  ">
+            <div style="display: flex; flex-direction: column;  justify-content: center;">
+                <div style="display: flex; flex-wrap: wrap; align-items: center; margin-right: 30px; ">
+                    <h4 style=" font-weight: bolder;  font-size:x-large;"> {{general.getText({ es : "Configuraciónes para capacitación", en : "Training settings"})}}
+                    </h4>
+                </div>
+            </div>
+            <span class="custom" style="flex: 1;margin:5px; flex: 2; margin-top: 10px ;   border: 1px solid #ced4da; border-radius: 3px;">
+              
+             </span>
+        </div>
+        <div style="display: flex;   width:100%;display: flex; flex-wrap: wrap; ">
+            <button pButton pRipple type="button" (click)="tabVideo = 0" class="p-button-rounded p-button-success " style="margin: 20px; border: 3px solid #aaaaaa; margin-top: 10px;  height: 45px; padding-left: 20px; padding-right: 20px;
+            font-weight: 900; color: #aaaaaa; background: transparent; text-align: center; display: flex; justify-content: center; ">
+            {{general.getText({ es : "Primer video", en:"First video"})}}
+            </button>
+            <button pButton pRipple type="button" (click)="tabVideo = 1" class="p-button-rounded p-button-success " style="margin: 20px; border: 3px solid #aaaaaa; margin-top: 10px;  height: 45px; padding-left: 20px; padding-right: 20px;
+            font-weight: 900; color: #aaaaaa; background: transparent; text-align: center; display: flex; justify-content: center; ">
+            {{general.getText({ es : "Último video", en:"Latest video"})}}
+            </button>
+
+        </div>
+        <div style="width: 100%;" *ngIf="tabVideo == 0">
+            <div style="display: flex; width: 100%;">
+                <div class="inputbox " style="justify-content: space-between; ">
+                    <h5 style="flex: 1; ">* {{ getControlsText("video1")}}
+                    </h5>
+                    <input class="inputcorreo" id="url" style="flex: 2;" type="text" formControlName="video1" placeholder="*a6ptOkLG5Zo">
+
+                    <span (click)="reload()" style=" cursor: pointer; color: white; padding: 10px; font-weight: bold; font-size: 15px;  background: #28ba9b; border-radius:50%; width:30px ; height:30px; display: flex; justify-content: center; align-items: center; ">
+                    <i class="pi pi-reply" style="font-size: 15px;"></i>
+                </span>
+                </div>
+            </div>
+
+            <div *ngIf="!load" style="display: flex; border-radius: 5px; justify-content: center; position: relative;  padding-bottom: 40.25%;height: 0;overflow: hidden;width: 100%; margin-bottom: 20px;">
+                <iframe width="100%" height="100%" (errro)="errorFrame()" style=" background-color:#f2f2f2;  border: 3px solid white; max-width: 1000px; max-height: 400px; top:0 ; bottom:0; position: absolute; z-index: 11111;" [src]="videoselect | safe" title="YouTube video player"
+                    frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+
+
+        </div>
+
+        <div style="width: 100%;" *ngIf="tabVideo == 1">
+            <div style="display: flex; width: 100%;">
+                <div class="inputbox " style="justify-content: space-between; ">
+                    <h5 style="flex: 1; ">* {{ getControlsText("video2")}}
+                    </h5>
+                    <input class="inputcorreo" id="url" style="flex: 2;" type="text" formControlName="video2" placeholder="*a6ptOkLG5Zo">
+
+                    <span (click)="reload2()" style=" cursor: pointer; color: white; padding: 10px; font-weight: bold; font-size: 15px;  background: #28ba9b; border-radius:50%; width:30px ; height:30px; display: flex; justify-content: center; align-items: center; ">
+                    <i class="pi pi-reply" style="font-size: 15px;"></i>
+                </span>
+                </div>
+            </div>
+
+            <div *ngIf="!load" style="display: flex; border-radius: 5px; justify-content: center; position: relative;  padding-bottom: 40.25%;height: 0;overflow: hidden;width: 100%; margin-bottom: 20px;">
+                <iframe width="100%" height="100%" (errro)="errorFrame()" style=" background-color:#f2f2f2;  border: 3px solid white; max-width: 1000px; max-height: 400px; top:0 ; bottom:0; position: absolute; z-index: 11111;" [src]="videoselect2 | safe" title="YouTube video player"
+                    frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        </div>
+        <div style="display: flex; width: 100%;">
+            <div class="inputbox " style="justify-content: space-between; ">
+                <h5 style="flex: 1; "> * {{ getControlsText("headerEs")}}
+                </h5>
+                <input class="inputcorreo" style="flex: 2;" type="text" formControlName="headerEs" [placeholder]="general.getText({ es : '*Titulo', en:'*Title'})">
+            </div>
+        </div>
+        <div style="display: flex; width: 100%;">
+            <div class="inputbox " style="justify-content: space-between; ">
+                <h5 style="flex: 1; "> * {{ getControlsText("headerEn")}}
+                </h5>
+                <input class="inputcorreo" style="flex: 2;" type="text" formControlName="headerEn" [placeholder]="general.getText({ es : '*Titulo', en:'*Title'})">
+            </div>
+        </div>
+        <!---->
+        <div style="display: flex; width: 100%;">
+            <div class="inputbox " style="justify-content: space-between; ">
+                <h5 style="flex: 1; "> * {{ getControlsText("titleEs")}}
+                </h5>
+                <input class="inputcorreo" style="flex: 2;" type="text" formControlName="titleEs" [placeholder]="general.getText({ es : '*Titulo', en:'*Title'})">
+            </div>
+        </div>
+        <div style="display: flex; width: 100%;">
+            <div class="inputbox " style="justify-content: space-between; ">
+                <h5 style="flex: 1; "> * {{ getControlsText("titleEn")}}
+                </h5>
+                <input class="inputcorreo" style="flex: 2;" type="text" formControlName="titleEn" [placeholder]="general.getText({ es : '*Titulo', en:'*Title'})">
+            </div>
+        </div>
+        <div style="display: flex;  width:100%; display: flex; flex-wrap: wrap; ">
+            <button pButton pRipple type="button" (click)="tab = 0" class="p-button-rounded p-button-success " style="margin:20px; border: 3px solid #aaaaaa; margin-top: 10px;  height: 45px; padding-left: 20px; padding-right: 20px;
+            font-weight: 900; color: #aaaaaa; background: transparent; text-align: center; display: flex; justify-content: center; ">
+            {{general.getText({ es : "Primer elemento", en:"First item"})}}
+            </button>
+            <button pButton pRipple type="button" (click)="tab = 1" class="p-button-rounded p-button-success " style="margin:20px; border: 3px solid #aaaaaa; margin-top: 10px;  height: 45px; padding-left: 20px; padding-right: 20px;
+            font-weight: 900; color: #aaaaaa; background: transparent; text-align: center; display: flex; justify-content: center; ">
+            {{general.getText({ es : "Segundo elemento", en:"Second item"})}}
+            </button>
+            <button pButton pRipple type="button" (click)="tab = 2" class="p-button-rounded p-button-success " style="margin:20px; border: 3px solid #aaaaaa; margin-top: 10px;  height: 45px; padding-left: 20px; padding-right: 20px;
+            font-weight: 900; color: #aaaaaa; background: transparent; text-align: center; display: flex; justify-content: center; ">
+            {{general.getText({ es : "Tercer elemento", en:"Third item"})}}
+            </button>
+        </div>
+
+        <div style="width: 100%;" *ngIf="tab == 0">
+            <div style="display: flex; width: 100%;">
+                <div class="inputbox " style="justify-content: space-between; ">
+                    <h5 style="flex: 1; "> * {{ getControlsText("title1Es")}}
+                    </h5>
+                    <input class="inputcorreo" style="flex: 2;" type="text" formControlName="title1Es" [placeholder]="general.getText({ es : '*Titulo', en:'*Title'})">
+                </div>
+            </div>
+            <div style="display: flex; width: 100%;">
+                <div class="inputbox " style="justify-content: space-between; ">
+                    <h5 style="flex: 1; "> * {{ getControlsText("title1En")}}
+                    </h5>
+                    <input class="inputcorreo" style="flex: 2;" type="text" formControlName="title1En" [placeholder]="general.getText({ es : '*Titulo', en:'*Title'})">
+                </div>
+            </div>
+            <div style="display: flex; width: 100%;">
+                <div class="inputbox " style="justify-content: space-between; ">
+                    <h5 style="flex: 1; ">* {{ getControlsText("body1Es")}}
+                    </h5>
+                    <input class="inputcorreo" style="flex: 2;" type="text" formControlName="body1Es" [placeholder]="general.getText({ es : '*Descripción', en:'*Description'})">
+                </div>
+            </div>
+            <div style="display: flex; width: 100%;">
+                <div class="inputbox " style="justify-content: space-between; ">
+                    <h5 style="flex: 1; ">* {{ getControlsText("body1En")}}
+                    </h5>
+                    <input class="inputcorreo" style="flex: 2;" type="text" formControlName="body1En" [placeholder]="general.getText({ es : '*Descripción', en:'*Description'})">
+                </div>
+            </div>
+        </div>
+
+
+        <div style="width: 100%;" *ngIf="tab == 1">
+            <div style="display: flex; width: 100%;">
+                <div class="inputbox " style="justify-content: space-between; ">
+                    <h5 style="flex: 1; ">* {{ getControlsText("title2Es")}}
+                    </h5>
+                    <input class="inputcorreo" style="flex: 2;" type="text" formControlName="title2Es" [placeholder]="general.getText({ es : '*Titulo', en:'*Title'})">
+                </div>
+            </div>
+
+            <div style="display: flex; width: 100%;">
+                <div class="inputbox " style="justify-content: space-between; ">
+                    <h5 style="flex: 1; ">* {{ getControlsText("title2En")}}
+                    </h5>
+                    <input class="inputcorreo" style="flex: 2;" type="text" formControlName="title2En" [placeholder]="general.getText({ es : '*Titulo', en:'*Title'})">
+                </div>
+            </div>
+            <div style="display: flex; width: 100%;">
+                <div class="inputbox " style="justify-content: space-between; ">
+                    <h5 style="flex: 1; ">* {{ getControlsText("body2Es")}}
+                    </h5>
+                    <input class="inputcorreo" style="flex: 2;" type="text" formControlName="body2Es" [placeholder]="general.getText({ es : '*Descripción', en:'*Description'})">
+                </div>
+            </div>
+            <div style="display: flex; width: 100%;">
+                <div class="inputbox " style="justify-content: space-between; ">
+                    <h5 style="flex: 1; ">* {{ getControlsText("body2En")}}
+                    </h5>
+                    <input class="inputcorreo" style="flex: 2;" type="text" formControlName="body2En" [placeholder]="general.getText({ es : '*Descripción', en:'*Description'})">
+                </div>
+            </div>
+        </div>
+        <div style="width: 100%;" *ngIf="tab == 2">
+            <div style="display: flex; width: 100%;">
+                <div class="inputbox " style="justify-content: space-between; ">
+                    <h5 style="flex: 1; ">* {{ getControlsText("title3Es")}}
+                    </h5>
+                    <input class="inputcorreo" style="flex: 2;" type="text" formControlName="title3Es" [placeholder]="general.getText({ es : '*Titulo', en:'*Title'})">
+                </div>
+            </div>
+
+            <div style="display: flex; width: 100%;">
+                <div class="inputbox " style="justify-content: space-between; ">
+                    <h5 style="flex: 1; ">*{{ getControlsText("title3En")}}
+                    </h5>
+                    <input class="inputcorreo" style="flex: 2;" type="text" formControlName="title3En" [placeholder]="general.getText({ es : '*Titulo', en:'*Title'})">
+                </div>
+            </div>
+            <div style="display: flex; width: 100%;">
+                <div class="inputbox " style="justify-content: space-between; ">
+                    <h5 style="flex: 1; ">* {{ getControlsText("body3Es")}}
+                    </h5>
+                    <input class="inputcorreo" style="flex: 2;" type="text" formControlName="body3Es" [placeholder]="general.getText({ es : '*Descripción', en:'*Description'})">
+                </div>
+            </div>
+            <div style="display: flex; width: 100%;">
+                <div class="inputbox " style="justify-content: space-between; ">
+                    <h5 style="flex: 1; ">* {{ getControlsText("body3En")}}
+                    </h5>
+                    <input class="inputcorreo" style="flex: 2;" type="text" formControlName="body3En" [placeholder]="general.getText({ es : '*Descripción', en:'*Description'})">
+                </div>
+            </div>
+        </div>
+
+    </form>
+    <div style="margin-top: 20px; margin-bottom: 20px; display: flex; justify-content: flex-end; width: 80%; max-width: 1100px;  ">
+
+        <button (click)="guardar()" pButton pRipple type="button " class="p-button-rounded p-button-success " style=" margin-top: 10px; margin-right: 25px; height: 45px; padding-left: 20px; padding-right: 20px; font-weight: 900; color: white; border:
+                    none ;  background: #28ba9b; text-align: center; display: flex; justify-content: center; ">
+            {{general.getText({ es : "Guardar Cambios ", en:"Save Changes"})}}
+        </button>
+
+    </div>
+</div>

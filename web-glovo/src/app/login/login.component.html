@@ -1,0 +1,204 @@
+<div class="fondo">
+  <div class="login">
+    <div class="center">
+      <div class="idioma">
+        <div>
+          <span id="idiomaHeader4" class="ripple icon">
+            <img src="../assets/icons/lgdark.svg " />
+            <img src="../assets/icons/down-dark.svg" />
+          </span>
+          <globo-select
+            [active]="'idiomaHeader4'"
+            (clicked)="general.lenguage.next(general.idioma())"
+            [items]="general.idiomas"
+          ></globo-select>
+        </div>
+      </div>
+      <div class="center">
+        <img
+          src="assets/icons/globoG.svg"
+          routerLink="/public/home"
+          alt="logo"
+          class="glovo-logo"
+        />
+        <br />
+        <h1 class="title">
+          {{
+            general.getText({
+              es: "Hagámoslo juntos",
+              en: "Let´s do it together"
+            })
+          }}
+        </h1>
+        <br />
+
+        <br />
+        <div class="container-form">
+          <ng-container *ngIf="tab == 0 && !buscandoUsuario">
+            <br />
+            <h1 class="title">
+              {{
+                general.getText({
+                  es: "Iniciar sesión en Glovo",
+                  en: "Login in to Glovo"
+                })
+              }}
+            </h1>
+            <br />
+            <form [formGroup]="signIn">
+              <div>
+                <div class="flex">
+                  <img
+                    src="assets/icons/correo.svg"
+                    alt=""
+                    class="icon-input"
+                  />
+                  <input
+                    formControlName="email"
+                    id="email"
+                    (focus)="emailFocus = true"
+                    (blur)="emailFocus = false"
+                    class="inputcorreo"
+                    [ngClass]="status('email', emailFocus)"
+                    type="text"
+                    placeholder=" {{
+                      general.getText({ es: 'Correo', en: 'Email' })
+                    }}"
+                  />
+                </div>
+                <br />
+                <div class="flex">
+                  <img
+                    src="assets/icons/candado.svg"
+                    alt=""
+                    class="icon-input"
+                  />
+                  <div class="pass" [ngClass]="status('pass', passFocus)">
+                    <input
+                      formControlName="pass"
+                      (focus)="passFocus = true"
+                      style="flex: 1"
+                      (blur)="passFocus = false"
+                      id="password"
+                      class="inputcorreo"
+                      type="password"
+                      placeholder=" {{
+                        general.getText({ es: 'Contraseña', en: 'Password' })
+                      }}"
+                    />
+                    <a (click)="type()" class="pass-icon">
+                      <img
+                        *ngIf="tipo == 'password'"
+                        src="assets/icons/eye-regular.svg"
+                        alt=""
+                      />
+                      <img
+                        *ngIf="tipo == 'text'"
+                        src="assets/icons/eye-slash-regular.svg"
+                        alt=""
+                      />
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <a (click)="restPass()" class="resetpass">
+                {{
+                  general.getText({
+                    es: "¿Olvidaste tu contraseña?",
+                    en: "Forgot your password?"
+                  })
+                }}</a
+              >
+            </form>
+            <br />
+            <button
+              (click)="logIn()"
+              pButton
+              pRipple
+              type="button"
+              class="p-button-rounded p-button-success submit"
+            >
+              {{ general.getText({ es: "iniciar sesión", en: "Log in" }) }}
+            </button>
+            <br />
+          </ng-container>
+          <ng-container *ngIf="tab == 1 && !buscandoUsuario">
+            <div class="dialog-mail">
+              <span (click)="close()">
+                <i class="pi pi-arrow-left"></i>
+              </span>
+            </div>
+            <br />
+            <h1 class="title" style="text-align: center; font-size: medium">
+              {{
+                general.getText({
+                  es: "Validación por correo electrónico",
+                  en: "Email validation"
+                })
+              }}
+            </h1>
+            <br />
+            <form class="dialog-autenticacion" [formGroup]="step">
+              <div>
+                <div class="flex">
+                  <span>[**] </span>
+                  <input
+                    formControlName="code"
+                    id="code"
+                    (focus)="codeFocus = true"
+                    (blur)="codeFocus = false"
+                    class="inputcorreo"
+                    onKeypress="if (event.keyCode < 48 || event.keyCode > 57) event.returnValue = false;"
+                    [ngClass]="status('code', codeFocus, step)"
+                    type="text"
+                    placeholder=" {{
+                      general.getText({
+                        es: 'Código de autenticación',
+                        en: 'Authentication code'
+                      })
+                    }}"
+                  />
+                </div>
+              </div>
+              <a
+                (click)="sendCode()"
+                [ngClass]="{ deshabilitado: codigoEnviado }"
+                class="code"
+              >
+                {{
+                  general.getText({
+                    es: "Reenviar correo de validación",
+                    en: "Resend validation email"
+                  })
+                }}</a
+              >
+            </form>
+            <br />
+            <br />
+
+            <button
+              (click)="faVerify()"
+              pButton
+              pRipple
+              type="button"
+              class="p-button-rounded p-button-success submit-codigo"
+            >
+              {{ general.getText({ es: "Enviar código", en: "Send code" }) }}
+            </button>
+            <br />
+          </ng-container>
+          <div *ngIf="buscandoUsuario" class="loader">
+            <p-progressSpinner></p-progressSpinner>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="loginFotter">
+    <p class="textLogin">
+      <a routerLink="/terms">Terms & Conditions</a> and
+      <a routerLink="/legal-privacy"> Privacy Policy </a>
+    </p>
+    <img src="assets/icons/globoPw.svg" alt="" />
+  </div>
+</div>

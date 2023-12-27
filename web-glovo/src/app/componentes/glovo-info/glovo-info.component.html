@@ -1,0 +1,23 @@
+<div style="position: relative">
+  <button
+    id="glovoInfo"
+    *ngIf="visible"
+    (focusout)="visible = false"
+    class="gvInfo"
+  >
+    <div class="triangulo"></div>
+    <div
+      style="
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+      "
+    >
+      <h5 style="margin: 0px; color: #28ba9b">{{ data.name }}</h5>
+      <br />
+      <h6 style="margin: 0px">{{ data.ciudad }}</h6>
+      <h6 style="margin: 0px">{{ data.content }}</h6>
+    </div>
+  </button>
+</div>

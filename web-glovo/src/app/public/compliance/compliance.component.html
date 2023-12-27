@@ -1,0 +1,97 @@
+<div class="center container">
+  <div class="centro content">
+    <!-- <div style="display: flex; justify-content: center; width: 100%;">
+            <h1 class="megaTitle"> {{data.selectedTag.title}}</h1>
+        </div> -->
+    <div class="buttons">
+      <button
+        (click)="data.selectedTag = item; data.getSections(item.id)"
+        pButton
+        pRipple
+        type="button"
+        *ngFor="let item of data.compliance"
+        class="p-button-rounded p-button-success btn"
+      >
+        {{ item.title }}
+      </button>
+    </div>
+    <div class="img-container">
+      <div>
+        <img src="assets/public/piñaSeñala.svg" alt="" />
+      </div>
+      <img
+        src="assets/public/bajo-header-compliance.svg"
+        style="width: 100%"
+        alt=""
+      />
+    </div>
+  </div>
+  <div class="compliance">
+    <!-- <div style=" margin-right: 20px;">
+            <div style="display: flex; flex: 1; position: relative; flex-direction: column; margin-right: 10px; padding: 7px; margin-top: 20px; min-width: 100px;">
+                <br><br>
+                <span *ngIf="!data.selectedSection" class="event" style=" cursor: pointer; margin-top: 10px; padding: 5px;">
+                    <h1>No Data</h1>
+                </span>
+                <span (click)="data.selectedSection = section" class="event" style=" cursor: pointer; margin-top: 10px; padding: 5px;" *ngFor="let section of data.sections; index as i">
+                    {{section.title}}
+                    <div *ngIf="section.id == data.selectedSection.id" class="barrita" style="margin-top: 5px;"></div>
+                    <div *ngIf="section.id !== data.selectedSection.id" class="barrita2" style="margin-top: 5px;"></div>
+                </span>
+            </div>
+        </div> -->
+    <div class="body">
+      <div class="body-content">
+        <h1 *ngIf="data.selectedTag" class="megaText" style="font-weight: bold">
+          {{ data.selectedTag.title }}
+        </h1>
+        <a
+          *ngIf="data.selectedTag"
+          target="_blank"
+          [download]="getText(data.selectedTag.title, data.selectedTag.docUrl)"
+          [href]="data.selectedTag.docUrl"
+          pButton
+          pRipple
+          type="button"
+          class="p-button-rounded p-button-success btn"
+        >
+          <span
+            ><img src="assets/icons/descarga-w.svg" style="width: 17px" alt=""
+          /></span>
+          <p>
+            {{ general.getText({ en: "Download", es: "Descargar" }) }}
+          </p>
+        </a>
+      </div>
+      <div class="tarjeta2">
+        <div class="body-tarjeta2">
+          <h1
+            *ngIf="data.selectedSection"
+            class="megaText"
+            style="font-weight: bold"
+          >
+            {{ data.selectedSection.title }}
+          </h1>
+          <div class="barrita"></div>
+        </div>
+        <br />
+
+        <img
+          *ngIf="data.selectedTag"
+          [src]="data.selectedTag.previewUrl"
+          alt=""
+        />
+
+        <br />
+        <div *ngIf="data.selectedSection" style="width: 100%; padding: 1rem">
+          <p
+            style="overflow-wrap: break-word; line-height: 1.5"
+            *ngFor="let text of getParrafo(data.selectedSection.body)"
+          >
+            {{ text }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

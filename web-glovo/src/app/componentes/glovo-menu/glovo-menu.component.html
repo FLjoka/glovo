@@ -1,0 +1,50 @@
+<div id="menu" class="menu hidden">
+  <div id="fondo" (click)="toggle()" class="fondo fondoColor"></div>
+  <div id="block" class="hidden"></div>
+  <div id="desplegable" class="desplegable">
+    <div class="body-desplegable">
+      <span (click)="cerrar1()" class="ripple">
+        <i class="pi pi-arrow-left"></i>
+      </span>
+    </div>
+    <div class="container-list">
+      <ul>
+        <div *ngFor="let item of general.menu; index as i">
+          <li
+            *ngIf="!item.subItems && !item.icon_only"
+            [ngClass]="{ bg2: item.selected }"
+            class="ripple noselect item"
+            (click)="menuSelect(i); cerrar1()"
+          >
+            {{ general.getText(item.nombre) }}
+            <i class="pi pi-chevron-right"></i>
+          </li>
+          <div *ngIf="item.subItems">
+            <li
+              *ngFor="let subItem of item.subItems; index as subIndex"
+              [ngClass]="{ bg2: subItem.selected }"
+              class="ripple noselect item"
+              (click)="menuSelectList2(i, subIndex); cerrar1()"
+            >
+              {{ general.getText(subItem.nombre) }}
+              <i class="pi pi-chevron-right"></i>
+            </li>
+          </div>
+        </div>
+      </ul>
+    </div>
+    <div class="footer">
+      <a class="logo" (click)="menuSelect(0); cerrar1()">
+        <img [src]="general.menu[0].icon" alt="" />
+      </a>
+      <br />
+      <a (click)="cerrarSesion()" *ngIf="public()" class="ripple sesion">
+        <i
+          style="font-size: 15px; margin-right: 5px; padding-right: 7px"
+          class="pi pi-sign-out"
+        ></i>
+        <p style="margin: 0">cerrar sesión</p>
+      </a>
+    </div>
+  </div>
+</div>

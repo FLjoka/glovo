@@ -1,0 +1,155 @@
+@import "../../../themes/_colors.sass"
+
+.barrita
+    width: 50px
+    height: 5px
+    border-radius: 3px / 2px
+    background: $dark-orange
+    bottom: -20px
+.shared
+    padding-top: 120px
+    width: 75%
+.tarjeta2
+    min-width: 300px
+    display: flex
+    width: 100%
+    max-width: 900px
+    flex-direction: column
+    align-items: center
+    min-height: 250px
+    background: white
+    border-radius: 20px
+    box-shadow: 0px 10px 27px 8px rgba(0,0,0,0.36)
+    padding: 40px
+.select
+    border: none
+.p-cascadeselect
+    background: red !important
+.textarea
+
+    width: 100%
+    max-width: 100%
+    min-width: 100%
+    border: 0px
+    border-bottom: 1px solid $dark-bg
+.textarea:focus
+    outline: 0
+
+.custom
+    min-width: 200px
+.btnPos
+    display: flex
+.inputcorreo
+    flex: 1
+    border: none
+    font-size: 16px
+    padding-bottom: 2px
+    width: 90px
+    min-width: none
+    font-weight: 300
+    font-family: 'Gotham', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+    background-color: transparent
+.inputcorreo:focus
+    outline: none
+    font-family: 'Gotham', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+    font-weight: 300
+
+.inputcorreo::placeholder
+    font-family: 'Gotham', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+.inputcorreo::after
+    font-family: 'Gotham', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+.inputcorreo::before
+    font-family: 'Gotham', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+.inputbox
+    border-radius: 25px / 50%
+    padding-left: 15px
+    padding-right: 15px
+    background: #f2f2f2
+    min-height: 50px
+    display: flex
+    align-items: center
+    flex: 1
+    margin: 10px 5px 10px 5px
+    h5
+        min-width: 90px
+        font-weight: 300
+.toggleTrue
+    flex: 3
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: center
+    padding: 20px 7px 20px 7px
+    max-height: 25px
+    overflow: visible
+    cursor: pointer
+    text-decoration: none
+    &:hover
+        span
+            border-bottom: 1px solid #28ba9b
+@media screen and ( max-width: 600px )
+    .form
+        margin: 7px
+    .custom
+        width: 100%
+    .btnPos
+        width: 100%
+        justify-content: flex-end
+    .tarjeta2
+        padding: 10px
+.fondo
+    background: rgb(255,204,102)
+    background: radial-gradient(circle, rgba(255,204,102,1) 0%, rgba(255,197,84,1) 100%)
+
+.login
+    background: rgb(255,204,102)
+    background: radial-gradient(circle, rgba(255,204,102,1) 0%, rgba(255,197,84,1) 100%)
+    color: $dark-bg
+    padding: 20px
+
+.loginFotter
+    background: $dark-bg
+    width: 120%
+    flex: 1
+    height: 100%
+    border-radius: 50%/ 100px 100px 0 0
+    display: flex
+    justify-content: flex-start
+    padding-top: 30px
+    flex-direction: column
+    align-items: center
+
+.inputcorreo
+    flex: 1
+    border: none
+    padding-bottom: 7px
+    font-size: 16px
+    font-weight: 500
+    font-family: 'Gotham', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+.inputcorreo:focus
+    outline: none
+    font-family: 'Gotham', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+    font-weight: 300
+
+.inputcorreo::placeholder
+    font-family: 'Gotham', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+.inputcorreo::after
+    font-family: 'Gotham', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+.inputcorreo::before
+    font-family: 'Gotham', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+.pendiente
+    border-bottom: 1px solid #3498DB 
+.valido
+    border-bottom: 1px solid #28B463 
+.sinfoco
+    border-bottom: 1px solid  #CACFD2
+.invalido
+    border-bottom: 1px solid #CB4335
+@media screen and ( max-width: 700px )
+    .loginFotter
+        border-radius: 50%/ 50px 50px 0 0
+        padding-bottom: 30px
+    .textLogin
+        font-size: 12px
+    .btnPos
+        margin-right: 10px

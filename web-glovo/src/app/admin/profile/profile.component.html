@@ -1,0 +1,171 @@
+<div style="display: flex; justify-content: center; width: 100%; padding-top: 90px; padding-bottom: 150px; ">
+    <div style="width: 75%; max-width: 900px; min-width: 300px; ">
+        <div style="width: 100%; display: flex; justify-content: space-between;">
+            <div style="width: 100%; ">
+                <h1 style="   font-size: xx-large; text-transform: capitalize; margin-bottom: 10px;"> {{general.getText({ es : "Hola", en : "Hi"})}}, {{individual.name.split(' ')[0]}} </h1>
+                <div class="barrita"></div>
+            </div>
+            <ng-container *ngIf="auth.user">
+                <span *ngIf="auth.user.roles[0] == 'Super Admin' " class="custom" style="margin:5px; flex: 2; margin-top: 10px ;  height: 40px;  border: 1px solid #ced4da; border-radius: 3px;">
+                    <p-dropdown [style]="{'minWidth':'100%'}" [(ngModel)]="admin.mode" [options]="admin.modeList" (onChange)="ir($event)" placeholder="rol de usuario" optionLabel=""></p-dropdown>
+                </span>
+            </ng-container>
+        </div>
+
+        <br><br><br>
+        <div class="tarjeta2">
+            <div style="width: 100%; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; ">
+                <div>
+                    <div style="display: flex; flex-wrap: wrap; align-items: flex-end; ; ">
+                        <h4 style=" font-weight: bolder;  font-size:x-large; text-transform: capitalize; margin-bottom: 10px;"> {{general.getText({ es : "Información", en : "Information"})}}
+                        </h4>
+                        <h4 *ngIf="auth.user" style="font-size: medium; margin-bottom: 10px; margin-left: 10px;">{{auth.user.roles[0]}}</h4>
+                    </div>
+                    <div class="barrita"></div>
+                </div>
+
+                <div class="btnPos">
+                    <button (click)="edit = edit ? false : true; tab = 0 ; cambio = true " pButton pRipple type="button" class="p-button-rounded p-button-success" style=" margin-top: 10px; margin-right: 10px; height: 35px; padding-left: 20px; padding-right: 20px; font-weight: 900; color: white; border: none ;  background: #28ba9b; text-align: center; display: flex; justify-content: center;">
+                <img src="assets/icons/edit-solid.svg" style="width: 20px; fill: white; height: 20px; margin-right: 5px;" alt="">
+                {{general.getText({ es : "Editar", en:"Edit"})}}
+            </button>
+                </div>
+            </div>
+            <br>
+            <div *ngIf="edit" style="display: flex; width: 100%; flex-wrap: wrap">
+                <button pButton pRipple type="button " (click)="tab = 0; cambio = true" class="p-button-rounded p-button-success " style=" margin-left: 20px;  border: 3px solid #aaaaaa; margin-top: 10px;  height: 45px; padding-left: 20px; padding-right: 20px;
+                                font-weight: 900; color: #aaaaaa; background: transparent; text-align: center; display: flex; justify-content: center; ">
+                {{general.getText({ es : "Datos de usuario ", en:"User Data"})}}
+                </button>
+                <button pButton pRipple type="button " (click)="tab = 1;" class="p-button-rounded p-button-success " style=" margin-left: 20px; border: 3px solid #aaaaaa; margin-top: 10px;  height: 45px; padding-left: 20px; padding-right: 20px;
+                                    font-weight: 900; color: #aaaaaa; background: transparent; text-align: center; display: flex; justify-content: center; ">
+                    {{general.getText({ es : "Seguridad", en:"Security"})}}
+                </button>
+
+            </div>
+            <div [style.display]=" tab == 1 ?  'block' : 'none'" style="width: 100%;">
+                <br>
+                <div class="inputbox " style="width: 100%;">
+                    <div style="display: flex; flex-direction: column;align-items: center;">
+                        <h5 style="flex: 1; ">{{general.getText({ es : "Cambio de contraseña", en:"Change of password"})}}
+                        </h5>
+                        <button (click)="cambiar() " pButton pRipple type="button" class="p-button-rounded p-button-success" style=" margin-top: 10px; margin-right: 10px; height: 35px; padding-left: 20px; padding-right: 20px; font-weight: 900; color: white; border: none ;  background: #28ba9b; text-align: center; display: flex; justify-content: center;">
+               
+                            {{general.getText({ es : "Guardar", en:"Save"})}}
+                        </button>
+                    </div>
+
+                    <form [formGroup]="reset" style="flex: 5; padding: 10px;">
+                        <br>
+                        <div style="display: flex;  ">
+                            <img src="assets/icons/candado.svg" style="width: 20px; padding: 3px; margin-right: 5px; padding-bottom: 10px;" alt="">
+                            <div style="padding: none; flex: 1; display: flex;" [ngClass]="status( 'pass' , passFocus1 )">
+                                <input placeholder="*" autocomplete="off" (focus)="passFocus1 = true" formControlName="old_password" style="flex: 1;" (blur)="passFocus1 = false" id="old_password" class="inputcorreo" type="password" placeholder=" {{general.getText({ es : '*Contraseña actual', en:'*Current password'})}}">
+                                <a (click)="old_password()" style="padding: 3px; margin: 0; cursor: pointer;">
+                                    <img *ngIf="passType1 == 'password'" src="assets/icons/eye-regular.svg" style="width: 17px;" alt="">
+                                    <img *ngIf="passType1 == 'text'" src="assets/icons/eye-slash-regular.svg" style="width: 17px;" alt="">
+                                </a>
+                            </div>
+                        </div>
+                        <br>
+                        <div style="display: flex;  ">
+                            <img src="assets/icons/candado.svg" style="width: 20px; padding: 3px; margin-right: 5px; padding-bottom: 10px;" alt="">
+                            <div style="padding: none; flex: 1; display: flex;" [ngClass]="status( 'pass' , passFocus )">
+                                <input placeholder="*" (focus)="passFocus = true" formControlName="pass" style="flex: 1;" (blur)="passFocus = false" id="password" class="inputcorreo" type="password" placeholder=" {{general.getText({ es : '*Nueva Contraseña', en:'*New Password'})}}">
+                                <a (click)="pass()" style="padding: 3px; margin: 0; cursor: pointer;">
+                                    <img *ngIf="passType == 'password'" src="assets/icons/eye-regular.svg" style="width: 17px;" alt="">
+                                    <img *ngIf="passType == 'text'" src="assets/icons/eye-slash-regular.svg" style="width: 17px;" alt="">
+                                </a>
+                            </div>
+                        </div>
+                        <br>
+                        <div style="display: flex;  ">
+                            <img src="assets/icons/candado.svg" style="width: 20px; padding: 3px; margin-right: 5px; padding-bottom: 10px;" alt="">
+                            <div style="padding: none; flex: 1; display: flex;" [ngClass]="status( 'confirm' , passFocus2 )">
+                                <input placeholder="*" (focus)="passFocus2 = true" style="flex: 1;" formControlName="confirm" (blur)="passFocus2 = false" id="confirm" class="inputcorreo" type="password" placeholder=" {{general.getText({ es : '*Confirmar Contraseña', en:'*Confirm Password'})}}">
+                                <a (click)="confirm()" style="padding: 3px; margin: 0; cursor: pointer;">
+                                    <img *ngIf="tipo == 'password'" src="assets/icons/eye-regular.svg" style="width: 17px;" alt="">
+                                    <img *ngIf="tipo == 'text'" src="assets/icons/eye-slash-regular.svg" style="width: 17px;" alt="">
+                                </a>
+                            </div>
+                        </div>
+                        <br>
+                    </form>
+                </div>
+            </div>
+            <form *ngIf="tab == 0" [formGroup]="individualForm" [style.padding]=" edit ? '0px' : '10px'" style="width: 100%;">
+                <div style="display: flex; flex-wrap: wrap;  ">
+                    <div style="flex: 1; min-width: 250px; ">
+                        <!-- separador  -->
+                        <div *ngIf="edit">
+                            <div class="inputbox" style="background: transparent;">
+                                <h5> {{general.getText({ es : "ID / Pasaporte ", en : "ID / Passport: "})}} {{individualForm.get("id")?.value}}</h5>
+                            </div>
+                        </div>
+                        <div *ngIf="!edit" style="padding: 10px 0px 10px 0px;">
+                            <h5 style="font-weight: 300;"> {{general.getText({ es : "ID / Pasaporte ", en : "ID / Passport "})}} {{individualForm.get("id")?.value}}</h5>
+                            <div class="barrita"></div>
+                        </div>
+
+                        <!-- separador  -->
+                        <div *ngIf="edit">
+                            <div class="inputbox">
+                                <h5 style="flex: 3;">*{{general.getText({ es : "Nombre y apellido: ", en : "Name and surname: "})}} </h5>
+                                <input placeholder="*" style="flex: 7;" class="inputcorreo" formControlName="name" type="text">
+                            </div>
+                        </div>
+                        <div *ngIf="!edit" style="padding: 10px 0px 10px 0px;">
+                            <h5 style="font-weight: 300;">{{general.getText({ es : "Nombre y apellido: ", en : "Name and surname: "})}} {{individualForm.get("name")?.value}}</h5>
+                            <div class="barrita"></div>
+                        </div>
+                    </div>
+                    <!-- separador  -->
+                    <div style="flex: 1; min-width: 250px;">
+                        <div *ngIf="edit">
+                            <div class="inputbox">
+                                <h5 style="flex: 3;">*{{general.getText({ es : "Email de Registro: ", en : "Registration Email: "})}}</h5>
+                                <input placeholder="*" style="flex: 7;" class="inputcorreo" formControlName="email" type="text">
+                            </div>
+                        </div>
+                        <div *ngIf="!edit" style="padding: 10px 0px 10px 0px;">
+                            <h5 style="font-weight: 300;">{{general.getText({ es : "Email de Registro: ", en : "Registration Email: "})}} {{individualForm.get("email")?.value}}</h5>
+                            <div class="barrita"></div>
+                        </div>
+                        <!-- separador  -->
+                        <div *ngIf="edit">
+                            <div class="inputbox">
+                                <h5>{{general.getText({ es : "Teléfono: ", en : "Phone: "})}} </h5>
+                                <input placeholder="*" class="inputcorreo" formControlName="phone" type="text">
+                            </div>
+                        </div>
+                        <div *ngIf="!edit" style="padding: 10px 0px 10px 0px;">
+                            <h5 style="font-weight: 300;">{{general.getText({ es : "Teléfono: ", en : "Phone: "})}}{{individualForm.get("phone")?.value}}</h5>
+                            <div class="barrita"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div *ngIf="edit">
+                    <div class="inputbox">
+                        <h5 style="flex: 3;">* {{general.getText({ es : "Dirección: ", en : "Address: "})}} </h5>
+                        <input placeholder="*" style="flex: 6;" class="inputcorreo" formControlName="address" type="text">
+                    </div>
+                </div>
+                <div *ngIf="!edit" style="padding: 10px 0px 10px 0px;">
+                    <h5 style="font-weight: 300;"> {{general.getText({ es : "Actividades profesionales y residencia fiscal: ", en : "Professional activities and tax residence: "})}} {{individualForm.get("address")?.value}}</h5>
+                    <div class="barrita"></div>
+                </div>
+
+
+            </form>
+        </div>
+        <div style="margin-top: 20px; margin-bottom: 20px; display: flex; justify-content: flex-end; width: 100%;">
+            <button *ngIf="edit && tab == 0" (click)=" cancelar()" pButton pRipple type="button" class="p-button-rounded p-button-success" style=" border: 3px solid #aaaaaa; margin-top: 10px; margin-right: 25px; height: 45px; padding-left: 20px; padding-right: 20px; font-weight: 900; color: #aaaaaa; background:  transparent; text-align: center; display: flex; justify-content: center;">
+            {{general.getText({ es : "Cancelar", en:"Cancel"})}}
+        </button>
+            <button *ngIf="edit && tab == 0" (click)="guardar()" pButton pRipple type="button" class="p-button-rounded p-button-success" style=" margin-top: 10px; margin-right: 25px; height: 45px; padding-left: 20px; padding-right: 20px; font-weight: 900; color: white; border: none ;  background: #28ba9b; text-align: center; display: flex; justify-content: center;">
+            {{general.getText({ es : "Guardar Cambios", en:"Save Changes"})}}
+        </button>
+        </div>
+    </div>
+</div>

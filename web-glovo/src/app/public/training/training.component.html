@@ -1,0 +1,75 @@
+<div class="center">
+  <div class="centro back-img">
+    <div class="centro back-color">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1921.51 178.53">
+        <g id="Capa_2" data-name="Capa 2">
+          <g id="Capa_2-2" data-name="Capa 2">
+            <path
+              class="cls-1"
+              style="fill: #fff"
+              d="M1,98.53c26.42-2.89,66.42-7.32,115-13,259.9-30.36,337.21-46.08,461-60,171.22-19.25,299.76-33.7,473-19,205.43,17.43,395.77,69.23,413,74,78.72,21.77,176.08,53.55,318,62a1177.08,1177.08,0,0,0,140,0l-.5,35.5H.5Z"
+            />
+          </g>
+        </g>
+      </svg>
+    </div>
+    <div class="conatiner-video">
+      <iframe
+        width="100%"
+        height="100%"
+        [src]="data.trainingSettings.video1 | safe"
+        title="YouTube video player"
+        frameborder="0"
+        allow="accelerometer;  autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+      >
+      </iframe>
+    </div>
+  </div>
+  <div class="content">
+    <div class="head-content">
+      <h1 class="megaText" style="font-weight: bold">
+        {{ general.getText(data.trainingSettings.title) }}
+      </h1>
+    </div>
+    <div class="conatiner-cards">
+      <div class="card" *ngFor="let item of data.items">
+        <div class="img-card">
+          <img [src]="item.img" alt="" />
+        </div>
+        <h1 class="subtitle" style="font-weight: bold">
+          {{ general.getText(item.subtitulo) }}
+        </h1>
+        <div class="barrita" style="margin-top: 1px"></div>
+        <p>{{ general.getText(item.descripcion) }}</p>
+      </div>
+    </div>
+    <div class="container-footer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1921.51 178.53">
+        <g id="Capa_2" data-name="Capa 2">
+          <g id="Capa_2-2" data-name="Capa 2">
+            <path
+              class="cls-1"
+              style="fill: white"
+              d="M1,98.53c26.42-2.89,66.42-7.32,115-13,259.9-30.36,337.21-46.08,461-60,171.22-19.25,299.76-33.7,473-19,205.43,17.43,395.77,69.23,413,74,78.72,21.77,176.08,53.55,318,62a1177.08,1177.08,0,0,0,140,0l-.5,35.5H.5Z"
+            />
+          </g>
+        </g>
+      </svg>
+
+      <div class="footer-video">
+        <iframe
+          width="100%"
+          height="100%"
+          [src]="data.trainingSettings.video2 | safe"
+          title="YouTube video player"
+          frameborder="0"
+          allow="accelerometer;  autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        >
+        </iframe>
+      </div>
+    </div>
+    <img class="circulos" src="assets/public/home-circles-bg.png" alt="" />
+  </div>
+</div>
